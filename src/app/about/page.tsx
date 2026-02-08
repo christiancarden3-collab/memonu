@@ -72,25 +72,29 @@ export default function About() {
           />
         </div>
         <div className="relative z-10 px-6">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-10">
-            About
-          </h1>
-          <p className="text-[#f5f5f0]/60 text-lg md:text-xl max-w-md mx-auto">
-            Born from necessity. Built for performance.
-          </p>
+          <div className="border border-[#f5f5f0]/30 px-16 md:px-32 py-16 md:py-24">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8">
+              About
+            </h1>
+            <p className="text-[#f5f5f0]/60 text-lg md:text-xl max-w-md mx-auto">
+              Born from necessity. Built for performance.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* The Story */}
-      <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
-        <div className="max-w-2xl mx-auto">
-          <span className="text-[11px] tracking-[0.3em] uppercase text-[#0a0a0a]/40 block mb-20">Our Story</span>
+      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
+        <div className="max-w-3xl mx-auto">
+          <div className="border border-[#0a0a0a]/20 p-12 md:p-20 mb-24">
+            <span className="text-[11px] tracking-[0.3em] uppercase text-[#0a0a0a]/40 block">Our Story</span>
+          </div>
           
-          <h2 className="text-3xl md:text-5xl font-light mb-24 leading-relaxed">
+          <h2 className="text-3xl md:text-5xl font-light mb-32 leading-relaxed">
             We got tired of carrying bottles and mixing powders.
           </h2>
           
-          <div className="space-y-16 text-[#0a0a0a]/60 text-lg md:text-xl leading-loose">
+          <div className="space-y-20 text-[#0a0a0a]/60 text-lg md:text-xl leading-loose max-w-2xl mx-auto">
             <p>
               It started with a simple question: why does staying hydrated have to be so complicated?
             </p>
@@ -116,32 +120,34 @@ export default function About() {
       </section>
 
       {/* Values */}
-      <section className="py-64 md:py-96 px-6 bg-[#0a0a0a] text-center">
+      <section className="py-80 md:py-[28rem] px-6 bg-[#0a0a0a] text-center">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-light mb-48 md:mb-64 text-[#f5f5f0]">
-            What We Believe
-          </h2>
+          <div className="border border-[#f5f5f0]/20 p-12 md:p-20 mb-40">
+            <h2 className="text-3xl md:text-5xl font-light text-[#f5f5f0]">
+              What We Believe
+            </h2>
+          </div>
           
-          <div className="space-y-64 md:space-y-80">
-            <div>
-              <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/10 block mb-12">01</span>
-              <h3 className="text-3xl md:text-4xl font-light mb-10 text-[#f5f5f0]">Simplicity</h3>
+          <div className="space-y-80 md:space-y-[28rem]">
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+              <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/20 block mb-16">01</span>
+              <h3 className="text-3xl md:text-4xl font-light mb-12 text-[#f5f5f0]">Simplicity</h3>
               <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 The best solutions are the ones you actually use. No complexity, no barriers.
               </p>
             </div>
             
-            <div>
-              <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/10 block mb-12">02</span>
-              <h3 className="text-3xl md:text-4xl font-light mb-10 text-[#f5f5f0]">Performance</h3>
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+              <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/20 block mb-16">02</span>
+              <h3 className="text-3xl md:text-4xl font-light mb-12 text-[#f5f5f0]">Performance</h3>
               <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 Every ingredient earns its place. Nothing more, nothing less.
               </p>
             </div>
             
-            <div>
-              <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/10 block mb-12">03</span>
-              <h3 className="text-3xl md:text-4xl font-light mb-10 text-[#f5f5f0]">Freedom</h3>
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+              <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/20 block mb-16">03</span>
+              <h3 className="text-3xl md:text-4xl font-light mb-12 text-[#f5f5f0]">Freedom</h3>
               <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 Hydration that goes where you go. No bottles, no limits.
               </p>
@@ -151,25 +157,27 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
-        <h2 className="text-3xl md:text-5xl font-light mb-16">
-          Join the Movement
-        </h2>
-        <p className="text-[#0a0a0a]/50 text-lg md:text-xl mb-20 max-w-md mx-auto">
-          Be the first to experience hydration, reimagined.
-        </p>
-        <Link 
-          href="/shop"
-          className="inline-block border border-[#0a0a0a]/30 px-14 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
-        >
-          Shop Now
-        </Link>
+      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
+        <div className="border border-[#0a0a0a]/20 p-16 md:p-24 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-light mb-16">
+            Join the Movement
+          </h2>
+          <p className="text-[#0a0a0a]/50 text-lg md:text-xl mb-20 max-w-md mx-auto">
+            Be the first to experience hydration, reimagined.
+          </p>
+          <Link 
+            href="/shop"
+            className="inline-block border border-[#0a0a0a] px-14 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
+          >
+            Shop Now
+          </Link>
+        </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-20 px-6 border-t border-[#f5f5f0]/10 bg-[#0a0a0a] text-center">
-        <span className="text-lg tracking-[0.06em] text-[#f5f5f0] block mb-8">memo</span>
-        <div className="flex gap-8 justify-center text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
+      <footer className="py-24 px-6 border-t border-[#f5f5f0]/10 bg-[#0a0a0a] text-center">
+        <span className="text-lg tracking-[0.06em] text-[#f5f5f0] block mb-10">memo</span>
+        <div className="flex gap-10 justify-center text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
           <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
           <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
           <span>© 2026</span>

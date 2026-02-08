@@ -58,9 +58,9 @@ export default function Shop() {
         </nav>
       </div>
 
-      {/* Hero - Simple Coming Soon */}
+      {/* Hero */}
       <section className="min-h-screen flex items-center justify-center px-6 text-center">
-        <div>
+        <div className="border border-[#0a0a0a]/30 px-16 md:px-32 py-20 md:py-32">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-12">
             Coming Soon
           </h1>
@@ -70,7 +70,7 @@ export default function Shop() {
 
           <Link 
             href="/"
-            className="inline-block border border-[#0a0a0a]/30 px-14 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
+            className="inline-block border border-[#0a0a0a] px-14 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
           >
             Join Waitlist
           </Link>

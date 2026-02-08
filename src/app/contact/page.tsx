@@ -67,61 +67,65 @@ export default function Contact() {
       </div>
 
       {/* Content */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-32 text-center">
-        <div className="w-full max-w-md mx-auto">
-          <h1 className="text-5xl md:text-7xl font-light mb-12">
-            Contact
-          </h1>
-          <p className="text-[#f5f5f0]/40 text-lg md:text-xl mb-24">
-            Questions? Partnerships? Just say hello.
-          </p>
+      <section className="min-h-screen flex items-center justify-center px-6 py-48 text-center">
+        <div className="w-full max-w-lg mx-auto">
+          <div className="border border-[#f5f5f0]/30 px-12 md:px-20 py-16 md:py-20 mb-32">
+            <h1 className="text-5xl md:text-7xl font-light mb-8">
+              Contact
+            </h1>
+            <p className="text-[#f5f5f0]/40 text-lg md:text-xl">
+              Questions? Partnerships? Just say hello.
+            </p>
+          </div>
 
           {status === 'success' ? (
-            <div className="py-24">
-              <p className="text-3xl mb-8">Message sent.</p>
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+              <p className="text-3xl mb-10">Message sent.</p>
               <p className="text-[#f5f5f0]/40 text-lg">We'll be in touch soon.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-16 text-center">
-              <div>
-                <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Name</label>
-                <input
-                  type="text"
-                  required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Email</label>
-                <input
-                  type="email"
-                  required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Message</label>
-                <textarea
-                  rows={5}
-                  required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors resize-none"
-                />
-              </div>
-              <div className="pt-16">
-                <button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  className="border border-[#f5f5f0]/30 px-16 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
-                >
-                  {status === 'loading' ? 'Sending...' : 'Send'}
-                </button>
-              </div>
-            </form>
+            <div className="border border-[#f5f5f0]/20 p-12 md:p-20">
+              <form onSubmit={handleSubmit} className="space-y-16 text-center">
+                <div>
+                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Name</label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Email</label>
+                  <input
+                    type="email"
+                    required
+                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Message</label>
+                  <textarea
+                    rows={5}
+                    required
+                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors resize-none"
+                  />
+                </div>
+                <div className="pt-12">
+                  <button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="border border-[#f5f5f0] px-16 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
+                  >
+                    {status === 'loading' ? 'Sending...' : 'Send'}
+                  </button>
+                </div>
+              </form>
+            </div>
           )}
 
           {/* Contact Info */}
-          <div className="mt-48 pt-32 border-t border-[#f5f5f0]/10">
-            <div className="space-y-24">
+          <div className="mt-48 border border-[#f5f5f0]/10 p-12 md:p-20">
+            <div className="space-y-20">
               <div>
                 <span className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/30 block mb-8">Email</span>
                 <a href="mailto:hello@memonu.com" className="text-2xl hover:text-[#f5f5f0]/50 transition-colors">

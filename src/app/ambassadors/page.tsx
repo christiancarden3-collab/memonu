@@ -80,39 +80,41 @@ export default function Ambassadors() {
           />
         </div>
         <div className="relative z-10 px-6">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-12">
-            Ambassadors
-          </h1>
-          <p className="text-[#f5f5f0]/60 text-lg md:text-xl max-w-md mx-auto">
-            Join a community of athletes redefining hydration.
-          </p>
+          <div className="border border-[#f5f5f0]/30 px-16 md:px-32 py-16 md:py-24">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8">
+              Ambassadors
+            </h1>
+            <p className="text-[#f5f5f0]/60 text-lg md:text-xl max-w-md mx-auto">
+              Join a community of athletes redefining hydration.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Benefits */}
-      <section className="py-64 md:py-96 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
+      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-light mb-48 md:mb-64">
-            What You Get
-          </h2>
+          <div className="border border-[#0a0a0a]/20 p-12 md:p-20 mb-48">
+            <h2 className="text-3xl md:text-5xl font-light">What You Get</h2>
+          </div>
           
-          <div className="space-y-40 md:space-y-56">
-            <div>
-              <h3 className="text-3xl md:text-4xl font-light mb-10">Free Product</h3>
+          <div className="space-y-48 md:space-y-64">
+            <div className="border border-[#0a0a0a]/20 p-12 md:p-20">
+              <h3 className="text-3xl md:text-4xl font-light mb-12">Free Product</h3>
               <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 Monthly supply of memo strips delivered to your door.
               </p>
             </div>
             
-            <div>
-              <h3 className="text-3xl md:text-4xl font-light mb-10">Early Access</h3>
+            <div className="border border-[#0a0a0a]/20 p-12 md:p-20">
+              <h3 className="text-3xl md:text-4xl font-light mb-12">Early Access</h3>
               <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 First look at new products, flavors, and collaborations.
               </p>
             </div>
             
-            <div>
-              <h3 className="text-3xl md:text-4xl font-light mb-10">Commission</h3>
+            <div className="border border-[#0a0a0a]/20 p-12 md:p-20">
+              <h3 className="text-3xl md:text-4xl font-light mb-12">Commission</h3>
               <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 Earn on every sale through your unique code.
               </p>
@@ -122,72 +124,74 @@ export default function Ambassadors() {
       </section>
 
       {/* Application */}
-      <section className="py-64 md:py-80 px-6 bg-[#0a0a0a] text-center">
-        <div className="max-w-md mx-auto">
-          <h2 className="text-3xl md:text-5xl font-light mb-12">
-            Apply Now
-          </h2>
-          <p className="text-[#f5f5f0]/40 text-lg md:text-xl mb-24">
-            We're looking for authentic voices in fitness, sports, and wellness.
-          </p>
+      <section className="py-80 md:py-[28rem] px-6 bg-[#0a0a0a] text-center">
+        <div className="max-w-lg mx-auto">
+          <div className="border border-[#f5f5f0]/20 p-12 md:p-20 mb-32">
+            <h2 className="text-3xl md:text-5xl font-light mb-8">Apply Now</h2>
+            <p className="text-[#f5f5f0]/40 text-lg md:text-xl">
+              We're looking for authentic voices in fitness, sports, and wellness.
+            </p>
+          </div>
 
           {status === 'success' ? (
-            <div className="py-24">
-              <p className="text-3xl mb-8">Application received.</p>
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+              <p className="text-3xl mb-10">Application received.</p>
               <p className="text-[#f5f5f0]/40 text-lg">We'll review and get back to you within 48 hours.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-16 text-center">
-              <div>
-                <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Name</label>
-                <input
-                  type="text"
-                  required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50"
-                />
-              </div>
-              <div>
-                <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Email</label>
-                <input
-                  type="email"
-                  required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50"
-                />
-              </div>
-              <div>
-                <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Instagram</label>
-                <input
-                  type="text"
-                  placeholder="@"
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50"
-                />
-              </div>
-              <div>
-                <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Why Memo?</label>
-                <textarea
-                  rows={4}
-                  placeholder="Tell us about yourself..."
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50 resize-none"
-                />
-              </div>
-              <div className="pt-16">
-                <button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  className="border border-[#f5f5f0]/30 px-16 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
-                >
-                  {status === 'loading' ? 'Submitting...' : 'Submit'}
-                </button>
-              </div>
-            </form>
+            <div className="border border-[#f5f5f0]/20 p-12 md:p-20">
+              <form onSubmit={handleSubmit} className="space-y-16 text-center">
+                <div>
+                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Name</label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Email</label>
+                  <input
+                    type="email"
+                    required
+                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Instagram</label>
+                  <input
+                    type="text"
+                    placeholder="@"
+                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Why Memo?</label>
+                  <textarea
+                    rows={4}
+                    placeholder="Tell us about yourself..."
+                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50 resize-none"
+                  />
+                </div>
+                <div className="pt-12">
+                  <button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="border border-[#f5f5f0] px-16 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
+                  >
+                    {status === 'loading' ? 'Submitting...' : 'Submit'}
+                  </button>
+                </div>
+              </form>
+            </div>
           )}
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-20 px-6 border-t border-[#f5f5f0]/10 text-center">
-        <span className="text-lg tracking-[0.06em] block mb-8">memo</span>
-        <div className="flex gap-8 justify-center text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
+      <footer className="py-24 px-6 border-t border-[#f5f5f0]/10 text-center">
+        <span className="text-lg tracking-[0.06em] block mb-10">memo</span>
+        <div className="flex gap-10 justify-center text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
           <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
           <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
           <span>© 2026</span>
