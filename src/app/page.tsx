@@ -84,10 +84,10 @@ export default function Home() {
       </header>
 
       {/* Center Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6">
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">
         {/* Logo */}
         <h1 
-          className="text-white text-6xl md:text-8xl lg:text-[10rem] font-light tracking-[0.02em] mb-4"
+          className="text-white text-6xl md:text-8xl lg:text-[10rem] font-light tracking-[0.02em] mb-4 w-full text-center"
           style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
         >
           memo
