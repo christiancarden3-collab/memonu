@@ -10,10 +10,10 @@ export default function About() {
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-8 md:px-16 py-8 flex justify-between items-center">
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-6 flex justify-between items-center">
         <Link 
           href="/" 
-          className="text-white text-2xl tracking-[0.06em]"
+          className="text-white text-xl tracking-[0.06em]"
           style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
         >
           memo
@@ -23,36 +23,42 @@ export default function About() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-white flex items-center gap-3 group"
         >
-          <span className="text-xs tracking-[0.3em] uppercase opacity-60 group-hover:opacity-100 transition-opacity hidden md:block">Menu</span>
-          <div className="flex flex-col gap-1.5">
-            <span className="w-7 h-px bg-white" />
-            <span className="w-7 h-px bg-white" />
+          <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Menu</span>
+          <div className="flex flex-col gap-[5px]">
+            <span className="w-6 h-[1px] bg-white" />
+            <span className="w-6 h-[1px] bg-white" />
           </div>
         </button>
       </header>
 
       {/* Menu Overlay */}
-      <div className={`fixed inset-0 bg-black z-50 transform transition-transform duration-500 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex justify-end px-8 md:px-16 py-8">
-          <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3">
-            <span className="text-xs tracking-[0.3em] uppercase opacity-60">Close</span>
-            <div className="relative w-7 h-7 flex items-center justify-center">
-              <span className="absolute w-7 h-px bg-white rotate-45" />
-              <span className="absolute w-7 h-px bg-white -rotate-45" />
+      <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className="flex justify-end px-6 md:px-12 py-6">
+          <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3 group">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Close</span>
+            <div className="relative w-6 h-6 flex items-center justify-center">
+              <span className="absolute w-6 h-[1px] bg-white rotate-45" />
+              <span className="absolute w-6 h-[1px] bg-white -rotate-45" />
             </div>
           </button>
         </div>
-        <nav className="px-8 md:px-16 py-16">
-          <ul className="space-y-5">
-            {['Shop', 'About Us', 'Contact', 'Ambassadors'].map((item) => (
-              <li key={item}>
+        <nav className="h-full flex items-center justify-center">
+          <ul className="space-y-4 text-center">
+            {[
+              { name: 'Shop', href: '/shop' },
+              { name: 'Science', href: '/science' },
+              { name: 'About', href: '/about' },
+              { name: 'Ambassadors', href: '/ambassadors' },
+              { name: 'Contact', href: '/contact' },
+            ].map((item, i) => (
+              <li key={item.name}>
                 <Link 
-                  href={`/${item.toLowerCase().replace(' ', '-').replace('about-us', 'about')}`}
+                  href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-white text-5xl font-normal hover:opacity-40 transition-opacity block"
+                  className="text-white text-5xl md:text-7xl font-light hover:text-white/40 transition-colors block py-1"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
-                  {item}
+                  {item.name}
                 </Link>
               </li>
             ))}
@@ -72,30 +78,30 @@ export default function About() {
             priority
           />
         </div>
-        <div className="relative z-10 text-center px-8">
+        <div className="relative z-10 text-center px-6">
           <h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-normal mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-light mb-6"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
-            About Us
+            About
           </h1>
-          <p className="text-white/60 text-lg md:text-xl max-w-xl mx-auto">
+          <p className="text-white/50 text-base md:text-lg max-w-md mx-auto">
             Born from necessity. Built for performance.
           </p>
         </div>
       </section>
 
       {/* Statement Section */}
-      <section className="py-32 md:py-48 px-8 md:px-16">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-24 md:py-32 px-6">
+        <div className="max-w-3xl mx-auto text-center">
           <p 
-            className="text-3xl md:text-5xl lg:text-6xl font-normal leading-tight"
+            className="text-2xl md:text-4xl lg:text-5xl font-light leading-snug"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             We got tired of carrying bottles, mixing powders, and timing our hydration around water access.
           </p>
           <p 
-            className="text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mt-8 text-white/40"
+            className="text-2xl md:text-4xl lg:text-5xl font-light leading-snug mt-6 text-white/40"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             So we built something better.
@@ -104,7 +110,7 @@ export default function About() {
       </section>
 
       {/* Image Break */}
-      <section className="h-[70vh] relative">
+      <section className="h-[60vh] relative">
         <Image
           src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2940&auto=format&fit=crop"
           alt="Training"
@@ -115,132 +121,95 @@ export default function About() {
       </section>
 
       {/* The Story */}
-      <section className="py-32 md:py-48 px-8 md:px-16 bg-white text-black">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-            <div>
-              <span className="text-xs tracking-[0.3em] uppercase text-black/40 block mb-8">The Story</span>
-              <h2 
-                className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8"
-                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-              >
-                A strip that changed everything
-              </h2>
-              <div className="space-y-6 text-black/60 text-lg leading-relaxed">
-                <p>
-                  It started with a simple question: why does staying hydrated have to be so complicated?
-                </p>
-                <p>
-                  We were athletes who trained at 5 AM, entrepreneurs who lived on planes, parents who never had a free hand. The solutions on the market weren't built for us.
-                </p>
-                <p>
-                  So we spent two years developing a dissolving strip that delivers electrolytes instantly—no water, no mixing, no waiting.
-                </p>
-              </div>
-            </div>
-            <div className="relative aspect-[4/5]">
-              <Image
-                src="https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=2940&auto=format&fit=crop"
-                alt="Product development"
-                fill
-                className="object-cover"
-              />
-            </div>
+      <section className="py-24 md:py-32 px-6 bg-white text-black">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-black/40 block mb-6">The Story</span>
+            <h2 
+              className="text-3xl md:text-5xl font-light"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              A strip that changed everything
+            </h2>
+          </div>
+          <div className="max-w-2xl mx-auto space-y-6 text-black/60 text-base md:text-lg leading-relaxed text-center">
+            <p>
+              It started with a simple question: why does staying hydrated have to be so complicated?
+            </p>
+            <p>
+              We were athletes who trained at 5 AM, entrepreneurs who lived on planes, parents who never had a free hand. The solutions on the market weren't built for us.
+            </p>
+            <p>
+              So we spent two years developing a dissolving strip that delivers electrolytes instantly—no water, no mixing, no waiting.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="py-32 md:py-48 px-8 md:px-16 bg-black">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 md:py-32 px-6 bg-black">
+        <div className="max-w-4xl mx-auto">
           <h2 
-            className="text-4xl md:text-6xl font-normal text-center mb-24"
+            className="text-3xl md:text-5xl font-light text-center mb-20"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             What We Believe
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             {[
-              { 
-                num: '01', 
-                title: 'Simplicity', 
-                desc: 'The best solutions are the ones you actually use. No complexity, no barriers.' 
-              },
-              { 
-                num: '02', 
-                title: 'Performance', 
-                desc: 'Every ingredient earns its place. Nothing more, nothing less.' 
-              },
-              { 
-                num: '03', 
-                title: 'Freedom', 
-                desc: 'Hydration that goes where you go. No bottles, no limits.' 
-              },
+              { num: '01', title: 'Simplicity', desc: 'The best solutions are the ones you actually use.' },
+              { num: '02', title: 'Performance', desc: 'Every ingredient earns its place.' },
+              { num: '03', title: 'Freedom', desc: 'Hydration that goes where you go.' },
             ].map((value) => (
-              <div key={value.num} className="text-center">
-                <span className="text-6xl md:text-7xl font-normal text-white/10 block mb-6"
+              <div key={value.num}>
+                <span className="text-5xl font-light text-white/10 block mb-4"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {value.num}
                 </span>
                 <h3 
-                  className="text-2xl font-normal mb-4"
+                  className="text-xl font-light mb-3"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {value.title}
                 </h3>
-                <p className="text-white/50">{value.desc}</p>
+                <p className="text-white/40 text-sm">{value.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="py-32 md:py-48 px-8 md:px-16 bg-white text-black">
-        <div className="max-w-4xl mx-auto text-center">
-          <blockquote 
-            className="text-3xl md:text-5xl font-normal leading-tight"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
-            "The best hydration is the kind you actually use."
-          </blockquote>
-          <cite className="text-black/40 text-sm tracking-[0.2em] uppercase mt-8 block not-italic">
-            — Founding Team
-          </cite>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="py-32 md:py-48 px-8 md:px-16 bg-black text-center">
+      <section className="py-24 md:py-32 px-6 bg-black text-center border-t border-white/10">
         <h2 
-          className="text-4xl md:text-6xl font-normal mb-8"
+          className="text-3xl md:text-5xl font-light mb-6"
           style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
         >
           Join the Movement
         </h2>
-        <p className="text-white/50 text-lg mb-12 max-w-xl mx-auto">
+        <p className="text-white/40 text-base mb-10 max-w-md mx-auto">
           Be the first to experience hydration, reimagined.
         </p>
         <Link 
-          href="/"
-          className="inline-block border border-white/30 px-12 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300"
+          href="/shop"
+          className="inline-block border border-white/30 px-10 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-300"
         >
-          Join Waitlist
+          Shop Now
         </Link>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-8 md:px-16 border-t border-white/10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <footer className="py-8 px-6 border-t border-white/10">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center">
           <span 
-            className="text-xl tracking-[0.06em]"
+            className="text-lg tracking-[0.06em]"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             memo
           </span>
-          <div className="flex gap-8 text-xs tracking-[0.2em] uppercase text-white/40">
+          <div className="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-white/30">
             <Link href="/about" className="hover:text-white transition-colors">About</Link>
             <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
             <span>© 2026</span>

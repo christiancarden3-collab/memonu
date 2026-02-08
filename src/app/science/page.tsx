@@ -1,195 +1,247 @@
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'The Science | memo - How Sublingual Electrolyte Delivery Works',
-  description: 'Learn the science behind memo\'s fast-dissolving electrolyte strips and why sublingual absorption is the future of hydration.',
-};
+export default function Science() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-export default function SciencePage() {
   return (
-    <>
-      <Navigation />
-      
-      <main className="pt-16">
-        {/* Hero */}
-        <section className="py-24 px-6 bg-gradient-to-b from-emerald-50 to-white">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-light tracking-tight mb-6">
-              The Science
-            </h1>
-            <p className="text-xl text-gray-600">
-              Why sublingual delivery changes everything about hydration.
-            </p>
+    <main className="min-h-screen bg-black text-white">
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-6 flex justify-between items-center">
+        <Link 
+          href="/" 
+          className="text-white text-xl tracking-[0.06em]"
+          style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
+        >
+          memo
+        </Link>
+        
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="text-white flex items-center gap-3 group"
+        >
+          <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Menu</span>
+          <div className="flex flex-col gap-[5px]">
+            <span className="w-6 h-[1px] bg-white" />
+            <span className="w-6 h-[1px] bg-white" />
           </div>
-        </section>
+        </button>
+      </header>
 
-        {/* Sublingual Absorption */}
-        <section className="py-16 px-6">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-light mb-8">Sublingual Absorption</h2>
-            <p className="text-lg text-gray-600 mb-6">
-              The area under your tongue (sublingual mucosa) is one of the most efficient absorption sites in your body. Here's why:
-            </p>
-            
-            <div className="bg-gray-50 rounded-2xl p-8 mb-8">
-              <ul className="space-y-4">
-                <li className="flex items-start gap-4">
-                  <span className="text-emerald-600 text-xl">✓</span>
-                  <div>
-                    <strong className="block mb-1">Rich Blood Supply</strong>
-                    <span className="text-gray-600">The sublingual area has a dense network of blood vessels, allowing rapid absorption directly into your bloodstream.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-emerald-600 text-xl">✓</span>
-                  <div>
-                    <strong className="block mb-1">Bypasses First-Pass Metabolism</strong>
-                    <span className="text-gray-600">Unlike pills that go through your digestive system, sublingual delivery avoids the liver's first-pass effect, increasing bioavailability.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-emerald-600 text-xl">✓</span>
-                  <div>
-                    <strong className="block mb-1">Thin Membrane</strong>
-                    <span className="text-gray-600">The tissue under your tongue is thin and permeable, allowing molecules to pass through quickly and efficiently.</span>
-                  </div>
-                </li>
-              </ul>
+      {/* Menu Overlay */}
+      <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className="flex justify-end px-6 md:px-12 py-6">
+          <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3 group">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Close</span>
+            <div className="relative w-6 h-6 flex items-center justify-center">
+              <span className="absolute w-6 h-[1px] bg-white rotate-45" />
+              <span className="absolute w-6 h-[1px] bg-white -rotate-45" />
+            </div>
+          </button>
+        </div>
+        <nav className="h-full flex items-center justify-center">
+          <ul className="space-y-4 text-center">
+            {[
+              { name: 'Shop', href: '/shop' },
+              { name: 'Science', href: '/science' },
+              { name: 'About', href: '/about' },
+              { name: 'Ambassadors', href: '/ambassadors' },
+              { name: 'Contact', href: '/contact' },
+            ].map((item) => (
+              <li key={item.name}>
+                <Link 
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-white text-5xl md:text-7xl font-light hover:text-white/40 transition-colors block py-1"
+                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      {/* Hero */}
+      <section className="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div className="max-w-3xl mx-auto text-center">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-6">The Science</span>
+          <h1 
+            className="text-5xl md:text-7xl font-light mb-6"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            Sublingual Delivery
+          </h1>
+          <p className="text-white/50 text-base md:text-lg max-w-lg mx-auto">
+            Why the area under your tongue is one of the most efficient absorption sites in your body.
+          </p>
+        </div>
+      </section>
+
+      {/* Speed Comparison */}
+      <section className="py-24 px-6 border-t border-white/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 
+            className="text-3xl md:text-4xl font-light mb-16"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            Absorption Speed
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="border border-white/10 p-8">
+              <div className="text-4xl font-light text-emerald-400 mb-3">~30s</div>
+              <div className="text-base font-light mb-2">memo strips</div>
+              <div className="text-[11px] text-white/40 uppercase tracking-wider">Sublingual</div>
             </div>
             
-            <p className="text-lg text-gray-600">
-              This is the same delivery method used for nitroglycerin (heart medication), certain vitamins, and CBD products—chosen specifically because it works fast.
-            </p>
-          </div>
-        </section>
-
-        {/* Speed Comparison */}
-        <section className="py-16 px-6 bg-[#0a0a0a] text-white">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-light mb-12 text-center">Absorption Speed Comparison</h2>
+            <div className="border border-white/10 p-8">
+              <div className="text-4xl font-light text-white/30 mb-3">15-30m</div>
+              <div className="text-base font-light mb-2">Drinks</div>
+              <div className="text-[11px] text-white/40 uppercase tracking-wider">Digestive</div>
+            </div>
             
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gray-900 rounded-2xl p-6 text-center">
-                <div className="text-4xl font-light text-emerald-400 mb-2">~30 sec</div>
-                <div className="text-lg font-medium mb-2">memo strips</div>
-                <div className="text-sm text-gray-400">Sublingual absorption</div>
-              </div>
-              
-              <div className="bg-gray-900 rounded-2xl p-6 text-center">
-                <div className="text-4xl font-light text-gray-400 mb-2">15-30 min</div>
-                <div className="text-lg font-medium mb-2">Electrolyte drinks</div>
-                <div className="text-sm text-gray-400">Stomach → intestines → blood</div>
-              </div>
-              
-              <div className="bg-gray-900 rounded-2xl p-6 text-center">
-                <div className="text-4xl font-light text-gray-400 mb-2">30-60 min</div>
-                <div className="text-lg font-medium mb-2">Capsules / Pills</div>
-                <div className="text-sm text-gray-400">Must dissolve first</div>
-              </div>
+            <div className="border border-white/10 p-8">
+              <div className="text-4xl font-light text-white/30 mb-3">30-60m</div>
+              <div className="text-base font-light mb-2">Pills</div>
+              <div className="text-[11px] text-white/40 uppercase tracking-wider">Digestive</div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Electrolytes */}
-        <section className="py-16 px-6">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-light mb-8">The Electrolytes</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              We include only the essential electrolytes your body needs—nothing more, nothing less.
-            </p>
+      {/* How It Works */}
+      <section className="py-24 px-6 bg-white text-black">
+        <div className="max-w-3xl mx-auto">
+          <h2 
+            className="text-3xl md:text-4xl font-light mb-16 text-center"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            How It Works
+          </h2>
+          
+          <div className="space-y-12">
+            <div className="text-center">
+              <span className="text-4xl font-light text-black/10 block mb-4">01</span>
+              <h3 className="text-xl font-light mb-3">Rich Blood Supply</h3>
+              <p className="text-black/50 max-w-md mx-auto">
+                Dense network of blood vessels allows rapid absorption directly into your bloodstream.
+              </p>
+            </div>
             
-            <div className="space-y-6">
-              <div className="border-l-4 border-emerald-500 pl-6 py-2">
-                <h3 className="text-xl font-medium mb-2">Sodium</h3>
-                <p className="text-gray-600">
-                  The primary electrolyte lost in sweat. Critical for fluid balance, nerve function, and muscle contractions. We use the optimal amount for rapid replenishment.
-                </p>
-              </div>
-              
-              <div className="border-l-4 border-emerald-500 pl-6 py-2">
-                <h3 className="text-xl font-medium mb-2">Potassium</h3>
-                <p className="text-gray-600">
-                  Works with sodium to maintain cellular hydration. Essential for heart rhythm, muscle function, and preventing cramps.
-                </p>
-              </div>
-              
-              <div className="border-l-4 border-emerald-500 pl-6 py-2">
-                <h3 className="text-xl font-medium mb-2">Magnesium</h3>
-                <p className="text-gray-600">
-                  Involved in over 300 enzymatic reactions. Supports muscle relaxation, energy production, and electrolyte balance.
-                </p>
-              </div>
+            <div className="text-center">
+              <span className="text-4xl font-light text-black/10 block mb-4">02</span>
+              <h3 className="text-xl font-light mb-3">Bypasses First-Pass</h3>
+              <p className="text-black/50 max-w-md mx-auto">
+                Unlike pills, sublingual delivery avoids the liver's first-pass effect, increasing bioavailability.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <span className="text-4xl font-light text-black/10 block mb-4">03</span>
+              <h3 className="text-xl font-light mb-3">Thin Membrane</h3>
+              <p className="text-black/50 max-w-md mx-auto">
+                The tissue under your tongue is thin and permeable, allowing molecules to pass through efficiently.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* What We Don't Include */}
-        <section className="py-16 px-6 bg-gray-50">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-light mb-8">What We Leave Out</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Just as important as what we include is what we don't:
-            </p>
+      {/* Electrolytes */}
+      <section className="py-24 px-6 bg-black">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 
+            className="text-3xl md:text-4xl font-light mb-16"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            The Electrolytes
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+              <h3 className="text-lg font-light mb-3">Sodium</h3>
+              <p className="text-white/40 text-sm">
+                Primary electrolyte lost in sweat. Critical for fluid balance and muscle function.
+              </p>
+            </div>
             
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 text-gray-600">
-                <span className="text-red-500">✗</span>
-                <span>No added sugars</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-600">
-                <span className="text-red-500">✗</span>
-                <span>No artificial colors</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-600">
-                <span className="text-red-500">✗</span>
-                <span>No artificial sweeteners</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-600">
-                <span className="text-red-500">✗</span>
-                <span>No fillers or binders</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-600">
-                <span className="text-red-500">✗</span>
-                <span>No caffeine</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-600">
-                <span className="text-red-500">✗</span>
-                <span>No proprietary blends</span>
-              </div>
+            <div>
+              <h3 className="text-lg font-light mb-3">Potassium</h3>
+              <p className="text-white/40 text-sm">
+                Works with sodium for cellular hydration. Essential for heart rhythm and preventing cramps.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-lg font-light mb-3">Magnesium</h3>
+              <p className="text-white/40 text-sm">
+                Supports muscle relaxation, energy production, and overall electrolyte balance.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Patent */}
-        <section className="py-16 px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-light mb-6">Patent Pending</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Our unique formulation and delivery method is protected by a pending patent (Application #63/976,885). We're not just making another supplement—we're pioneering a new category.
-            </p>
+      {/* What We Leave Out */}
+      <section className="py-24 px-6 border-t border-white/10">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 
+            className="text-3xl md:text-4xl font-light mb-12"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            What We Leave Out
+          </h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-white/40 text-sm">
+            <div>No added sugars</div>
+            <div>No artificial colors</div>
+            <div>No artificial sweeteners</div>
+            <div>No fillers</div>
+            <div>No caffeine</div>
+            <div>No proprietary blends</div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <section className="py-16 px-6 bg-emerald-600 text-white">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-light mb-6">Experience the Difference</h2>
-            <p className="text-lg text-emerald-100 mb-8">
-              Try memo and feel what fast hydration really means.
-            </p>
-            <Link 
-              href="/shop"
-              className="inline-block px-8 py-4 bg-white text-emerald-600 rounded-full font-medium hover:bg-emerald-50 transition-colors"
-            >
-              Shop Now
-            </Link>
+      {/* CTA */}
+      <section className="py-24 px-6 bg-white text-black text-center">
+        <h2 
+          className="text-3xl md:text-4xl font-light mb-6"
+          style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+        >
+          Experience the Difference
+        </h2>
+        <p className="text-black/50 text-base mb-10 max-w-md mx-auto">
+          Try memo and feel what fast hydration really means.
+        </p>
+        <Link 
+          href="/shop"
+          className="inline-block border border-black/20 px-10 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-black hover:text-white transition-all duration-300"
+        >
+          Shop Now
+        </Link>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-6 border-t border-white/10 bg-black">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+          <span 
+            className="text-lg tracking-[0.06em] text-white"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            memo
+          </span>
+          <div className="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-white/30">
+            <Link href="/about" className="hover:text-white transition-colors">About</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+            <span>© 2026</span>
           </div>
-        </section>
-      </main>
-
-      <Footer />
-    </>
+        </div>
+      </footer>
+    </main>
   );
 }

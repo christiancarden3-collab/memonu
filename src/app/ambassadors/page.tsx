@@ -18,11 +18,11 @@ export default function Ambassadors() {
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-8 md:px-16 py-8 flex justify-between items-center">
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-6 flex justify-between items-center">
         <Link 
           href="/" 
-          className="text-white text-2xl tracking-[0.06em]"
-          style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          className="text-white text-xl tracking-[0.06em]"
+          style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
         >
           memo
         </Link>
@@ -31,36 +31,42 @@ export default function Ambassadors() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-white flex items-center gap-3 group"
         >
-          <span className="text-xs tracking-[0.3em] uppercase opacity-60 group-hover:opacity-100 hidden md:block">Menu</span>
-          <div className="flex flex-col gap-1.5">
-            <span className="w-7 h-px bg-white" />
-            <span className="w-7 h-px bg-white" />
+          <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Menu</span>
+          <div className="flex flex-col gap-[5px]">
+            <span className="w-6 h-[1px] bg-white" />
+            <span className="w-6 h-[1px] bg-white" />
           </div>
         </button>
       </header>
 
-      {/* Menu */}
-      <div className={`fixed inset-0 bg-black z-50 transform transition-transform duration-500 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex justify-end px-8 md:px-16 py-8">
-          <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3">
-            <span className="text-xs tracking-[0.3em] uppercase opacity-60">Close</span>
-            <div className="relative w-7 h-7 flex items-center justify-center">
-              <span className="absolute w-7 h-px bg-white rotate-45" />
-              <span className="absolute w-7 h-px bg-white -rotate-45" />
+      {/* Menu Overlay */}
+      <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className="flex justify-end px-6 md:px-12 py-6">
+          <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3 group">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Close</span>
+            <div className="relative w-6 h-6 flex items-center justify-center">
+              <span className="absolute w-6 h-[1px] bg-white rotate-45" />
+              <span className="absolute w-6 h-[1px] bg-white -rotate-45" />
             </div>
           </button>
         </div>
-        <nav className="px-8 md:px-16 py-16">
-          <ul className="space-y-5">
-            {['Shop', 'About Us', 'Contact', 'Ambassadors'].map((item) => (
-              <li key={item}>
+        <nav className="h-full flex items-center justify-center">
+          <ul className="space-y-4 text-center">
+            {[
+              { name: 'Shop', href: '/shop' },
+              { name: 'Science', href: '/science' },
+              { name: 'About', href: '/about' },
+              { name: 'Ambassadors', href: '/ambassadors' },
+              { name: 'Contact', href: '/contact' },
+            ].map((item) => (
+              <li key={item.name}>
                 <Link 
-                  href={`/${item.toLowerCase().replace(' ', '-').replace('about-us', 'about')}`}
+                  href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-white text-5xl font-normal hover:opacity-40 transition-opacity block"
+                  className="text-white text-5xl md:text-7xl font-light hover:text-white/40 transition-colors block py-1"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
-                  {item}
+                  {item.name}
                 </Link>
               </li>
             ))}
@@ -80,30 +86,30 @@ export default function Ambassadors() {
             priority
           />
         </div>
-        <div className="relative z-10 text-center px-8">
+        <div className="relative z-10 text-center px-6">
           <h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-normal mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-light mb-6"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Ambassadors
           </h1>
-          <p className="text-white/60 text-lg md:text-xl max-w-xl mx-auto">
+          <p className="text-white/50 text-base md:text-lg max-w-md mx-auto">
             Join a community of athletes redefining hydration.
           </p>
         </div>
       </section>
 
       {/* Benefits */}
-      <section className="py-32 md:py-48 px-8 md:px-16 bg-white text-black">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 md:py-32 px-6 bg-white text-black">
+        <div className="max-w-4xl mx-auto">
           <h2 
-            className="text-4xl md:text-6xl font-normal text-center mb-24"
+            className="text-3xl md:text-5xl font-light text-center mb-20"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             What You Get
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             {[
               { title: 'Free Product', desc: 'Monthly supply of memo strips delivered to your door.' },
               { title: 'Early Access', desc: 'First look at new products, flavors, and collaborations.' },
@@ -111,12 +117,12 @@ export default function Ambassadors() {
             ].map((item, i) => (
               <div key={i}>
                 <h3 
-                  className="text-2xl font-normal mb-4"
+                  className="text-xl font-light mb-3"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {item.title}
                 </h3>
-                <p className="text-black/50">{item.desc}</p>
+                <p className="text-black/50 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -124,75 +130,69 @@ export default function Ambassadors() {
       </section>
 
       {/* Application */}
-      <section className="py-32 md:py-48 px-8 md:px-16 bg-black">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 
-              className="text-4xl md:text-5xl font-normal mb-6"
-              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-            >
-              Apply Now
-            </h2>
-            <p className="text-white/50">
-              We're looking for authentic voices in fitness, sports, and wellness.
-            </p>
-          </div>
+      <section className="py-24 md:py-32 px-6 bg-black">
+        <div className="max-w-lg mx-auto text-center">
+          <h2 
+            className="text-3xl md:text-5xl font-light mb-4"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            Apply Now
+          </h2>
+          <p className="text-white/40 text-base mb-12">
+            We're looking for authentic voices in fitness, sports, and wellness.
+          </p>
 
           {status === 'success' ? (
-            <div className="text-center py-16">
+            <div className="py-12">
               <p 
-                className="text-3xl mb-4"
+                className="text-2xl mb-3"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Application received.
               </p>
-              <p className="text-white/50">We'll review and get back to you within 48 hours.</p>
+              <p className="text-white/40 text-sm">We'll review and get back to you within 48 hours.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <form onSubmit={handleSubmit} className="space-y-6 text-left">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Name</label>
+                  <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Name</label>
                   <input
                     type="text"
                     required
-                    className="w-full bg-transparent border-b border-white/20 py-4 text-xl focus:outline-none focus:border-white/50"
-                    style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-base focus:outline-none focus:border-white/50"
                   />
                 </div>
                 <div>
-                  <label className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Email</label>
+                  <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Email</label>
                   <input
                     type="email"
                     required
-                    className="w-full bg-transparent border-b border-white/20 py-4 text-xl focus:outline-none focus:border-white/50"
-                    style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-base focus:outline-none focus:border-white/50"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Instagram Handle</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Instagram</label>
                 <input
                   type="text"
                   placeholder="@"
-                  className="w-full bg-transparent border-b border-white/20 py-4 text-xl placeholder:text-white/20 focus:outline-none focus:border-white/50"
-                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                  className="w-full bg-transparent border-b border-white/20 py-3 text-base placeholder:text-white/20 focus:outline-none focus:border-white/50"
                 />
               </div>
               <div>
-                <label className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Why Memo?</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Why Memo?</label>
                 <textarea
-                  rows={4}
+                  rows={3}
                   placeholder="Tell us about yourself..."
-                  className="w-full bg-transparent border-b border-white/20 py-4 text-xl placeholder:text-white/20 focus:outline-none focus:border-white/50 resize-none"
-                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                  className="w-full bg-transparent border-b border-white/20 py-3 text-base placeholder:text-white/20 focus:outline-none focus:border-white/50 resize-none"
                 />
               </div>
-              <div className="text-center pt-8">
+              <div className="text-center pt-6">
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="border border-white/30 px-16 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50"
+                  className="border border-white/30 px-12 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50"
                 >
                   {status === 'loading' ? 'Submitting...' : 'Submit'}
                 </button>
@@ -203,15 +203,15 @@ export default function Ambassadors() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-8 md:px-16 border-t border-white/10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <footer className="py-8 px-6 border-t border-white/10">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center">
           <span 
-            className="text-xl tracking-[0.06em]"
+            className="text-lg tracking-[0.06em]"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             memo
           </span>
-          <div className="flex gap-8 text-xs tracking-[0.2em] uppercase text-white/40">
+          <div className="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-white/30">
             <Link href="/about" className="hover:text-white transition-colors">About</Link>
             <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
             <span>© 2026</span>
