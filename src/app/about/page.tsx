@@ -33,7 +33,7 @@ export default function About() {
         </button>
       </header>
 
-      {/* Menu Overlay */}
+      {/* Menu Overlay - EXPANDED */}
       <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <button 
           onClick={() => setIsMenuOpen(false)} 
@@ -47,7 +47,7 @@ export default function About() {
         </button>
         
         <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-6 text-center">
+          <ul className="space-y-10 text-center">
             {[
               { name: 'Shop', href: '/shop' },
               { name: 'Science', href: '/science' },
@@ -59,7 +59,7 @@ export default function About() {
                 <Link 
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block py-2"
+                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {item.name}
@@ -84,7 +84,7 @@ export default function About() {
         </div>
         <div className="relative z-10 text-center px-6">
           <h1 
-            className="text-[#f5f5f0] text-5xl md:text-7xl lg:text-8xl font-light mb-8"
+            className="text-[#f5f5f0] text-5xl md:text-7xl lg:text-8xl font-light mb-10"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             About
@@ -95,19 +95,19 @@ export default function About() {
         </div>
       </section>
 
-      {/* The Story - SPACED OUT */}
-      <section className="py-32 md:py-48 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+      {/* The Story - MEGA SPACED */}
+      <section className="py-48 md:py-64 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
         <div className="max-w-2xl mx-auto text-center">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#0a0a0a]/40 block mb-12">Our Story</span>
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#0a0a0a]/40 block mb-16">Our Story</span>
           
           <h2 
-            className="text-3xl md:text-5xl font-light mb-16 leading-tight"
+            className="text-3xl md:text-5xl font-light mb-20 leading-relaxed"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             We got tired of carrying bottles and mixing powders.
           </h2>
           
-          <div className="space-y-8 text-[#0a0a0a]/60 text-base md:text-lg leading-relaxed">
+          <div className="space-y-12 text-[#0a0a0a]/60 text-base md:text-lg leading-loose">
             <p>
               It started with a simple question: why does staying hydrated have to be so complicated?
             </p>
@@ -122,7 +122,7 @@ export default function About() {
       </section>
 
       {/* Image Break */}
-      <section className="h-[70vh] relative">
+      <section className="h-screen relative">
         <Image
           src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2940&auto=format&fit=crop"
           alt="Training"
@@ -132,94 +132,94 @@ export default function About() {
         />
       </section>
 
-      {/* Values - SPACED OUT with B&W */}
-      <section className="py-32 md:py-48 px-6 bg-[#0a0a0a]">
+      {/* Values - MEGA SPACED */}
+      <section className="py-48 md:py-64 px-6 bg-[#0a0a0a]">
         <div className="max-w-3xl mx-auto">
           <h2 
-            className="text-3xl md:text-5xl font-light text-center mb-24 text-[#f5f5f0]"
+            className="text-3xl md:text-5xl font-light text-center mb-32 text-[#f5f5f0]"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             What We Believe
           </h2>
           
-          <div className="space-y-20">
+          <div className="space-y-32">
             <div className="text-center">
-              <span className="text-6xl font-light text-[#f5f5f0]/20 block mb-6"
+              <span className="text-7xl md:text-8xl font-light text-[#f5f5f0]/15 block mb-10"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 01
               </span>
               <h3 
-                className="text-2xl font-light mb-4 text-[#f5f5f0]"
+                className="text-2xl md:text-3xl font-light mb-8 text-[#f5f5f0]"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Simplicity
               </h3>
-              <p className="text-[#f5f5f0]/50 max-w-md mx-auto">The best solutions are the ones you actually use. No complexity, no barriers.</p>
+              <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg leading-relaxed">The best solutions are the ones you actually use. No complexity, no barriers.</p>
             </div>
             
             <div className="text-center">
-              <span className="text-6xl font-light text-[#f5f5f0]/20 block mb-6"
+              <span className="text-7xl md:text-8xl font-light text-[#f5f5f0]/15 block mb-10"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 02
               </span>
               <h3 
-                className="text-2xl font-light mb-4 text-[#f5f5f0]"
+                className="text-2xl md:text-3xl font-light mb-8 text-[#f5f5f0]"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Performance
               </h3>
-              <p className="text-[#f5f5f0]/50 max-w-md mx-auto">Every ingredient earns its place. Nothing more, nothing less.</p>
+              <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg leading-relaxed">Every ingredient earns its place. Nothing more, nothing less.</p>
             </div>
             
             <div className="text-center">
-              <span className="text-6xl font-light text-[#f5f5f0]/20 block mb-6"
+              <span className="text-7xl md:text-8xl font-light text-[#f5f5f0]/15 block mb-10"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 03
               </span>
               <h3 
-                className="text-2xl font-light mb-4 text-[#f5f5f0]"
+                className="text-2xl md:text-3xl font-light mb-8 text-[#f5f5f0]"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Freedom
               </h3>
-              <p className="text-[#f5f5f0]/50 max-w-md mx-auto">Hydration that goes where you go. No bottles, no limits.</p>
+              <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg leading-relaxed">Hydration that goes where you go. No bottles, no limits.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-32 md:py-48 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
+      {/* CTA - MEGA SPACED */}
+      <section className="py-48 md:py-64 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
         <h2 
-          className="text-3xl md:text-5xl font-light mb-8"
+          className="text-3xl md:text-5xl font-light mb-12"
           style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
         >
           Join the Movement
         </h2>
-        <p className="text-[#0a0a0a]/50 text-base mb-12 max-w-md mx-auto">
+        <p className="text-[#0a0a0a]/50 text-lg mb-16 max-w-md mx-auto">
           Be the first to experience hydration, reimagined.
         </p>
         <Link 
           href="/shop"
-          className="inline-block border border-[#0a0a0a]/30 px-10 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
+          className="inline-block border border-[#0a0a0a]/30 px-12 py-5 text-[11px] tracking-[0.25em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
         >
           Shop Now
         </Link>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-[#f5f5f0]/10 bg-[#0a0a0a]">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+      <footer className="py-16 px-6 border-t border-[#f5f5f0]/10 bg-[#0a0a0a]">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center">
           <span 
             className="text-lg tracking-[0.06em] text-[#f5f5f0]"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             memo
           </span>
-          <div className="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
+          <div className="flex gap-8 text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
             <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
             <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
             <span>© 2026</span>

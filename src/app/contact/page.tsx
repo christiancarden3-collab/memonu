@@ -40,7 +40,7 @@ export default function Contact() {
         </button>
       </header>
 
-      {/* Menu Overlay */}
+      {/* Menu Overlay - EXPANDED */}
       <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <button 
           onClick={() => setIsMenuOpen(false)} 
@@ -54,7 +54,7 @@ export default function Contact() {
         </button>
         
         <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-6 text-center">
+          <ul className="space-y-10 text-center">
             {[
               { name: 'Shop', href: '/shop' },
               { name: 'Science', href: '/science' },
@@ -66,7 +66,7 @@ export default function Contact() {
                 <Link 
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block py-2"
+                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {item.name}
@@ -77,60 +77,60 @@ export default function Contact() {
         </nav>
       </div>
 
-      {/* Content */}
-      <section className="min-h-screen flex items-center justify-center px-6">
+      {/* Content - MEGA SPACED */}
+      <section className="min-h-screen flex items-center justify-center px-6 py-32">
         <div className="w-full max-w-md mx-auto text-center">
           <h1 
-            className="text-5xl md:text-7xl font-light mb-6"
+            className="text-5xl md:text-7xl font-light mb-10"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Contact
           </h1>
-          <p className="text-[#f5f5f0]/40 text-base mb-16">
+          <p className="text-[#f5f5f0]/40 text-lg mb-20">
             Questions? Partnerships? Just say hello.
           </p>
 
           {status === 'success' ? (
-            <div className="py-16">
+            <div className="py-20">
               <p 
-                className="text-2xl mb-4"
+                className="text-3xl mb-6"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Message sent.
               </p>
-              <p className="text-[#f5f5f0]/40">We'll be in touch soon.</p>
+              <p className="text-[#f5f5f0]/40 text-lg">We'll be in touch soon.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-10 text-left">
+            <form onSubmit={handleSubmit} className="space-y-12 text-left">
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Name</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Name</label>
                 <input
                   type="text"
                   required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-5 text-lg focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
                 />
               </div>
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Email</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Email</label>
                 <input
                   type="email"
                   required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-5 text-lg focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
                 />
               </div>
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Message</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Message</label>
                 <textarea
-                  rows={4}
+                  rows={5}
                   required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50 transition-colors resize-none"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-5 text-lg focus:outline-none focus:border-[#f5f5f0]/50 transition-colors resize-none"
                 />
               </div>
-              <div className="text-center pt-8">
+              <div className="text-center pt-12">
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="border border-[#f5f5f0]/30 px-12 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
+                  className="border border-[#f5f5f0]/30 px-14 py-5 text-[11px] tracking-[0.25em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
                 >
                   {status === 'loading' ? 'Sending...' : 'Send'}
                 </button>
@@ -138,20 +138,20 @@ export default function Contact() {
             </form>
           )}
 
-          {/* Contact Info - SPACED */}
-          <div className="mt-24 pt-16 border-t border-[#f5f5f0]/10">
-            <div className="space-y-12">
+          {/* Contact Info - MEGA SPACED */}
+          <div className="mt-32 pt-20 border-t border-[#f5f5f0]/10">
+            <div className="space-y-16">
               <div>
-                <span className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30 block mb-4">Email</span>
-                <a href="mailto:hello@memonu.com" className="text-base hover:text-[#f5f5f0]/50 transition-colors">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30 block mb-6">Email</span>
+                <a href="mailto:hello@memonu.com" className="text-xl hover:text-[#f5f5f0]/50 transition-colors">
                   hello@memonu.com
                 </a>
               </div>
               <div>
-                <span className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30 block mb-4">Social</span>
-                <div className="flex gap-8 justify-center">
-                  <a href="https://instagram.com/memonu" className="text-base hover:text-[#f5f5f0]/50 transition-colors">Instagram</a>
-                  <a href="https://twitter.com/memonu" className="text-base hover:text-[#f5f5f0]/50 transition-colors">Twitter</a>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30 block mb-6">Social</span>
+                <div className="flex gap-12 justify-center">
+                  <a href="https://instagram.com/memonu" className="text-xl hover:text-[#f5f5f0]/50 transition-colors">Instagram</a>
+                  <a href="https://twitter.com/memonu" className="text-xl hover:text-[#f5f5f0]/50 transition-colors">Twitter</a>
                 </div>
               </div>
             </div>

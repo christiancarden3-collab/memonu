@@ -155,10 +155,10 @@ export default function Home() {
           </div>
         </button>
 
-        {/* Menu Content - MORE SPACING */}
+        {/* Menu Content - MEGA SPACING */}
         <div className="h-full flex flex-col items-center justify-center px-6">
           <nav>
-            <ul className="space-y-6 text-center">
+            <ul className="space-y-10 text-center">
               {[
                 { name: 'Shop', href: '/shop' },
                 { name: 'Science', href: '/science' },
@@ -176,7 +176,7 @@ export default function Home() {
                   <Link 
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-white text-4xl md:text-6xl font-light tracking-tight hover:text-white/40 transition-colors duration-300 block py-2"
+                    className="text-white text-4xl md:text-6xl font-light tracking-tight hover:text-white/40 transition-colors duration-300 block"
                     style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
                   >
                     {item.name}

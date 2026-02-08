@@ -41,7 +41,7 @@ export default function Ambassadors() {
         </button>
       </header>
 
-      {/* Menu Overlay */}
+      {/* Menu Overlay - EXPANDED */}
       <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <button 
           onClick={() => setIsMenuOpen(false)} 
@@ -55,7 +55,7 @@ export default function Ambassadors() {
         </button>
         
         <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-6 text-center">
+          <ul className="space-y-10 text-center">
             {[
               { name: 'Shop', href: '/shop' },
               { name: 'Science', href: '/science' },
@@ -67,7 +67,7 @@ export default function Ambassadors() {
                 <Link 
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block py-2"
+                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {item.name}
@@ -92,123 +92,123 @@ export default function Ambassadors() {
         </div>
         <div className="relative z-10 text-center px-6">
           <h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-light mb-8"
+            className="text-5xl md:text-7xl lg:text-8xl font-light mb-10"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Ambassadors
           </h1>
-          <p className="text-[#f5f5f0]/60 text-base md:text-lg max-w-md mx-auto">
+          <p className="text-[#f5f5f0]/60 text-lg max-w-md mx-auto">
             Join a community of athletes redefining hydration.
           </p>
         </div>
       </section>
 
-      {/* Benefits - SPACED */}
-      <section className="py-32 md:py-48 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+      {/* Benefits - MEGA SPACED */}
+      <section className="py-48 md:py-64 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
         <div className="max-w-2xl mx-auto">
           <h2 
-            className="text-3xl md:text-5xl font-light text-center mb-24"
+            className="text-3xl md:text-5xl font-light text-center mb-32"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             What You Get
           </h2>
           
-          <div className="space-y-20">
+          <div className="space-y-24">
             <div className="text-center">
               <h3 
-                className="text-xl font-light mb-6"
+                className="text-2xl font-light mb-8"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Free Product
               </h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto">Monthly supply of memo strips delivered to your door.</p>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg leading-relaxed">Monthly supply of memo strips delivered to your door.</p>
             </div>
             
             <div className="text-center">
               <h3 
-                className="text-xl font-light mb-6"
+                className="text-2xl font-light mb-8"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Early Access
               </h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto">First look at new products, flavors, and collaborations.</p>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg leading-relaxed">First look at new products, flavors, and collaborations.</p>
             </div>
             
             <div className="text-center">
               <h3 
-                className="text-xl font-light mb-6"
+                className="text-2xl font-light mb-8"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Commission
               </h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto">Earn on every sale through your unique code.</p>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg leading-relaxed">Earn on every sale through your unique code.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Application - SPACED */}
-      <section className="py-32 md:py-48 px-6 bg-[#0a0a0a]">
+      {/* Application - MEGA SPACED */}
+      <section className="py-48 md:py-64 px-6 bg-[#0a0a0a]">
         <div className="max-w-md mx-auto text-center">
           <h2 
-            className="text-3xl md:text-5xl font-light mb-6"
+            className="text-3xl md:text-5xl font-light mb-10"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Apply Now
           </h2>
-          <p className="text-[#f5f5f0]/40 text-base mb-16">
+          <p className="text-[#f5f5f0]/40 text-lg mb-20">
             We're looking for authentic voices in fitness, sports, and wellness.
           </p>
 
           {status === 'success' ? (
-            <div className="py-16">
+            <div className="py-20">
               <p 
-                className="text-2xl mb-4"
+                className="text-3xl mb-6"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Application received.
               </p>
-              <p className="text-[#f5f5f0]/40">We'll review and get back to you within 48 hours.</p>
+              <p className="text-[#f5f5f0]/40 text-lg">We'll review and get back to you within 48 hours.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-10 text-left">
+            <form onSubmit={handleSubmit} className="space-y-12 text-left">
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Name</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Name</label>
                 <input
                   type="text"
                   required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-5 text-lg focus:outline-none focus:border-[#f5f5f0]/50"
                 />
               </div>
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Email</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Email</label>
                 <input
                   type="email"
                   required
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-5 text-lg focus:outline-none focus:border-[#f5f5f0]/50"
                 />
               </div>
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Instagram</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Instagram</label>
                 <input
                   type="text"
                   placeholder="@"
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-5 text-lg placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50"
                 />
               </div>
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Why Memo?</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Why Memo?</label>
                 <textarea
-                  rows={3}
+                  rows={4}
                   placeholder="Tell us about yourself..."
-                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50 resize-none"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-5 text-lg placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50 resize-none"
                 />
               </div>
-              <div className="text-center pt-8">
+              <div className="text-center pt-12">
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="border border-[#f5f5f0]/30 px-12 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
+                  className="border border-[#f5f5f0]/30 px-14 py-5 text-[11px] tracking-[0.25em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
                 >
                   {status === 'loading' ? 'Submitting...' : 'Submit'}
                 </button>
@@ -219,15 +219,15 @@ export default function Ambassadors() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-[#f5f5f0]/10">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+      <footer className="py-16 px-6 border-t border-[#f5f5f0]/10">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center">
           <span 
             className="text-lg tracking-[0.06em]"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             memo
           </span>
-          <div className="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
+          <div className="flex gap-8 text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
             <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
             <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
             <span>© 2026</span>
