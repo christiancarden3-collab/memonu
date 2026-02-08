@@ -76,11 +76,11 @@ export default function Science() {
       {/* Speed Comparison */}
       <section className="py-80 md:py-[28rem] px-6 border-t border-[#f5f5f0]/10 text-center">
         <div className="max-w-2xl mx-auto">
-          <div className="border border-[#f5f5f0]/20 p-12 md:p-20 mb-40">
+          <div className="border border-[#f5f5f0]/20 p-12 md:p-20 mb-40 mx-auto max-w-xl">
             <h2 className="text-3xl md:text-5xl font-light">Absorption Speed</h2>
           </div>
           
-          <div className="space-y-32">
+          <div className="space-y-32 max-w-xl mx-auto">
             <div className="border border-[#f5f5f0]/40 p-16 md:p-24">
               <div className="text-6xl md:text-8xl font-light text-[#f5f5f0] mb-10">~30s</div>
               <div className="text-2xl font-light mb-6">memo strips</div>
