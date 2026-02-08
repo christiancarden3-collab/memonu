@@ -86,16 +86,16 @@ export default function Science() {
       </section>
 
       {/* Speed Comparison - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 border-t border-[#f5f5f0]/10">
+      <section className="py-64 md:py-80 px-6 border-t border-[#f5f5f0]/10">
         <div className="max-w-2xl mx-auto text-center">
           <h2 
-            className="text-3xl md:text-5xl font-light mb-24"
+            className="text-3xl md:text-5xl font-light mb-40 md:mb-56 md:mb-40"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Absorption Speed
           </h2>
           
-          <div className="space-y-16">
+          <div className="space-y-24">
             <div className="border border-[#f5f5f0]/30 p-12 md:p-16">
               <div className="text-6xl md:text-7xl font-light text-[#f5f5f0] mb-6">~30s</div>
               <div className="text-xl font-light mb-4">memo strips</div>
@@ -118,16 +118,16 @@ export default function Science() {
       </section>
 
       {/* How It Works - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+      <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
         <div className="max-w-2xl mx-auto">
           <h2 
-            className="text-3xl md:text-5xl font-light mb-32 text-center"
+            className="text-3xl md:text-5xl font-light mb-40 md:mb-56 text-center"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             How It Works
           </h2>
           
-          <div className="space-y-32">
+          <div className="space-y-48 md:space-y-64">
             <div className="text-center">
               <span className="text-6xl md:text-7xl font-light text-[#0a0a0a]/10 block mb-10">01</span>
               <h3 className="text-2xl font-light mb-8">Rich Blood Supply</h3>
@@ -156,16 +156,16 @@ export default function Science() {
       </section>
 
       {/* Electrolytes - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 bg-[#0a0a0a]">
+      <section className="py-64 md:py-80 px-6 bg-[#0a0a0a]">
         <div className="max-w-2xl mx-auto text-center">
           <h2 
-            className="text-3xl md:text-5xl font-light mb-32"
+            className="text-3xl md:text-5xl font-light mb-40 md:mb-56"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             The Electrolytes
           </h2>
           
-          <div className="space-y-24">
+          <div className="space-y-40">
             <div>
               <h3 className="text-2xl font-light mb-8">Sodium</h3>
               <p className="text-[#f5f5f0]/40 text-lg leading-relaxed max-w-md mx-auto">
@@ -191,10 +191,10 @@ export default function Science() {
       </section>
 
       {/* What We Leave Out - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 border-t border-[#f5f5f0]/10">
+      <section className="py-64 md:py-80 px-6 border-t border-[#f5f5f0]/10">
         <div className="max-w-xl mx-auto text-center">
           <h2 
-            className="text-3xl md:text-5xl font-light mb-24"
+            className="text-3xl md:text-5xl font-light mb-40 md:mb-56 md:mb-40"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             What We Leave Out
@@ -212,7 +212,7 @@ export default function Science() {
       </section>
 
       {/* CTA - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
+      <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
         <h2 
           className="text-3xl md:text-5xl font-light mb-12"
           style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}

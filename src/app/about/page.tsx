@@ -95,19 +95,19 @@ export default function About() {
         </div>
       </section>
 
-      {/* The Story - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+      {/* The Story - EXTREME SPACED */}
+      <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
         <div className="max-w-2xl mx-auto text-center">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#0a0a0a]/40 block mb-16">Our Story</span>
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#0a0a0a]/40 block mb-20">Our Story</span>
           
           <h2 
-            className="text-3xl md:text-5xl font-light mb-20 leading-relaxed"
+            className="text-3xl md:text-5xl font-light mb-24 leading-relaxed"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             We got tired of carrying bottles and mixing powders.
           </h2>
           
-          <div className="space-y-12 text-[#0a0a0a]/60 text-base md:text-lg leading-loose">
+          <div className="space-y-16 text-[#0a0a0a]/60 text-base md:text-lg leading-loose">
             <p>
               It started with a simple question: why does staying hydrated have to be so complicated?
             </p>
@@ -132,17 +132,17 @@ export default function About() {
         />
       </section>
 
-      {/* Values - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 bg-[#0a0a0a]">
+      {/* Values - EXTREME SPACED */}
+      <section className="py-64 md:py-80 px-6 bg-[#0a0a0a]">
         <div className="max-w-3xl mx-auto">
           <h2 
-            className="text-3xl md:text-5xl font-light text-center mb-32 text-[#f5f5f0]"
+            className="text-3xl md:text-5xl font-light text-center mb-40 md:mb-56 text-[#f5f5f0]"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             What We Believe
           </h2>
           
-          <div className="space-y-32">
+          <div className="space-y-48 md:space-y-64">
             <div className="text-center">
               <span className="text-7xl md:text-8xl font-light text-[#f5f5f0]/15 block mb-10"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
@@ -191,15 +191,15 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
+      {/* CTA - EXTREME SPACED */}
+      <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
         <h2 
-          className="text-3xl md:text-5xl font-light mb-12"
+          className="text-3xl md:text-5xl font-light mb-16"
           style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
         >
           Join the Movement
         </h2>
-        <p className="text-[#0a0a0a]/50 text-lg mb-16 max-w-md mx-auto">
+        <p className="text-[#0a0a0a]/50 text-lg mb-20 max-w-md mx-auto">
           Be the first to experience hydration, reimagined.
         </p>
         <Link 

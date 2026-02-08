@@ -86,7 +86,7 @@ export default function Contact() {
           >
             Contact
           </h1>
-          <p className="text-[#f5f5f0]/40 text-lg mb-20">
+          <p className="text-[#f5f5f0]/40 text-lg mb-32">
             Questions? Partnerships? Just say hello.
           </p>
 
@@ -101,7 +101,7 @@ export default function Contact() {
               <p className="text-[#f5f5f0]/40 text-lg">We'll be in touch soon.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-12 text-left">
+            <form onSubmit={handleSubmit} className="space-y-24 text-left">
               <div>
                 <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Name</label>
                 <input
@@ -139,8 +139,8 @@ export default function Contact() {
           )}
 
           {/* Contact Info - MEGA SPACED */}
-          <div className="mt-32 pt-20 border-t border-[#f5f5f0]/10">
-            <div className="space-y-16">
+          <div className="mt-48 pt-32 border-t border-[#f5f5f0]/10">
+            <div className="space-y-24">
               <div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30 block mb-6">Email</span>
                 <a href="mailto:hello@memonu.com" className="text-xl hover:text-[#f5f5f0]/50 transition-colors">

@@ -104,16 +104,16 @@ export default function Ambassadors() {
       </section>
 
       {/* Benefits - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+      <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
         <div className="max-w-2xl mx-auto">
           <h2 
-            className="text-3xl md:text-5xl font-light text-center mb-32"
+            className="text-3xl md:text-5xl font-light text-center mb-40 md:mb-56"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             What You Get
           </h2>
           
-          <div className="space-y-24">
+          <div className="space-y-40">
             <div className="text-center">
               <h3 
                 className="text-2xl font-light mb-8"
@@ -148,7 +148,7 @@ export default function Ambassadors() {
       </section>
 
       {/* Application - MEGA SPACED */}
-      <section className="py-48 md:py-64 px-6 bg-[#0a0a0a]">
+      <section className="py-64 md:py-80 px-6 bg-[#0a0a0a]">
         <div className="max-w-md mx-auto text-center">
           <h2 
             className="text-3xl md:text-5xl font-light mb-10"
@@ -156,7 +156,7 @@ export default function Ambassadors() {
           >
             Apply Now
           </h2>
-          <p className="text-[#f5f5f0]/40 text-lg mb-20">
+          <p className="text-[#f5f5f0]/40 text-lg mb-32">
             We're looking for authentic voices in fitness, sports, and wellness.
           </p>
 
@@ -171,7 +171,7 @@ export default function Ambassadors() {
               <p className="text-[#f5f5f0]/40 text-lg">We'll review and get back to you within 48 hours.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-12 text-left">
+            <form onSubmit={handleSubmit} className="space-y-16 text-left">
               <div>
                 <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-6">Name</label>
                 <input
