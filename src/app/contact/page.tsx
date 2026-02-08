@@ -67,9 +67,9 @@ export default function Contact() {
       </div>
 
       {/* Content */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-48 text-center">
-        <div className="w-full max-w-lg mx-auto">
-          <div className="border border-[#f5f5f0]/30 px-12 md:px-20 py-16 md:py-20 mb-32">
+      <section className="min-h-screen flex items-center justify-center px-6 py-48">
+        <div className="w-full flex flex-col items-center text-center">
+          <div className="border border-[#f5f5f0]/30 px-12 md:px-20 py-16 md:py-20 mb-32 w-full max-w-xl">
             <h1 className="text-5xl md:text-7xl font-light mb-8">
               Contact
             </h1>
@@ -79,12 +79,12 @@ export default function Contact() {
           </div>
 
           {status === 'success' ? (
-            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24 w-full max-w-xl text-center">
               <p className="text-3xl mb-10">Message sent.</p>
               <p className="text-[#f5f5f0]/40 text-lg">We'll be in touch soon.</p>
             </div>
           ) : (
-            <div className="border border-[#f5f5f0]/20 p-12 md:p-20">
+            <div className="border border-[#f5f5f0]/20 p-12 md:p-20 w-full max-w-xl">
               <form onSubmit={handleSubmit} className="space-y-16 text-center">
                 <div>
                   <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Name</label>
@@ -124,7 +124,7 @@ export default function Contact() {
           )}
 
           {/* Contact Info */}
-          <div className="mt-48 border border-[#f5f5f0]/10 p-12 md:p-20">
+          <div className="mt-48 border border-[#f5f5f0]/10 p-12 md:p-20 w-full max-w-xl text-center">
             <div className="space-y-20">
               <div>
                 <span className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/30 block mb-8">Email</span>

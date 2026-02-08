@@ -60,7 +60,7 @@ export default function About() {
       </div>
 
       {/* Hero */}
-      <section className="h-screen flex items-center justify-center relative overflow-hidden text-center">
+      <section className="h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2940&auto=format&fit=crop"
@@ -71,12 +71,12 @@ export default function About() {
             priority
           />
         </div>
-        <div className="relative z-10 px-6">
-          <div className="border border-[#f5f5f0]/30 px-16 md:px-32 py-16 md:py-24">
+        <div className="relative z-10 px-6 w-full flex flex-col items-center text-center">
+          <div className="border border-[#f5f5f0]/30 px-16 md:px-32 py-16 md:py-24 w-full max-w-2xl">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8">
               About
             </h1>
-            <p className="text-[#f5f5f0]/60 text-lg md:text-xl max-w-md mx-auto">
+            <p className="text-[#f5f5f0]/60 text-lg md:text-xl">
               Born from necessity. Built for performance.
             </p>
           </div>
@@ -84,17 +84,17 @@ export default function About() {
       </section>
 
       {/* The Story */}
-      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
-        <div className="max-w-3xl mx-auto">
-          <div className="border border-[#0a0a0a]/20 p-12 md:p-20 mb-24">
-            <span className="text-[11px] tracking-[0.3em] uppercase text-[#0a0a0a]/40 block">Our Story</span>
+      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+        <div className="w-full flex flex-col items-center text-center">
+          <div className="border border-[#0a0a0a]/20 p-12 md:p-20 mb-24 w-full max-w-xl">
+            <span className="text-[11px] tracking-[0.3em] uppercase text-[#0a0a0a]/40">Our Story</span>
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-light mb-32 leading-relaxed">
+          <h2 className="text-3xl md:text-5xl font-light mb-32 leading-relaxed max-w-2xl">
             We got tired of carrying bottles and mixing powders.
           </h2>
           
-          <div className="space-y-20 text-[#0a0a0a]/60 text-lg md:text-xl leading-loose max-w-2xl mx-auto">
+          <div className="space-y-20 text-[#0a0a0a]/60 text-lg md:text-xl leading-loose max-w-2xl">
             <p>
               It started with a simple question: why does staying hydrated have to be so complicated?
             </p>
@@ -120,35 +120,35 @@ export default function About() {
       </section>
 
       {/* Values */}
-      <section className="py-80 md:py-[28rem] px-6 bg-[#0a0a0a] text-center">
-        <div className="max-w-3xl mx-auto">
-          <div className="border border-[#f5f5f0]/20 p-12 md:p-20 mb-40">
+      <section className="py-80 md:py-[28rem] px-6 bg-[#0a0a0a]">
+        <div className="w-full flex flex-col items-center text-center">
+          <div className="border border-[#f5f5f0]/20 p-12 md:p-20 mb-40 w-full max-w-xl">
             <h2 className="text-3xl md:text-5xl font-light text-[#f5f5f0]">
               What We Believe
             </h2>
           </div>
           
-          <div className="space-y-80 md:space-y-[28rem]">
-            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+          <div className="w-full max-w-xl space-y-80 md:space-y-[28rem]">
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24 text-center">
               <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/20 block mb-16">01</span>
               <h3 className="text-3xl md:text-4xl font-light mb-12 text-[#f5f5f0]">Simplicity</h3>
-              <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
+              <p className="text-[#f5f5f0]/50 text-lg md:text-xl leading-relaxed">
                 The best solutions are the ones you actually use. No complexity, no barriers.
               </p>
             </div>
             
-            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24 text-center">
               <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/20 block mb-16">02</span>
               <h3 className="text-3xl md:text-4xl font-light mb-12 text-[#f5f5f0]">Performance</h3>
-              <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
+              <p className="text-[#f5f5f0]/50 text-lg md:text-xl leading-relaxed">
                 Every ingredient earns its place. Nothing more, nothing less.
               </p>
             </div>
             
-            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24 text-center">
               <span className="text-8xl md:text-9xl font-light text-[#f5f5f0]/20 block mb-16">03</span>
               <h3 className="text-3xl md:text-4xl font-light mb-12 text-[#f5f5f0]">Freedom</h3>
-              <p className="text-[#f5f5f0]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
+              <p className="text-[#f5f5f0]/50 text-lg md:text-xl leading-relaxed">
                 Hydration that goes where you go. No bottles, no limits.
               </p>
             </div>
@@ -157,20 +157,22 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
-        <div className="border border-[#0a0a0a]/20 p-16 md:p-24 max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-light mb-16">
-            Join the Movement
-          </h2>
-          <p className="text-[#0a0a0a]/50 text-lg md:text-xl mb-20 max-w-md mx-auto">
-            Be the first to experience hydration, reimagined.
-          </p>
-          <Link 
-            href="/shop"
-            className="inline-block border border-[#0a0a0a] px-14 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
-          >
-            Shop Now
-          </Link>
+      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+        <div className="w-full flex flex-col items-center text-center">
+          <div className="border border-[#0a0a0a]/20 p-16 md:p-24 w-full max-w-2xl">
+            <h2 className="text-3xl md:text-5xl font-light mb-16">
+              Join the Movement
+            </h2>
+            <p className="text-[#0a0a0a]/50 text-lg md:text-xl mb-20">
+              Be the first to experience hydration, reimagined.
+            </p>
+            <Link 
+              href="/shop"
+              className="inline-block border border-[#0a0a0a] px-14 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
+            >
+              Shop Now
+            </Link>
+          </div>
         </div>
       </section>
 

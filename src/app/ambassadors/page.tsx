@@ -68,7 +68,7 @@ export default function Ambassadors() {
       </div>
 
       {/* Hero */}
-      <section className="h-screen flex items-center justify-center relative overflow-hidden text-center">
+      <section className="h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2940&auto=format&fit=crop"
@@ -79,12 +79,12 @@ export default function Ambassadors() {
             priority
           />
         </div>
-        <div className="relative z-10 px-6">
-          <div className="border border-[#f5f5f0]/30 px-16 md:px-32 py-16 md:py-24">
+        <div className="relative z-10 px-6 w-full flex flex-col items-center text-center">
+          <div className="border border-[#f5f5f0]/30 px-16 md:px-32 py-16 md:py-24 w-full max-w-2xl">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8">
               Ambassadors
             </h1>
-            <p className="text-[#f5f5f0]/60 text-lg md:text-xl max-w-md mx-auto">
+            <p className="text-[#f5f5f0]/60 text-lg md:text-xl">
               Join a community of athletes redefining hydration.
             </p>
           </div>
@@ -92,30 +92,30 @@ export default function Ambassadors() {
       </section>
 
       {/* Benefits */}
-      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
-        <div className="max-w-2xl mx-auto">
-          <div className="border border-[#0a0a0a]/20 p-12 md:p-20 mb-48">
+      <section className="py-80 md:py-[28rem] px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+        <div className="w-full flex flex-col items-center text-center">
+          <div className="border border-[#0a0a0a]/20 p-12 md:p-20 mb-48 w-full max-w-xl">
             <h2 className="text-3xl md:text-5xl font-light">What You Get</h2>
           </div>
           
-          <div className="space-y-48 md:space-y-64">
-            <div className="border border-[#0a0a0a]/20 p-12 md:p-20">
+          <div className="w-full max-w-xl space-y-48 md:space-y-64">
+            <div className="border border-[#0a0a0a]/20 p-12 md:p-20 text-center">
               <h3 className="text-3xl md:text-4xl font-light mb-12">Free Product</h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
+              <p className="text-[#0a0a0a]/50 text-lg md:text-xl leading-relaxed">
                 Monthly supply of memo strips delivered to your door.
               </p>
             </div>
             
-            <div className="border border-[#0a0a0a]/20 p-12 md:p-20">
+            <div className="border border-[#0a0a0a]/20 p-12 md:p-20 text-center">
               <h3 className="text-3xl md:text-4xl font-light mb-12">Early Access</h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
+              <p className="text-[#0a0a0a]/50 text-lg md:text-xl leading-relaxed">
                 First look at new products, flavors, and collaborations.
               </p>
             </div>
             
-            <div className="border border-[#0a0a0a]/20 p-12 md:p-20">
+            <div className="border border-[#0a0a0a]/20 p-12 md:p-20 text-center">
               <h3 className="text-3xl md:text-4xl font-light mb-12">Commission</h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
+              <p className="text-[#0a0a0a]/50 text-lg md:text-xl leading-relaxed">
                 Earn on every sale through your unique code.
               </p>
             </div>
@@ -124,9 +124,9 @@ export default function Ambassadors() {
       </section>
 
       {/* Application */}
-      <section className="py-80 md:py-[28rem] px-6 bg-[#0a0a0a] text-center">
-        <div className="max-w-lg mx-auto">
-          <div className="border border-[#f5f5f0]/20 p-12 md:p-20 mb-32">
+      <section className="py-80 md:py-[28rem] px-6 bg-[#0a0a0a]">
+        <div className="w-full flex flex-col items-center text-center">
+          <div className="border border-[#f5f5f0]/20 p-12 md:p-20 mb-32 w-full max-w-xl">
             <h2 className="text-3xl md:text-5xl font-light mb-8">Apply Now</h2>
             <p className="text-[#f5f5f0]/40 text-lg md:text-xl">
               We're looking for authentic voices in fitness, sports, and wellness.
@@ -134,12 +134,12 @@ export default function Ambassadors() {
           </div>
 
           {status === 'success' ? (
-            <div className="border border-[#f5f5f0]/20 p-16 md:p-24">
+            <div className="border border-[#f5f5f0]/20 p-16 md:p-24 w-full max-w-xl text-center">
               <p className="text-3xl mb-10">Application received.</p>
               <p className="text-[#f5f5f0]/40 text-lg">We'll review and get back to you within 48 hours.</p>
             </div>
           ) : (
-            <div className="border border-[#f5f5f0]/20 p-12 md:p-20">
+            <div className="border border-[#f5f5f0]/20 p-12 md:p-20 w-full max-w-xl">
               <form onSubmit={handleSubmit} className="space-y-16 text-center">
                 <div>
                   <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Name</label>
