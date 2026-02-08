@@ -6,19 +6,15 @@ import Link from 'next/link';
 export default function Shop() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const playfair = "var(--font-playfair), 'Playfair Display', Georgia, serif";
+
   return (
-    <main className="min-h-screen bg-[#f5f5f0] text-[#0a0a0a]">
+    <main className="min-h-screen bg-[#f5f5f0] text-[#0a0a0a]" style={{ fontFamily: playfair }}>
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8">
-        <div className="flex justify-center">
-          <Link 
-            href="/" 
-            className="text-[#0a0a0a] text-lg tracking-[0.06em]"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
-            memo
-          </Link>
-        </div>
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8 text-center">
+        <Link href="/" className="text-[#0a0a0a] text-lg tracking-[0.06em]">
+          memo
+        </Link>
         
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -46,22 +42,15 @@ export default function Shop() {
         </button>
         
         <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-6 text-center">
-            {[
-              { name: 'Shop', href: '/shop' },
-              { name: 'Science', href: '/science' },
-              { name: 'About', href: '/about' },
-              { name: 'Ambassadors', href: '/ambassadors' },
-              { name: 'Contact', href: '/contact' },
-            ].map((item) => (
-              <li key={item.name}>
+          <ul className="space-y-12 text-center">
+            {['Shop', 'Science', 'About', 'Ambassadors', 'Contact'].map((item) => (
+              <li key={item}>
                 <Link 
-                  href={item.href}
+                  href={`/${item.toLowerCase()}`}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block py-2"
-                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                  className="text-[#f5f5f0] text-5xl md:text-7xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
                 >
-                  {item.name}
+                  {item}
                 </Link>
               </li>
             ))}
@@ -69,22 +58,19 @@ export default function Shop() {
         </nav>
       </div>
 
-      {/* Simple Hero - Just Coming Soon */}
-      <section className="min-h-screen flex items-center justify-center px-6">
-        <div className="text-center">
-          <h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-light mb-8"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
+      {/* Hero - Simple Coming Soon */}
+      <section className="min-h-screen flex items-center justify-center px-6 text-center">
+        <div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-12">
             Coming Soon
           </h1>
-          <p className="text-[#0a0a0a]/50 text-base md:text-lg max-w-md mx-auto mb-16">
+          <p className="text-[#0a0a0a]/50 text-lg md:text-xl max-w-md mx-auto mb-20">
             We're putting the finishing touches on something special.
           </p>
 
           <Link 
             href="/"
-            className="inline-block border border-[#0a0a0a]/30 px-12 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
+            className="inline-block border border-[#0a0a0a]/30 px-14 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
           >
             Join Waitlist
           </Link>

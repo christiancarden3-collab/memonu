@@ -6,19 +6,15 @@ import Link from 'next/link';
 export default function Science() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const playfair = "var(--font-playfair), 'Playfair Display', Georgia, serif";
+
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-[#f5f5f0]">
+    <main className="min-h-screen bg-[#0a0a0a] text-[#f5f5f0]" style={{ fontFamily: playfair }}>
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8">
-        <div className="flex justify-center">
-          <Link 
-            href="/" 
-            className="text-[#f5f5f0] text-lg tracking-[0.06em]"
-            style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
-          >
-            memo
-          </Link>
-        </div>
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8 text-center">
+        <Link href="/" className="text-[#f5f5f0] text-lg tracking-[0.06em]">
+          memo
+        </Link>
         
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -32,7 +28,7 @@ export default function Science() {
         </button>
       </header>
 
-      {/* Menu Overlay - EXPANDED */}
+      {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <button 
           onClick={() => setIsMenuOpen(false)} 
@@ -46,22 +42,15 @@ export default function Science() {
         </button>
         
         <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-10 text-center">
-            {[
-              { name: 'Shop', href: '/shop' },
-              { name: 'Science', href: '/science' },
-              { name: 'About', href: '/about' },
-              { name: 'Ambassadors', href: '/ambassadors' },
-              { name: 'Contact', href: '/contact' },
-            ].map((item) => (
-              <li key={item.name}>
+          <ul className="space-y-12 text-center">
+            {['Shop', 'Science', 'About', 'Ambassadors', 'Contact'].map((item) => (
+              <li key={item}>
                 <Link 
-                  href={item.href}
+                  href={`/${item.toLowerCase()}`}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
-                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                  className="text-[#f5f5f0] text-5xl md:text-7xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
                 >
-                  {item.name}
+                  {item}
                 </Link>
               </li>
             ))}
@@ -70,13 +59,10 @@ export default function Science() {
       </div>
 
       {/* Hero */}
-      <section className="min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-10">The Science</span>
-          <h1 
-            className="text-5xl md:text-7xl font-light mb-10"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
+      <section className="min-h-screen flex items-center justify-center px-6 text-center">
+        <div className="max-w-2xl mx-auto">
+          <span className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-12">The Science</span>
+          <h1 className="text-5xl md:text-7xl font-light mb-12">
             Sublingual Delivery
           </h1>
           <p className="text-[#f5f5f0]/50 text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
@@ -85,69 +71,63 @@ export default function Science() {
         </div>
       </section>
 
-      {/* Speed Comparison - MEGA SPACED */}
-      <section className="py-64 md:py-80 px-6 border-t border-[#f5f5f0]/10">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 
-            className="text-3xl md:text-5xl font-light mb-40 md:mb-56 md:mb-40"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
+      {/* Speed Comparison */}
+      <section className="py-64 md:py-80 px-6 border-t border-[#f5f5f0]/10 text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-light mb-32 md:mb-48">
             Absorption Speed
           </h2>
           
           <div className="space-y-24">
-            <div className="border border-[#f5f5f0]/30 p-12 md:p-16">
-              <div className="text-6xl md:text-7xl font-light text-[#f5f5f0] mb-6">~30s</div>
-              <div className="text-xl font-light mb-4">memo strips</div>
-              <div className="text-[11px] text-[#f5f5f0]/40 uppercase tracking-widest">Sublingual</div>
+            <div className="border border-[#f5f5f0]/30 p-16 md:p-20">
+              <div className="text-6xl md:text-8xl font-light text-[#f5f5f0] mb-8">~30s</div>
+              <div className="text-2xl font-light mb-4">memo strips</div>
+              <div className="text-[11px] text-[#f5f5f0]/40 uppercase tracking-[0.3em]">Sublingual</div>
             </div>
             
-            <div className="border border-[#f5f5f0]/10 p-12 md:p-16">
-              <div className="text-6xl md:text-7xl font-light text-[#f5f5f0]/30 mb-6">15-30m</div>
-              <div className="text-xl font-light text-[#f5f5f0]/50 mb-4">Drinks</div>
-              <div className="text-[11px] text-[#f5f5f0]/30 uppercase tracking-widest">Digestive</div>
+            <div className="border border-[#f5f5f0]/10 p-16 md:p-20">
+              <div className="text-6xl md:text-8xl font-light text-[#f5f5f0]/30 mb-8">15-30m</div>
+              <div className="text-2xl font-light text-[#f5f5f0]/50 mb-4">Drinks</div>
+              <div className="text-[11px] text-[#f5f5f0]/30 uppercase tracking-[0.3em]">Digestive</div>
             </div>
             
-            <div className="border border-[#f5f5f0]/10 p-12 md:p-16">
-              <div className="text-6xl md:text-7xl font-light text-[#f5f5f0]/30 mb-6">30-60m</div>
-              <div className="text-xl font-light text-[#f5f5f0]/50 mb-4">Pills</div>
-              <div className="text-[11px] text-[#f5f5f0]/30 uppercase tracking-widest">Digestive</div>
+            <div className="border border-[#f5f5f0]/10 p-16 md:p-20">
+              <div className="text-6xl md:text-8xl font-light text-[#f5f5f0]/30 mb-8">30-60m</div>
+              <div className="text-2xl font-light text-[#f5f5f0]/50 mb-4">Pills</div>
+              <div className="text-[11px] text-[#f5f5f0]/30 uppercase tracking-[0.3em]">Digestive</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How It Works - MEGA SPACED */}
-      <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+      {/* How It Works */}
+      <section className="py-64 md:py-96 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 
-            className="text-3xl md:text-5xl font-light mb-40 md:mb-56 text-center"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
+          <h2 className="text-3xl md:text-5xl font-light mb-48 md:mb-64">
             How It Works
           </h2>
           
-          <div className="space-y-48 md:space-y-64">
-            <div className="text-center">
-              <span className="text-6xl md:text-7xl font-light text-[#0a0a0a]/10 block mb-10">01</span>
-              <h3 className="text-2xl font-light mb-8">Rich Blood Supply</h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg leading-relaxed">
+          <div className="space-y-64 md:space-y-80">
+            <div>
+              <span className="text-8xl md:text-9xl font-light text-[#0a0a0a]/10 block mb-12">01</span>
+              <h3 className="text-3xl md:text-4xl font-light mb-10">Rich Blood Supply</h3>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 Dense network of blood vessels allows rapid absorption directly into your bloodstream.
               </p>
             </div>
             
-            <div className="text-center">
-              <span className="text-6xl md:text-7xl font-light text-[#0a0a0a]/10 block mb-10">02</span>
-              <h3 className="text-2xl font-light mb-8">Bypasses First-Pass</h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg leading-relaxed">
+            <div>
+              <span className="text-8xl md:text-9xl font-light text-[#0a0a0a]/10 block mb-12">02</span>
+              <h3 className="text-3xl md:text-4xl font-light mb-10">Bypasses First-Pass</h3>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 Unlike pills, sublingual delivery avoids the liver's first-pass effect, increasing bioavailability.
               </p>
             </div>
             
-            <div className="text-center">
-              <span className="text-6xl md:text-7xl font-light text-[#0a0a0a]/10 block mb-10">03</span>
-              <h3 className="text-2xl font-light mb-8">Thin Membrane</h3>
-              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg leading-relaxed">
+            <div>
+              <span className="text-8xl md:text-9xl font-light text-[#0a0a0a]/10 block mb-12">03</span>
+              <h3 className="text-3xl md:text-4xl font-light mb-10">Thin Membrane</h3>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto text-lg md:text-xl leading-relaxed">
                 The tissue under your tongue is thin and permeable, allowing molecules to pass through efficiently.
               </p>
             </div>
@@ -155,34 +135,31 @@ export default function Science() {
         </div>
       </section>
 
-      {/* Electrolytes - MEGA SPACED */}
-      <section className="py-64 md:py-80 px-6 bg-[#0a0a0a]">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 
-            className="text-3xl md:text-5xl font-light mb-40 md:mb-56"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
+      {/* Electrolytes */}
+      <section className="py-64 md:py-80 px-6 bg-[#0a0a0a] text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-light mb-40 md:mb-56">
             The Electrolytes
           </h2>
           
           <div className="space-y-40">
             <div>
-              <h3 className="text-2xl font-light mb-8">Sodium</h3>
-              <p className="text-[#f5f5f0]/40 text-lg leading-relaxed max-w-md mx-auto">
+              <h3 className="text-3xl font-light mb-10">Sodium</h3>
+              <p className="text-[#f5f5f0]/40 text-lg md:text-xl leading-relaxed max-w-md mx-auto">
                 Primary electrolyte lost in sweat. Critical for fluid balance and muscle function.
               </p>
             </div>
             
             <div>
-              <h3 className="text-2xl font-light mb-8">Potassium</h3>
-              <p className="text-[#f5f5f0]/40 text-lg leading-relaxed max-w-md mx-auto">
+              <h3 className="text-3xl font-light mb-10">Potassium</h3>
+              <p className="text-[#f5f5f0]/40 text-lg md:text-xl leading-relaxed max-w-md mx-auto">
                 Works with sodium for cellular hydration. Essential for heart rhythm and preventing cramps.
               </p>
             </div>
             
             <div>
-              <h3 className="text-2xl font-light mb-8">Magnesium</h3>
-              <p className="text-[#f5f5f0]/40 text-lg leading-relaxed max-w-md mx-auto">
+              <h3 className="text-3xl font-light mb-10">Magnesium</h3>
+              <p className="text-[#f5f5f0]/40 text-lg md:text-xl leading-relaxed max-w-md mx-auto">
                 Supports muscle relaxation, energy production, and overall electrolyte balance.
               </p>
             </div>
@@ -190,17 +167,14 @@ export default function Science() {
         </div>
       </section>
 
-      {/* What We Leave Out - MEGA SPACED */}
-      <section className="py-64 md:py-80 px-6 border-t border-[#f5f5f0]/10">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 
-            className="text-3xl md:text-5xl font-light mb-40 md:mb-56 md:mb-40"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
+      {/* What We Leave Out */}
+      <section className="py-64 md:py-80 px-6 border-t border-[#f5f5f0]/10 text-center">
+        <div className="max-w-xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-light mb-32">
             What We Leave Out
           </h2>
           
-          <div className="space-y-8 text-[#f5f5f0]/40 text-lg">
+          <div className="space-y-10 text-[#f5f5f0]/40 text-xl">
             <p>No added sugars</p>
             <p>No artificial colors</p>
             <p>No artificial sweeteners</p>
@@ -211,39 +185,29 @@ export default function Science() {
         </div>
       </section>
 
-      {/* CTA - MEGA SPACED */}
+      {/* CTA */}
       <section className="py-64 md:py-80 px-6 bg-[#f5f5f0] text-[#0a0a0a] text-center">
-        <h2 
-          className="text-3xl md:text-5xl font-light mb-12"
-          style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-        >
+        <h2 className="text-3xl md:text-5xl font-light mb-16">
           Experience the Difference
         </h2>
-        <p className="text-[#0a0a0a]/50 text-lg mb-16 max-w-md mx-auto">
+        <p className="text-[#0a0a0a]/50 text-lg md:text-xl mb-20 max-w-md mx-auto">
           Try memo and feel what fast hydration really means.
         </p>
         <Link 
           href="/shop"
-          className="inline-block border border-[#0a0a0a]/30 px-12 py-5 text-[11px] tracking-[0.25em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
+          className="inline-block border border-[#0a0a0a]/30 px-14 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
         >
           Shop Now
         </Link>
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6 border-t border-[#f5f5f0]/10 bg-[#0a0a0a]">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center">
-          <span 
-            className="text-lg tracking-[0.06em]"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
-            memo
-          </span>
-          <div className="flex gap-8 text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
-            <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
-            <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
-            <span>© 2026</span>
-          </div>
+      <footer className="py-20 px-6 border-t border-[#f5f5f0]/10 bg-[#0a0a0a] text-center">
+        <span className="text-lg tracking-[0.06em] block mb-8">memo</span>
+        <div className="flex gap-8 justify-center text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
+          <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
+          <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
+          <span>© 2026</span>
         </div>
       </footer>
     </main>
