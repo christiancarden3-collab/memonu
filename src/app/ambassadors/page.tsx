@@ -18,18 +18,20 @@ export default function Ambassadors() {
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-6 flex justify-between items-center">
-        <Link 
-          href="/" 
-          className="text-white text-xl tracking-[0.06em]"
-          style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
-        >
-          memo
-        </Link>
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-6">
+        <div className="flex justify-center">
+          <Link 
+            href="/" 
+            className="text-white text-lg tracking-[0.06em]"
+            style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
+          >
+            memo
+          </Link>
+        </div>
         
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="text-white flex items-center gap-3 group"
+          className="absolute top-6 right-6 md:right-12 text-white flex items-center gap-3 group"
         >
           <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Menu</span>
           <div className="flex flex-col gap-[5px]">

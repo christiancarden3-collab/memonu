@@ -57,21 +57,21 @@ export default function Home() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
       {/* Top Bar */}
-      <header className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 md:px-12 py-6">
-        {/* Left - Tagline */}
-        <div className="hidden md:block">
-          <span className="text-[10px] tracking-[0.25em] uppercase text-white/50 font-light">
-            Electrolyte Strips
+      <header className="absolute top-0 left-0 right-0 z-30 px-6 md:px-12 py-6">
+        {/* Centered Logo */}
+        <div className="flex justify-center">
+          <span 
+            className="text-white text-lg tracking-[0.06em]"
+            style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
+          >
+            memo
           </span>
         </div>
 
-        {/* Center - could add something here */}
-        <div className="flex-1" />
-
-        {/* Right - Menu */}
+        {/* Menu Button - Absolute Right */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="text-white flex items-center gap-3 group"
+          className="absolute top-6 right-6 md:right-12 text-white flex items-center gap-3 group"
         >
           <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">
             Menu
