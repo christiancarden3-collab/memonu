@@ -54,10 +54,10 @@ export default function Home() {
       ))}
       
       {/* Refined Overlay - subtle gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50" />
 
       {/* Top Bar */}
-      <header className="absolute top-0 left-0 right-0 z-30 px-6 md:px-12 py-6">
+      <header className="absolute top-0 left-0 right-0 z-30 px-6 md:px-12 py-8">
         {/* Centered Logo */}
         <div className="flex justify-center">
           <span 
@@ -71,7 +71,7 @@ export default function Home() {
         {/* Menu Button - Absolute Right */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="absolute top-6 right-6 md:right-12 text-white flex items-center gap-3 group"
+          className="absolute top-8 right-6 md:right-12 text-white flex items-center gap-3 group"
         >
           <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">
             Menu
@@ -87,28 +87,28 @@ export default function Home() {
       <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">
         {/* Logo */}
         <h1 
-          className="text-white text-6xl md:text-8xl lg:text-[10rem] font-light tracking-[0.02em] mb-4 w-full text-center"
+          className="text-white text-6xl md:text-8xl lg:text-[10rem] font-light tracking-[0.02em] mb-6 w-full text-center"
           style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
         >
           memo
         </h1>
         
-        {/* Subtle tagline */}
-        <p className="text-white/40 text-[11px] tracking-[0.35em] uppercase font-light">
+        {/* Subtle tagline - more visible */}
+        <p className="text-white/70 text-sm md:text-base tracking-[0.35em] uppercase font-light mb-16">
           Fuel Your Performance
         </p>
 
         {/* CTA */}
         <Link 
           href="/shop"
-          className="mt-12 px-8 py-3 border border-white/30 text-white text-[11px] tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-300"
+          className="px-10 py-4 border border-white/40 text-white text-[11px] tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-300"
         >
           Shop Now
         </Link>
       </div>
 
       {/* Bottom Bar */}
-      <footer className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-between px-6 md:px-12 py-6">
+      <footer className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-between px-6 md:px-12 py-8">
         {/* Left - Social */}
         <div className="flex items-center gap-6">
           <a 
@@ -135,7 +135,7 @@ export default function Home() {
         </span>
       </footer>
 
-      {/* Full Screen Menu Overlay */}
+      {/* Full Screen Menu Overlay - MORE SPACING */}
       <div 
         className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-all duration-500 ${
           isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -144,7 +144,7 @@ export default function Home() {
         {/* Close Button */}
         <button 
           onClick={() => setIsMenuOpen(false)}
-          className="absolute top-6 right-6 md:right-12 text-white flex items-center gap-3 group"
+          className="absolute top-8 right-6 md:right-12 text-white flex items-center gap-3 group"
         >
           <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">
             Close
@@ -155,10 +155,10 @@ export default function Home() {
           </div>
         </button>
 
-        {/* Menu Content */}
-        <div className="h-full flex flex-col justify-center px-6 md:px-16 lg:px-24">
+        {/* Menu Content - MORE SPACING */}
+        <div className="h-full flex flex-col items-center justify-center px-6">
           <nav>
-            <ul className="space-y-2">
+            <ul className="space-y-6 text-center">
               {[
                 { name: 'Shop', href: '/shop' },
                 { name: 'Science', href: '/science' },
@@ -168,7 +168,7 @@ export default function Home() {
               ].map((item, i) => (
                 <li 
                   key={item.name}
-                  className={`overflow-hidden transition-all duration-500 ${
+                  className={`transition-all duration-500 ${
                     isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                   style={{ transitionDelay: isMenuOpen ? `${i * 60 + 100}ms` : '0ms' }}
@@ -176,7 +176,7 @@ export default function Home() {
                   <Link 
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-white text-5xl md:text-7xl lg:text-8xl font-light tracking-tight hover:text-white/40 transition-colors duration-300 block py-1"
+                    className="text-white text-4xl md:text-6xl font-light tracking-tight hover:text-white/40 transition-colors duration-300 block py-2"
                     style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
                   >
                     {item.name}
@@ -187,7 +187,7 @@ export default function Home() {
           </nav>
 
           {/* Menu Footer */}
-          <div className="absolute bottom-6 left-6 md:left-16 lg:left-24 right-6 flex items-end justify-between">
+          <div className="absolute bottom-8 left-6 right-6 md:left-12 md:right-12 flex items-end justify-between">
             <div className="flex items-center gap-8">
               <a 
                 href="https://instagram.com/memonu" 
@@ -207,7 +207,7 @@ export default function Home() {
               </a>
             </div>
             <span className="text-white/20 text-[10px] tracking-wider hidden md:block">
-              Electrolyte Strips — Fuel Your Performance
+              Electrolyte Strips
             </span>
           </div>
         </div>

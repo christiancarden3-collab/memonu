@@ -16,13 +16,13 @@ export default function Ambassadors() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-[#0a0a0a] text-[#f5f5f0]">
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-6">
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8">
         <div className="flex justify-center">
           <Link 
             href="/" 
-            className="text-white text-lg tracking-[0.06em]"
+            className="text-[#f5f5f0] text-lg tracking-[0.06em]"
             style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
           >
             memo
@@ -31,29 +31,31 @@ export default function Ambassadors() {
         
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="absolute top-6 right-6 md:right-12 text-white flex items-center gap-3 group"
+          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Menu</span>
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Menu</span>
           <div className="flex flex-col gap-[5px]">
-            <span className="w-6 h-[1px] bg-white" />
-            <span className="w-6 h-[1px] bg-white" />
+            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
+            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
           </div>
         </button>
       </header>
 
       {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <div className="flex justify-end px-6 md:px-12 py-6">
-          <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3 group">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Close</span>
-            <div className="relative w-6 h-6 flex items-center justify-center">
-              <span className="absolute w-6 h-[1px] bg-white rotate-45" />
-              <span className="absolute w-6 h-[1px] bg-white -rotate-45" />
-            </div>
-          </button>
-        </div>
+        <button 
+          onClick={() => setIsMenuOpen(false)} 
+          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
+        >
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Close</span>
+          <div className="relative w-6 h-6 flex items-center justify-center">
+            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] rotate-45" />
+            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] -rotate-45" />
+          </div>
+        </button>
+        
         <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-4 text-center">
+          <ul className="space-y-6 text-center">
             {[
               { name: 'Shop', href: '/shop' },
               { name: 'Science', href: '/science' },
@@ -65,7 +67,7 @@ export default function Ambassadors() {
                 <Link 
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-white text-5xl md:text-7xl font-light hover:text-white/40 transition-colors block py-1"
+                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block py-2"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {item.name}
@@ -90,111 +92,123 @@ export default function Ambassadors() {
         </div>
         <div className="relative z-10 text-center px-6">
           <h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-light mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-light mb-8"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Ambassadors
           </h1>
-          <p className="text-white/50 text-base md:text-lg max-w-md mx-auto">
+          <p className="text-[#f5f5f0]/60 text-base md:text-lg max-w-md mx-auto">
             Join a community of athletes redefining hydration.
           </p>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="py-24 md:py-32 px-6 bg-white text-black">
-        <div className="max-w-4xl mx-auto">
+      {/* Benefits - SPACED */}
+      <section className="py-32 md:py-48 px-6 bg-[#f5f5f0] text-[#0a0a0a]">
+        <div className="max-w-2xl mx-auto">
           <h2 
-            className="text-3xl md:text-5xl font-light text-center mb-20"
+            className="text-3xl md:text-5xl font-light text-center mb-24"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             What You Get
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            {[
-              { title: 'Free Product', desc: 'Monthly supply of memo strips delivered to your door.' },
-              { title: 'Early Access', desc: 'First look at new products, flavors, and collaborations.' },
-              { title: 'Commission', desc: 'Earn on every sale through your unique code.' },
-            ].map((item, i) => (
-              <div key={i}>
-                <h3 
-                  className="text-xl font-light mb-3"
-                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-                >
-                  {item.title}
-                </h3>
-                <p className="text-black/50 text-sm">{item.desc}</p>
-              </div>
-            ))}
+          <div className="space-y-20">
+            <div className="text-center">
+              <h3 
+                className="text-xl font-light mb-6"
+                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              >
+                Free Product
+              </h3>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto">Monthly supply of memo strips delivered to your door.</p>
+            </div>
+            
+            <div className="text-center">
+              <h3 
+                className="text-xl font-light mb-6"
+                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              >
+                Early Access
+              </h3>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto">First look at new products, flavors, and collaborations.</p>
+            </div>
+            
+            <div className="text-center">
+              <h3 
+                className="text-xl font-light mb-6"
+                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              >
+                Commission
+              </h3>
+              <p className="text-[#0a0a0a]/50 max-w-md mx-auto">Earn on every sale through your unique code.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Application */}
-      <section className="py-24 md:py-32 px-6 bg-black">
-        <div className="max-w-lg mx-auto text-center">
+      {/* Application - SPACED */}
+      <section className="py-32 md:py-48 px-6 bg-[#0a0a0a]">
+        <div className="max-w-md mx-auto text-center">
           <h2 
-            className="text-3xl md:text-5xl font-light mb-4"
+            className="text-3xl md:text-5xl font-light mb-6"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Apply Now
           </h2>
-          <p className="text-white/40 text-base mb-12">
+          <p className="text-[#f5f5f0]/40 text-base mb-16">
             We're looking for authentic voices in fitness, sports, and wellness.
           </p>
 
           {status === 'success' ? (
-            <div className="py-12">
+            <div className="py-16">
               <p 
-                className="text-2xl mb-3"
+                className="text-2xl mb-4"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Application received.
               </p>
-              <p className="text-white/40 text-sm">We'll review and get back to you within 48 hours.</p>
+              <p className="text-[#f5f5f0]/40">We'll review and get back to you within 48 hours.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6 text-left">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full bg-transparent border-b border-white/20 py-3 text-base focus:outline-none focus:border-white/50"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Email</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full bg-transparent border-b border-white/20 py-3 text-base focus:outline-none focus:border-white/50"
-                  />
-                </div>
+            <form onSubmit={handleSubmit} className="space-y-10 text-left">
+              <div>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Name</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50"
+                />
               </div>
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Instagram</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Email</label>
+                <input
+                  type="email"
+                  required
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Instagram</label>
                 <input
                   type="text"
                   placeholder="@"
-                  className="w-full bg-transparent border-b border-white/20 py-3 text-base placeholder:text-white/20 focus:outline-none focus:border-white/50"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50"
                 />
               </div>
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Why Memo?</label>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Why Memo?</label>
                 <textarea
                   rows={3}
                   placeholder="Tell us about yourself..."
-                  className="w-full bg-transparent border-b border-white/20 py-3 text-base placeholder:text-white/20 focus:outline-none focus:border-white/50 resize-none"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base placeholder:text-[#f5f5f0]/20 focus:outline-none focus:border-[#f5f5f0]/50 resize-none"
                 />
               </div>
-              <div className="text-center pt-6">
+              <div className="text-center pt-8">
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="border border-white/30 px-12 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50"
+                  className="border border-[#f5f5f0]/30 px-12 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
                 >
                   {status === 'loading' ? 'Submitting...' : 'Submit'}
                 </button>
@@ -205,7 +219,7 @@ export default function Ambassadors() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-white/10">
+      <footer className="py-12 px-6 border-t border-[#f5f5f0]/10">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center">
           <span 
             className="text-lg tracking-[0.06em]"
@@ -213,9 +227,9 @@ export default function Ambassadors() {
           >
             memo
           </span>
-          <div className="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-white/30">
-            <Link href="/about" className="hover:text-white transition-colors">About</Link>
-            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+          <div className="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
+            <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
+            <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
             <span>© 2026</span>
           </div>
         </div>

@@ -15,13 +15,13 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-[#0a0a0a] text-[#f5f5f0]">
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-6">
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8">
         <div className="flex justify-center">
           <Link 
             href="/" 
-            className="text-white text-lg tracking-[0.06em]"
+            className="text-[#f5f5f0] text-lg tracking-[0.06em]"
             style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
           >
             memo
@@ -30,29 +30,31 @@ export default function Contact() {
         
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="absolute top-6 right-6 md:right-12 text-white flex items-center gap-3 group"
+          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Menu</span>
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Menu</span>
           <div className="flex flex-col gap-[5px]">
-            <span className="w-6 h-[1px] bg-white" />
-            <span className="w-6 h-[1px] bg-white" />
+            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
+            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
           </div>
         </button>
       </header>
 
       {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <div className="flex justify-end px-6 md:px-12 py-6">
-          <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3 group">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-white transition-colors hidden md:block">Close</span>
-            <div className="relative w-6 h-6 flex items-center justify-center">
-              <span className="absolute w-6 h-[1px] bg-white rotate-45" />
-              <span className="absolute w-6 h-[1px] bg-white -rotate-45" />
-            </div>
-          </button>
-        </div>
+        <button 
+          onClick={() => setIsMenuOpen(false)} 
+          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
+        >
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Close</span>
+          <div className="relative w-6 h-6 flex items-center justify-center">
+            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] rotate-45" />
+            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] -rotate-45" />
+          </div>
+        </button>
+        
         <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-4 text-center">
+          <ul className="space-y-6 text-center">
             {[
               { name: 'Shop', href: '/shop' },
               { name: 'Science', href: '/science' },
@@ -64,7 +66,7 @@ export default function Contact() {
                 <Link 
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-white text-5xl md:text-7xl font-light hover:text-white/40 transition-colors block py-1"
+                  className="text-[#f5f5f0] text-4xl md:text-6xl font-light hover:text-[#f5f5f0]/40 transition-colors block py-2"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {item.name}
@@ -77,60 +79,58 @@ export default function Contact() {
 
       {/* Content */}
       <section className="min-h-screen flex items-center justify-center px-6">
-        <div className="w-full max-w-lg mx-auto text-center">
+        <div className="w-full max-w-md mx-auto text-center">
           <h1 
-            className="text-5xl md:text-7xl font-light mb-4"
+            className="text-5xl md:text-7xl font-light mb-6"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Contact
           </h1>
-          <p className="text-white/40 text-base mb-12">
+          <p className="text-[#f5f5f0]/40 text-base mb-16">
             Questions? Partnerships? Just say hello.
           </p>
 
           {status === 'success' ? (
-            <div className="py-12">
+            <div className="py-16">
               <p 
-                className="text-2xl mb-3"
+                className="text-2xl mb-4"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
                 Message sent.
               </p>
-              <p className="text-white/40 text-sm">We'll be in touch soon.</p>
+              <p className="text-[#f5f5f0]/40">We'll be in touch soon.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8 text-left">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full bg-transparent border-b border-white/20 py-3 text-base focus:outline-none focus:border-white/50 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Email</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full bg-transparent border-b border-white/20 py-3 text-base focus:outline-none focus:border-white/50 transition-colors"
-                  />
-                </div>
-              </div>
+            <form onSubmit={handleSubmit} className="space-y-10 text-left">
               <div>
-                <label className="text-[10px] tracking-[0.2em] uppercase text-white/40 block mb-3">Message</label>
-                <textarea
-                  rows={3}
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Name</label>
+                <input
+                  type="text"
                   required
-                  className="w-full bg-transparent border-b border-white/20 py-3 text-base focus:outline-none focus:border-white/50 transition-colors resize-none"
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
                 />
               </div>
-              <div className="text-center pt-4">
+              <div>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Email</label>
+                <input
+                  type="email"
+                  required
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/40 block mb-4">Message</label>
+                <textarea
+                  rows={4}
+                  required
+                  className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-4 text-base focus:outline-none focus:border-[#f5f5f0]/50 transition-colors resize-none"
+                />
+              </div>
+              <div className="text-center pt-8">
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="border border-white/30 px-12 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50"
+                  className="border border-[#f5f5f0]/30 px-12 py-4 text-[11px] tracking-[0.25em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
                 >
                   {status === 'loading' ? 'Sending...' : 'Send'}
                 </button>
@@ -138,20 +138,20 @@ export default function Contact() {
             </form>
           )}
 
-          {/* Contact Info */}
-          <div className="mt-16 pt-12 border-t border-white/10">
-            <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-16">
+          {/* Contact Info - SPACED */}
+          <div className="mt-24 pt-16 border-t border-[#f5f5f0]/10">
+            <div className="space-y-12">
               <div>
-                <span className="text-[10px] tracking-[0.2em] uppercase text-white/30 block mb-2">Email</span>
-                <a href="mailto:hello@memonu.com" className="text-base hover:text-white/50 transition-colors">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30 block mb-4">Email</span>
+                <a href="mailto:hello@memonu.com" className="text-base hover:text-[#f5f5f0]/50 transition-colors">
                   hello@memonu.com
                 </a>
               </div>
               <div>
-                <span className="text-[10px] tracking-[0.2em] uppercase text-white/30 block mb-2">Social</span>
-                <div className="flex gap-4 justify-center">
-                  <a href="https://instagram.com/memonu" className="text-base hover:text-white/50 transition-colors">IG</a>
-                  <a href="https://twitter.com/memonu" className="text-base hover:text-white/50 transition-colors">TW</a>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30 block mb-4">Social</span>
+                <div className="flex gap-8 justify-center">
+                  <a href="https://instagram.com/memonu" className="text-base hover:text-[#f5f5f0]/50 transition-colors">Instagram</a>
+                  <a href="https://twitter.com/memonu" className="text-base hover:text-[#f5f5f0]/50 transition-colors">Twitter</a>
                 </div>
               </div>
             </div>
