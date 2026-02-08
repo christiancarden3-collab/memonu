@@ -1,25 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+
+// Sports videos - B&W filter applied via CSS
+const sportsVideos = [
+  "https://cdn.coverr.co/videos/coverr-a-woman-running-on-a-beach-4894/1080p.mp4", // Running
+  "https://cdn.coverr.co/videos/coverr-playing-tennis-4817/1080p.mp4", // Tennis
+  "https://cdn.coverr.co/videos/coverr-swimmer-doing-laps-2531/1080p.mp4", // Swimming
+  "https://cdn.coverr.co/videos/coverr-cycling-on-the-road-1577/1080p.mp4", // Cycling
+  "https://cdn.coverr.co/videos/coverr-jogging-in-the-park-5266/1080p.mp4", // Running 2
+];
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Cycle to next video when current one ends
+  const handleVideoEnd = () => {
+    setCurrentVideoIndex((prev) => (prev + 1) % sportsVideos.length);
+  };
+
+  // Update video source when index changes
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play();
+    }
+  }, [currentVideoIndex]);
 
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-black">
-      {/* Full Screen Video Background - Single Runner, B&W, Panoramic */}
+      {/* Full Screen Video Background - Sports Loop, B&W */}
       <video
+        ref={videoRef}
         autoPlay
         muted
-        loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover grayscale"
+        onEnded={handleVideoEnd}
+        className="absolute inset-0 w-full h-full object-cover"
         style={{ filter: 'grayscale(100%) contrast(1.1)' }}
       >
-        {/* Single runner videos - panoramic style */}
-        <source src="https://cdn.coverr.co/videos/coverr-a-woman-running-on-a-beach-4894/1080p.mp4" type="video/mp4" />
-        <source src="https://cdn.coverr.co/videos/coverr-jogging-in-the-park-5266/1080p.mp4" type="video/mp4" />
+        <source src={sportsVideos[currentVideoIndex]} type="video/mp4" />
       </video>
       
       {/* Dark Overlay */}
@@ -42,7 +65,7 @@ export default function Home() {
       {/* Center Logo - memo lowercase, elegant serif */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <h1 
-          className="text-white text-7xl md:text-9xl lg:text-[12rem] font-light tracking-[0.08em]"
+          className="text-white text-7xl md:text-9xl lg:text-[12rem] font-normal tracking-[0.08em]"
           style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, 'Times New Roman', serif" }}
         >
           memo
@@ -84,7 +107,7 @@ export default function Home() {
                 <Link 
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-white text-4xl md:text-5xl font-light tracking-wide hover:opacity-40 transition-opacity duration-300 block py-1"
+                  className="text-white text-4xl md:text-5xl font-normal tracking-wide hover:opacity-40 transition-opacity duration-300 block py-1"
                   style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
                 >
                   {item.name}
