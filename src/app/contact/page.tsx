@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 export default function Contact() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -16,49 +15,51 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 md:px-16 py-8">
-        <Link href="/" className="text-white text-2xl tracking-[0.5em] font-light">
-          MEMO
+    <main className="min-h-screen bg-black text-white">
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 z-40 px-8 md:px-16 py-8 flex justify-between items-center">
+        <Link 
+          href="/" 
+          className="text-white text-2xl tracking-[0.06em]"
+          style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+        >
+          memo
         </Link>
-
+        
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-white flex items-center gap-3 group"
         >
-          <span className="text-sm tracking-[0.2em] uppercase opacity-70 group-hover:opacity-100 transition-opacity">
-            Menu
-          </span>
+          <span className="text-xs tracking-[0.3em] uppercase opacity-60 group-hover:opacity-100 hidden md:block">Menu</span>
           <div className="flex flex-col gap-1.5">
-            <span className="w-6 h-px bg-white" />
-            <span className="w-6 h-px bg-white" />
+            <span className="w-7 h-px bg-white" />
+            <span className="w-7 h-px bg-white" />
           </div>
         </button>
       </header>
 
-      {/* Menu */}
-      <div className={`fixed top-0 right-0 h-full w-full md:w-[400px] bg-black/95 backdrop-blur-md transform transition-transform duration-500 ease-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      {/* Menu Overlay */}
+      <div className={`fixed inset-0 bg-black z-50 transform transition-transform duration-500 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex justify-end px-8 md:px-16 py-8">
           <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3">
-            <span className="text-sm tracking-[0.2em] uppercase opacity-70">Close</span>
-            <div className="relative w-6 h-6">
-              <span className="absolute top-1/2 left-0 w-6 h-px bg-white rotate-45" />
-              <span className="absolute top-1/2 left-0 w-6 h-px bg-white -rotate-45" />
+            <span className="text-xs tracking-[0.3em] uppercase opacity-60">Close</span>
+            <div className="relative w-7 h-7 flex items-center justify-center">
+              <span className="absolute w-7 h-px bg-white rotate-45" />
+              <span className="absolute w-7 h-px bg-white -rotate-45" />
             </div>
           </button>
         </div>
-        <nav className="px-8 md:px-16 py-12">
-          <ul className="space-y-8">
-            {[
-              { name: 'Shop', href: '/shop' },
-              { name: 'About Us', href: '/about' },
-              { name: 'Contact', href: '/contact' },
-              { name: 'Ambassadors', href: '/ambassadors' },
-            ].map((item) => (
-              <li key={item.name}>
-                <Link href={item.href} onClick={() => setIsMenuOpen(false)} className="text-white text-4xl font-extralight hover:opacity-50 transition-opacity block">
-                  {item.name}
+        <nav className="px-8 md:px-16 py-16">
+          <ul className="space-y-5">
+            {['Shop', 'About Us', 'Contact', 'Ambassadors'].map((item) => (
+              <li key={item}>
+                <Link 
+                  href={`/${item.toLowerCase().replace(' ', '-').replace('about-us', 'about')}`}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-white text-5xl font-normal hover:opacity-40 transition-opacity block"
+                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                >
+                  {item}
                 </Link>
               </li>
             ))}
@@ -67,83 +68,101 @@ export default function Contact() {
       </div>
 
       {/* Content */}
-      <div className="pt-32 pb-20 px-8 md:px-16">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-extralight tracking-tight mb-8">
-            Contact
-          </h1>
-          <p className="text-white/50 text-lg mb-16">
-            Questions, partnerships, or just want to say hello? We'd love to hear from you.
-          </p>
+      <section className="min-h-screen flex items-center justify-center pt-32 pb-20 px-8">
+        <div className="w-full max-w-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h1 
+              className="text-5xl md:text-7xl font-normal mb-6"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              Contact
+            </h1>
+            <p className="text-white/50 text-lg">
+              Questions? Partnerships? Just say hello.
+            </p>
+          </div>
 
           {status === 'success' ? (
-            <div className="border border-emerald-500/30 bg-emerald-500/5 p-8 text-center">
-              <p className="text-emerald-400 text-lg">Message sent. We'll be in touch soon.</p>
+            <div className="text-center py-16">
+              <p 
+                className="text-3xl mb-4"
+                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              >
+                Message sent.
+              </p>
+              <p className="text-white/50">We'll be in touch soon.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8">
-              <div>
-                <label className="text-white/40 text-xs tracking-[0.2em] uppercase block mb-3">Name</label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-transparent border-b border-white/20 py-4 text-white text-lg focus:outline-none focus:border-white/50 transition-colors"
-                  required
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <label className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Name</label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full bg-transparent border-b border-white/20 py-4 text-xl focus:outline-none focus:border-white/50 transition-colors"
+                    style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Email</label>
+                  <input
+                    type="email"
+                    required
+                    className="w-full bg-transparent border-b border-white/20 py-4 text-xl focus:outline-none focus:border-white/50 transition-colors"
+                    style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                  />
+                </div>
               </div>
               <div>
-                <label className="text-white/40 text-xs tracking-[0.2em] uppercase block mb-3">Email</label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-transparent border-b border-white/20 py-4 text-white text-lg focus:outline-none focus:border-white/50 transition-colors"
-                  required
-                />
-              </div>
-              <div>
-                <label className="text-white/40 text-xs tracking-[0.2em] uppercase block mb-3">Message</label>
+                <label className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Message</label>
                 <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={5}
-                  className="w-full bg-transparent border-b border-white/20 py-4 text-white text-lg focus:outline-none focus:border-white/50 transition-colors resize-none"
+                  rows={4}
                   required
+                  className="w-full bg-transparent border-b border-white/20 py-4 text-xl focus:outline-none focus:border-white/50 transition-colors resize-none"
+                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 />
               </div>
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="inline-flex items-center gap-4 text-white border border-white/30 px-10 py-5 hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50"
-              >
-                <span className="text-sm tracking-[0.2em] uppercase">
-                  {status === 'loading' ? 'Sending...' : 'Send Message'}
-                </span>
-              </button>
+              <div className="text-center pt-8">
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="border border-white/30 px-16 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50"
+                >
+                  {status === 'loading' ? 'Sending...' : 'Send'}
+                </button>
+              </div>
             </form>
           )}
 
           {/* Contact Info */}
-          <div className="mt-24 pt-16 border-t border-white/10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-white/40 text-xs tracking-[0.2em] uppercase mb-4">Email</h3>
-                <a href="mailto:hello@memonu.com" className="text-white text-lg hover:opacity-50 transition-opacity">
-                  hello@memonu.com
+          <div className="mt-24 pt-16 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-12 text-center md:text-left">
+            <div>
+              <span className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Email</span>
+              <a href="mailto:hello@memonu.com" className="text-xl hover:opacity-50 transition-opacity"
+                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              >
+                hello@memonu.com
+              </a>
+            </div>
+            <div>
+              <span className="text-xs tracking-[0.2em] uppercase text-white/40 block mb-4">Social</span>
+              <div className="flex gap-6 justify-center md:justify-start">
+                <a href="https://instagram.com/memonu" className="text-xl hover:opacity-50 transition-opacity"
+                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                >
+                  Instagram
                 </a>
-              </div>
-              <div>
-                <h3 className="text-white/40 text-xs tracking-[0.2em] uppercase mb-4">Social</h3>
-                <div className="flex gap-4">
-                  <a href="https://instagram.com/memonu" className="text-white hover:opacity-50 transition-opacity">Instagram</a>
-                  <a href="https://twitter.com/memonu" className="text-white hover:opacity-50 transition-opacity">Twitter</a>
-                </div>
+                <a href="https://twitter.com/memonu" className="text-xl hover:opacity-50 transition-opacity"
+                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                >
+                  Twitter
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

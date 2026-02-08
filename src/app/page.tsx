@@ -3,13 +3,13 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
-// Sports videos - B&W filter applied via CSS
+// Free reliable video sources - rapid fire 0.5s each
 const sportsVideos = [
-  "https://cdn.coverr.co/videos/coverr-a-woman-running-on-a-beach-4894/1080p.mp4", // Running
-  "https://cdn.coverr.co/videos/coverr-playing-tennis-4817/1080p.mp4", // Tennis
-  "https://cdn.coverr.co/videos/coverr-swimmer-doing-laps-2531/1080p.mp4", // Swimming
-  "https://cdn.coverr.co/videos/coverr-cycling-on-the-road-1577/1080p.mp4", // Cycling
-  "https://cdn.coverr.co/videos/coverr-jogging-in-the-park-5266/1080p.mp4", // Running 2
+  "https://videos.pexels.com/video-files/5319281/5319281-uhd_2560_1440_30fps.mp4", // Running
+  "https://videos.pexels.com/video-files/4761437/4761437-uhd_2560_1440_25fps.mp4", // Cycling
+  "https://videos.pexels.com/video-files/4753987/4753987-uhd_2560_1440_25fps.mp4", // Swimming
+  "https://videos.pexels.com/video-files/4761671/4761671-uhd_2560_1440_25fps.mp4", // Tennis/sports
+  "https://videos.pexels.com/video-files/4763824/4763824-uhd_2560_1440_24fps.mp4", // Fitness
 ];
 
 export default function Home() {
@@ -17,36 +17,41 @@ export default function Home() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Cycle to next video when current one ends
-  const handleVideoEnd = () => {
-    setCurrentVideoIndex((prev) => (prev + 1) % sportsVideos.length);
-  };
-
-  // Update video source when index changes
+  // Rapid fire - switch every 0.5 seconds for cinematic effect
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play();
-    }
-  }, [currentVideoIndex]);
+    const interval = setInterval(() => {
+      setCurrentVideoIndex((prev) => (prev + 1) % sportsVideos.length);
+    }, 500); // 0.5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Preload all videos
+  useEffect(() => {
+    sportsVideos.forEach((src) => {
+      const video = document.createElement('video');
+      video.src = src;
+      video.preload = 'auto';
+    });
+  }, []);
 
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-black">
-      {/* Full Screen Video Background - Sports Loop, B&W */}
+      {/* Full Screen Video Background - Rapid Fire B&W */}
       <video
         ref={videoRef}
+        key={currentVideoIndex}
         autoPlay
         muted
         playsInline
-        onEnded={handleVideoEnd}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: 'grayscale(100%) contrast(1.1)' }}
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-100"
+        style={{ filter: 'grayscale(100%) contrast(1.15) brightness(0.9)' }}
       >
         <source src={sportsVideos[currentVideoIndex]} type="video/mp4" />
       </video>
       
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/40" />
 
       {/* Menu Button - Top Right */}
       <button 
@@ -65,8 +70,8 @@ export default function Home() {
       {/* Center Logo - memo lowercase, elegant serif */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <h1 
-          className="text-white text-7xl md:text-9xl lg:text-[12rem] font-normal tracking-[0.08em]"
-          style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, 'Times New Roman', serif" }}
+          className="text-white text-7xl md:text-9xl lg:text-[11rem] font-normal tracking-[0.06em]"
+          style={{ fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif" }}
         >
           memo
         </h1>
@@ -74,7 +79,6 @@ export default function Home() {
 
       {/* Slide-out Menu */}
       <div className={`fixed top-0 right-0 h-full w-full md:w-[420px] bg-black transform transition-transform duration-500 ease-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        {/* Close Button */}
         <div className="flex justify-end px-8 md:px-12 py-8">
           <button 
             onClick={() => setIsMenuOpen(false)}
@@ -90,7 +94,6 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Menu Links */}
         <nav className="px-8 md:px-12 py-16">
           <ul className="space-y-5">
             {[
@@ -117,7 +120,6 @@ export default function Home() {
           </ul>
         </nav>
 
-        {/* Footer in Menu */}
         <div className="absolute bottom-0 left-0 right-0 px-8 md:px-12 py-8 border-t border-white/10">
           <div className="flex items-center gap-6 mb-4">
             <a href="https://instagram.com/memonu" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">
@@ -126,13 +128,8 @@ export default function Home() {
             <a href="https://twitter.com/memonu" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">
               <span className="text-xs tracking-[0.2em] uppercase font-sans">Twitter</span>
             </a>
-            <a href="https://tiktok.com/@memonu" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">
-              <span className="text-xs tracking-[0.2em] uppercase font-sans">TikTok</span>
-            </a>
           </div>
-          <p className="text-white/30 text-xs tracking-wider font-sans">
-            © 2026 memo
-          </p>
+          <p className="text-white/30 text-xs tracking-wider font-sans">© 2026 memo</p>
         </div>
       </div>
     </main>

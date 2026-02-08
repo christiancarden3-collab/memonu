@@ -1,126 +1,116 @@
 'use client';
 
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
-export default function ShopPage() {
-  const [quantity, setQuantity] = useState(1);
-  
-  const products = [
-    {
-      id: 'starter',
-      name: 'Starter Pack',
-      strips: 10,
-      price: 14.99,
-      description: 'Perfect for trying memo',
-      popular: false,
-    },
-    {
-      id: 'monthly',
-      name: 'Monthly Pack',
-      strips: 30,
-      price: 34.99,
-      description: 'Most popular choice',
-      popular: true,
-    },
-    {
-      id: 'pro',
-      name: 'Pro Pack',
-      strips: 60,
-      price: 59.99,
-      description: 'Best value for athletes',
-      popular: false,
-    },
-  ];
+export default function Shop() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <>
-      <Navigation />
-      
-      <main className="pt-16">
-        {/* Hero */}
-        <section className="py-16 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-light tracking-tight mb-4">Shop</h1>
-            <p className="text-xl text-gray-600">
-              Choose the pack that's right for you.
-            </p>
+    <main className="min-h-screen bg-white text-black">
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 z-40 px-8 md:px-16 py-8 flex justify-between items-center mix-blend-difference">
+        <Link 
+          href="/" 
+          className="text-white text-2xl tracking-[0.06em]"
+          style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+        >
+          memo
+        </Link>
+        
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="text-white flex items-center gap-3 group"
+        >
+          <span className="text-xs tracking-[0.3em] uppercase opacity-60 group-hover:opacity-100 hidden md:block">Menu</span>
+          <div className="flex flex-col gap-1.5">
+            <span className="w-7 h-px bg-white" />
+            <span className="w-7 h-px bg-white" />
           </div>
-        </section>
+        </button>
+      </header>
 
-        {/* Products */}
-        <section className="py-8 px-6 pb-24">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <div 
-                  key={product.id}
-                  className={`relative rounded-2xl p-6 border-2 transition-all ${
-                    product.popular 
-                      ? 'border-emerald-500 bg-emerald-50' 
-                      : 'border-gray-200 hover:border-gray-300'
-                  }`}
+      {/* Menu Overlay */}
+      <div className={`fixed inset-0 bg-black z-50 transform transition-transform duration-500 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex justify-end px-8 md:px-16 py-8">
+          <button onClick={() => setIsMenuOpen(false)} className="text-white flex items-center gap-3">
+            <span className="text-xs tracking-[0.3em] uppercase opacity-60">Close</span>
+            <div className="relative w-7 h-7 flex items-center justify-center">
+              <span className="absolute w-7 h-px bg-white rotate-45" />
+              <span className="absolute w-7 h-px bg-white -rotate-45" />
+            </div>
+          </button>
+        </div>
+        <nav className="px-8 md:px-16 py-16">
+          <ul className="space-y-5">
+            {['Shop', 'About Us', 'Contact', 'Ambassadors'].map((item) => (
+              <li key={item}>
+                <Link 
+                  href={`/${item.toLowerCase().replace(' ', '-').replace('about-us', 'about')}`}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-white text-5xl font-normal hover:opacity-40 transition-opacity block"
+                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
-                  {product.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs font-medium px-3 py-1 rounded-full">
-                      Most Popular
-                    </div>
-                  )}
-                  
-                  <div className="text-center">
-                    <h2 className="text-xl font-medium mb-1">{product.name}</h2>
-                    <p className="text-gray-500 text-sm mb-4">{product.description}</p>
-                    
-                    <div className="mb-4">
-                      <span className="text-4xl font-light">${product.price}</span>
-                    </div>
-                    
-                    <p className="text-gray-600 mb-6">
-                      {product.strips} strips
-                      <span className="text-gray-400 text-sm block">
-                        (${(product.price / product.strips).toFixed(2)} per strip)
-                      </span>
-                    </p>
-                    
-                    <button 
-                      className={`w-full py-3 rounded-full font-medium transition-colors ${
-                        product.popular
-                          ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-                          : 'bg-[#0a0a0a] text-white hover:bg-gray-800'
-                      }`}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* Features */}
-            <div className="mt-16 grid md:grid-cols-4 gap-6 text-center">
-              <div>
-                <div className="text-2xl mb-2">🚚</div>
-                <p className="text-sm text-gray-600">Free shipping on orders $35+</p>
-              </div>
-              <div>
-                <div className="text-2xl mb-2">↩️</div>
-                <p className="text-sm text-gray-600">30-day money back guarantee</p>
-              </div>
-              <div>
-                <div className="text-2xl mb-2">🔒</div>
-                <p className="text-sm text-gray-600">Secure checkout</p>
-              </div>
-              <div>
-                <div className="text-2xl mb-2">📦</div>
-                <p className="text-sm text-gray-600">Subscribe & save 15%</p>
-              </div>
+                  {item}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      {/* Hero */}
+      <section className="min-h-screen flex items-center justify-center pt-32 pb-20 px-8">
+        <div className="text-center">
+          <span className="text-xs tracking-[0.3em] uppercase text-black/40 block mb-8">Coming Soon</span>
+          <h1 
+            className="text-5xl md:text-7xl lg:text-8xl font-normal mb-8"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            Shop
+          </h1>
+          <p className="text-black/50 text-lg md:text-xl max-w-xl mx-auto mb-12">
+            We're putting the finishing touches on something special. Join the waitlist to be first in line.
+          </p>
+          
+          {/* Product Preview */}
+          <div className="relative w-64 h-80 mx-auto mb-12">
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-sm flex items-center justify-center transform -rotate-3 hover:rotate-0 transition-transform duration-500 shadow-2xl">
+              <span 
+                className="text-white text-4xl tracking-[0.1em] -rotate-90"
+                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              >
+                memo
+              </span>
             </div>
           </div>
-        </section>
-      </main>
 
-      <Footer />
-    </>
+          <Link 
+            href="/"
+            className="inline-block border border-black/20 px-12 py-5 text-sm tracking-[0.2em] uppercase hover:bg-black hover:text-white transition-all duration-300"
+          >
+            Join Waitlist
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-8 md:px-16 border-t border-black/10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <span 
+            className="text-xl tracking-[0.06em]"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            memo
+          </span>
+          <div className="flex gap-8 text-xs tracking-[0.2em] uppercase text-black/40">
+            <Link href="/about" className="hover:text-black transition-colors">About</Link>
+            <Link href="/contact" className="hover:text-black transition-colors">Contact</Link>
+            <span>© 2026</span>
+          </div>
+        </div>
+      </footer>
+    </main>
   );
 }
