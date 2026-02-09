@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
@@ -17,8 +18,19 @@ export default function Contact() {
     <main className="min-h-screen bg-black text-[#FAF3E0]">
       <Header />
 
-      {/* HERO - Full Width */}
-      <section className="relative h-[50vh] sm:h-[60vh] flex items-center justify-center bg-gradient-to-b from-black via-black/95 to-black">
+      {/* HERO - Full Width Image */}
+      <section className="relative h-[50vh] sm:h-[60vh] flex items-center justify-center">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=2940&auto=format&fit=crop"
+            alt="Contact"
+            fill
+            className="object-cover"
+            style={{ filter: 'grayscale(100%) brightness(0.35)' }}
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
         <div className="relative z-10 text-center px-6">
           <Pill>Get in Touch</Pill>
           <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight">
