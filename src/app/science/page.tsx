@@ -112,9 +112,6 @@ export default function Science() {
                 <span className="text-[#FAF3E0]/30">✕</span> No fillers
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#FAF3E0]/30">✕</span> No caffeine
-              </div>
-              <div className="flex items-center gap-2">
                 <span className="text-[#FAF3E0]/30">✕</span> No proprietary blends
               </div>
             </div>
