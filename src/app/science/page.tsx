@@ -1,209 +1,260 @@
-'use client';
-
-import { useState } from 'react';
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Science() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const playfair = "var(--font-playfair), 'Playfair Display', Georgia, serif";
-
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-[#f5f5f0]" style={{ fontFamily: playfair }}>
-      {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8 text-center">
-        <Link href="/" className="text-[#f5f5f0] text-lg tracking-[0.06em]">
+    <main className="min-h-screen bg-black text-[#FAF3E0]">
+      <Header />
+
+      {/* HERO */}
+      <section className="relative">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-10 sm:pb-14">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+            <Pill>The Science</Pill>
+            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
+              Sublingual Delivery
+            </h1>
+            <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#FAF3E0]/80 leading-relaxed">
+              Why the area under your tongue is one of the most efficient absorption sites in your body.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ABSORPTION SPEED */}
+      <section>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <SectionTitle>Absorption Speed</SectionTitle>
+          
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <div className="rounded-3xl border border-white/20 bg-white/[0.05] p-6 sm:p-8">
+              <div className="text-4xl sm:text-5xl font-semibold">~30s</div>
+              <div className="mt-2 text-lg font-medium">memo strips</div>
+              <div className="mt-1 text-xs text-[#FAF3E0]/50 uppercase tracking-wider">Sublingual</div>
+            </div>
+            
+            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+              <div className="text-4xl sm:text-5xl font-semibold text-[#FAF3E0]/40">15-30m</div>
+              <div className="mt-2 text-lg font-medium text-[#FAF3E0]/60">Drinks</div>
+              <div className="mt-1 text-xs text-[#FAF3E0]/30 uppercase tracking-wider">Digestive</div>
+            </div>
+            
+            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+              <div className="text-4xl sm:text-5xl font-semibold text-[#FAF3E0]/40">30-60m</div>
+              <div className="mt-2 text-lg font-medium text-[#FAF3E0]/60">Pills</div>
+              <div className="mt-1 text-xs text-[#FAF3E0]/30 uppercase tracking-wider">Digestive</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="bg-[#FAF3E0] text-black">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <SectionTitleDark>How It Works</SectionTitleDark>
+          
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <StepCard 
+              number="01" 
+              title="Rich Blood Supply" 
+              body="Dense network of blood vessels allows rapid absorption directly into your bloodstream."
+            />
+            <StepCard 
+              number="02" 
+              title="Bypasses First-Pass" 
+              body="Unlike pills, sublingual delivery avoids the liver's first-pass effect, increasing bioavailability."
+            />
+            <StepCard 
+              number="03" 
+              title="Thin Membrane" 
+              body="The tissue under your tongue is thin and permeable, allowing molecules to pass through efficiently."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ELECTROLYTES */}
+      <section>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <SectionTitle>The Electrolytes</SectionTitle>
+          
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <Card 
+              title="Sodium" 
+              body="Primary electrolyte lost in sweat. Critical for fluid balance and muscle function."
+            />
+            <Card 
+              title="Potassium" 
+              body="Works with sodium for cellular hydration. Essential for heart rhythm and preventing cramps."
+            />
+            <Card 
+              title="Magnesium" 
+              body="Supports muscle relaxation, energy production, and overall electrolyte balance."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT WE LEAVE OUT */}
+      <section>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <SectionTitle>What We Leave Out</SectionTitle>
+          
+          <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-[#FAF3E0]/70">
+              <div className="flex items-center gap-2">
+                <span className="text-[#FAF3E0]/30">✕</span> No added sugars
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#FAF3E0]/30">✕</span> No artificial colors
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#FAF3E0]/30">✕</span> No artificial sweeteners
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#FAF3E0]/30">✕</span> No fillers
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#FAF3E0]/30">✕</span> No caffeine
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#FAF3E0]/30">✕</span> No proprietary blends
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-[#FAF3E0] text-black">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <div className="rounded-3xl border border-black/10 bg-black/[0.03] p-6 sm:p-10 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold">Experience the Difference</h2>
+            <p className="mt-4 text-base sm:text-lg text-black/70">
+              Try memo and feel what fast hydration really means.
+            </p>
+            <Link
+              href="/shop"
+              className="mt-6 inline-flex items-center justify-center rounded-2xl bg-black px-6 py-3 text-[#FAF3E0] font-medium
+                         hover:opacity-90 transition"
+            >
+              Shop Now
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-50 bg-black/80 backdrop-blur border-b border-white/10">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <Link href="/" className="font-semibold tracking-tight">
           memo
         </Link>
-        
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Menu</span>
-          <div className="flex flex-col gap-[5px]">
-            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
-            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
-          </div>
-        </button>
-      </header>
 
-      {/* Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <button 
-          onClick={() => setIsMenuOpen(false)} 
-          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Close</span>
-          <div className="relative w-6 h-6 flex items-center justify-center">
-            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] rotate-45" />
-            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] -rotate-45" />
-          </div>
-        </button>
-        
-        <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-12 text-center">
-            {['Shop', 'Science', 'About', 'Ambassadors', 'Contact'].map((item) => (
-              <li key={item}>
-                <Link 
-                  href={`/${item.toLowerCase()}`}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-[#f5f5f0] text-5xl md:text-7xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <nav className="hidden md:flex items-center gap-2">
+          <NavLink href="/shop" label="Shop" />
+          <NavLink href="/science" label="Science" />
+          <NavLink href="/about" label="About" />
+          <NavLink href="/ambassadors" label="Ambassadors" />
+          <NavLink href="/contact" label="Contact" />
         </nav>
+
+        <details className="md:hidden relative">
+          <summary className="list-none cursor-pointer rounded-xl border border-white/15 bg-white/[0.02] px-3 py-2 text-sm hover:bg-white/[0.05] transition">
+            Menu
+          </summary>
+          <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-white/10 bg-black p-2 shadow-xl">
+            <MobileLink href="/shop" label="Shop" />
+            <MobileLink href="/science" label="Science" />
+            <MobileLink href="/about" label="About" />
+            <MobileLink href="/ambassadors" label="Ambassadors" />
+            <MobileLink href="/contact" label="Contact" />
+          </div>
+        </details>
       </div>
+    </header>
+  );
+}
 
-      {/* Hero - Full Screen */}
-      <section className="min-h-screen flex items-center justify-center px-6">
-        <div className="text-center max-w-2xl">
-          <span className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">The Science</span>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-light mb-8">
-            Sublingual Delivery
-          </h1>
-          <p className="text-[#f5f5f0]/50 text-base sm:text-lg md:text-xl leading-relaxed max-w-lg mx-auto">
-            Why the area under your tongue is one of the most efficient absorption sites in your body.
-          </p>
+function Footer() {
+  return (
+    <footer className="border-t border-white/10 bg-black">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between">
+        <div className="text-sm text-[#FAF3E0]/70">© {new Date().getFullYear()} memo</div>
+        <div className="flex flex-wrap gap-3 text-sm">
+          <FooterLink href="/about" label="About" />
+          <FooterLink href="/contact" label="Contact" />
+          <FooterLink href="/ambassadors" label="Ambassadors" />
         </div>
-      </section>
+      </div>
+    </footer>
+  );
+}
 
-      {/* Speed Comparison - Full Screen */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#0a0a0a]">
-        <div className="text-center w-full max-w-lg">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-16 md:mb-24">Absorption Speed</h2>
-          
-          <div className="space-y-8 md:space-y-12">
-            <div className="border border-[#f5f5f0]/40 p-8 md:p-12">
-              <div className="text-4xl sm:text-5xl md:text-6xl font-light text-[#f5f5f0] mb-4">~30s</div>
-              <div className="text-lg font-light mb-2">memo strips</div>
-              <div className="text-[10px] text-[#f5f5f0]/40 uppercase tracking-[0.3em]">Sublingual</div>
-            </div>
-            
-            <div className="border border-[#f5f5f0]/10 p-8 md:p-12">
-              <div className="text-4xl sm:text-5xl md:text-6xl font-light text-[#f5f5f0]/30 mb-4">15-30m</div>
-              <div className="text-lg font-light text-[#f5f5f0]/50 mb-2">Drinks</div>
-              <div className="text-[10px] text-[#f5f5f0]/30 uppercase tracking-[0.3em]">Digestive</div>
-            </div>
-            
-            <div className="border border-[#f5f5f0]/10 p-8 md:p-12">
-              <div className="text-4xl sm:text-5xl md:text-6xl font-light text-[#f5f5f0]/30 mb-4">30-60m</div>
-              <div className="text-lg font-light text-[#f5f5f0]/50 mb-2">Pills</div>
-              <div className="text-[10px] text-[#f5f5f0]/30 uppercase tracking-[0.3em]">Digestive</div>
-            </div>
-          </div>
-        </div>
-      </section>
+function NavLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/80 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition">
+      {label}
+    </Link>
+  );
+}
 
-      {/* How It Works - 01 */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#f5f5f0] text-[#0a0a0a]">
-        <div className="text-center max-w-lg">
-          <span className="text-7xl sm:text-8xl md:text-9xl font-light text-[#0a0a0a]/10 block mb-8">01</span>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-8">Rich Blood Supply</h3>
-          <p className="text-[#0a0a0a]/50 text-base sm:text-lg md:text-xl leading-relaxed">
-            Dense network of blood vessels allows rapid absorption directly into your bloodstream.
-          </p>
-        </div>
-      </section>
+function MobileLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="block rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/85 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition">
+      {label}
+    </Link>
+  );
+}
 
-      {/* How It Works - 02 */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#f5f5f0] text-[#0a0a0a]">
-        <div className="text-center max-w-lg">
-          <span className="text-7xl sm:text-8xl md:text-9xl font-light text-[#0a0a0a]/10 block mb-8">02</span>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-8">Bypasses First-Pass</h3>
-          <p className="text-[#0a0a0a]/50 text-base sm:text-lg md:text-xl leading-relaxed">
-            Unlike pills, sublingual delivery avoids the liver's first-pass effect, increasing bioavailability.
-          </p>
-        </div>
-      </section>
+function FooterLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="text-[#FAF3E0]/75 hover:text-[#FAF3E0] transition">
+      {label}
+    </Link>
+  );
+}
 
-      {/* How It Works - 03 */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#f5f5f0] text-[#0a0a0a]">
-        <div className="text-center max-w-lg">
-          <span className="text-7xl sm:text-8xl md:text-9xl font-light text-[#0a0a0a]/10 block mb-8">03</span>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-8">Thin Membrane</h3>
-          <p className="text-[#0a0a0a]/50 text-base sm:text-lg md:text-xl leading-relaxed">
-            The tissue under your tongue is thin and permeable, allowing molecules to pass through efficiently.
-          </p>
-        </div>
-      </section>
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.02] px-3 py-1 text-xs text-[#FAF3E0]/80">
+      {children}
+    </span>
+  );
+}
 
-      {/* Electrolytes - Full Screen */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#0a0a0a]">
-        <div className="text-center w-full max-w-lg">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-16 md:mb-24">The Electrolytes</h2>
-          
-          <div className="space-y-12 md:space-y-16">
-            <div>
-              <h3 className="text-xl sm:text-2xl font-light mb-4">Sodium</h3>
-              <p className="text-[#f5f5f0]/40 text-sm sm:text-base md:text-lg leading-relaxed">
-                Primary electrolyte lost in sweat. Critical for fluid balance and muscle function.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-xl sm:text-2xl font-light mb-4">Potassium</h3>
-              <p className="text-[#f5f5f0]/40 text-sm sm:text-base md:text-lg leading-relaxed">
-                Works with sodium for cellular hydration. Essential for heart rhythm and preventing cramps.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-xl sm:text-2xl font-light mb-4">Magnesium</h3>
-              <p className="text-[#f5f5f0]/40 text-sm sm:text-base md:text-lg leading-relaxed">
-                Supports muscle relaxation, energy production, and overall electrolyte balance.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{children}</h2>
+  );
+}
 
-      {/* What We Leave Out - Full Screen */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#0a0a0a]">
-        <div className="text-center w-full max-w-lg">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-16 md:mb-24">What We Leave Out</h2>
-          
-          <div className="space-y-6 text-[#f5f5f0]/40 text-base sm:text-lg md:text-xl">
-            <p>No added sugars</p>
-            <p>No artificial colors</p>
-            <p>No artificial sweeteners</p>
-            <p>No fillers</p>
-            <p>No caffeine</p>
-            <p>No proprietary blends</p>
-          </div>
-        </div>
-      </section>
+function SectionTitleDark({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-black">{children}</h2>
+  );
+}
 
-      {/* CTA - Full Screen */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#f5f5f0] text-[#0a0a0a]">
-        <div className="text-center max-w-lg">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-8">
-            Experience the Difference
-          </h2>
-          <p className="text-[#0a0a0a]/50 text-base sm:text-lg md:text-xl mb-12">
-            Try memo and feel what fast hydration really means.
-          </p>
-          <Link 
-            href="/shop"
-            className="inline-block border border-[#0a0a0a] px-10 sm:px-14 py-4 sm:py-5 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
-          >
-            Shop Now
-          </Link>
-        </div>
-      </section>
+function Card({ title, body }: { title: string; body: string }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+      <div className="text-lg font-semibold">{title}</div>
+      <div className="mt-2 text-sm text-[#FAF3E0]/75 leading-relaxed">{body}</div>
+    </div>
+  );
+}
 
-      {/* Footer */}
-      <footer className="py-16 md:py-24 px-6 border-t border-[#f5f5f0]/10 bg-[#0a0a0a] text-center">
-        <span className="text-lg tracking-[0.06em] block mb-8">memo</span>
-        <div className="flex gap-8 justify-center text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
-          <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
-          <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
-          <span>© 2026</span>
-        </div>
-      </footer>
-    </main>
+function StepCard({ number, title, body }: { number: string; title: string; body: string }) {
+  return (
+    <div className="rounded-3xl border border-black/10 bg-black/[0.03] p-6">
+      <div className="text-4xl font-light text-black/20">{number}</div>
+      <div className="mt-2 text-lg font-semibold text-black">{title}</div>
+      <div className="mt-2 text-sm text-black/70 leading-relaxed">{body}</div>
+    </div>
   );
 }

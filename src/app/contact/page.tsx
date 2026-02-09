@@ -1,13 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Contact() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
-
-  const playfair = "var(--font-playfair), 'Playfair Display', Georgia, serif";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,132 +14,198 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-[#f5f5f0]" style={{ fontFamily: playfair }}>
-      {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8 text-center">
-        <Link href="/" className="text-[#f5f5f0] text-lg tracking-[0.06em]">
-          memo
-        </Link>
-        
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Menu</span>
-          <div className="flex flex-col gap-[5px]">
-            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
-            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
-          </div>
-        </button>
-      </header>
+    <main className="min-h-screen bg-black text-[#FAF3E0]">
+      <Header />
 
-      {/* Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <button 
-          onClick={() => setIsMenuOpen(false)} 
-          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Close</span>
-          <div className="relative w-6 h-6 flex items-center justify-center">
-            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] rotate-45" />
-            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] -rotate-45" />
-          </div>
-        </button>
-        
-        <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-12 text-center">
-            {['Shop', 'Science', 'About', 'Ambassadors', 'Contact'].map((item) => (
-              <li key={item}>
-                <Link 
-                  href={`/${item.toLowerCase()}`}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-[#f5f5f0] text-5xl md:text-7xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-
-      {/* Content */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-48">
-        <div className="w-full flex flex-col items-center text-center">
-          <div className="border border-[#f5f5f0]/30 px-12 md:px-20 py-16 md:py-20 mb-32 w-full max-w-xl">
-            <h1 className="text-5xl md:text-7xl font-light mb-8">
+      {/* HERO */}
+      <section className="relative">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-10 sm:pb-14">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+            <Pill>Get in Touch</Pill>
+            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
               Contact
             </h1>
-            <p className="text-[#f5f5f0]/40 text-lg md:text-xl">
+            <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#FAF3E0]/80 leading-relaxed">
               Questions? Partnerships? Just say hello.
             </p>
           </div>
+        </div>
+      </section>
 
-          {status === 'success' ? (
-            <div className="border border-[#f5f5f0]/20 p-16 md:p-24 w-full max-w-xl text-center">
-              <p className="text-3xl mb-10">Message sent.</p>
-              <p className="text-[#f5f5f0]/40 text-lg">We'll be in touch soon.</p>
-            </div>
-          ) : (
-            <div className="border border-[#f5f5f0]/20 p-12 md:p-20 w-full max-w-xl">
-              <form onSubmit={handleSubmit} className="space-y-16 text-center">
-                <div>
-                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
-                  />
+      {/* CONTACT FORM */}
+      <section>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            
+            {/* Form */}
+            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+              {status === 'success' ? (
+                <div className="text-center py-8">
+                  <div className="text-2xl font-semibold mb-4">Message sent!</div>
+                  <p className="text-[#FAF3E0]/70">We'll be in touch soon.</p>
                 </div>
-                <div>
-                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Email</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/40 block mb-8">Message</label>
-                  <textarea
-                    rows={5}
-                    required
-                    className="w-full bg-transparent border-b border-[#f5f5f0]/20 py-6 text-xl text-center focus:outline-none focus:border-[#f5f5f0]/50 transition-colors resize-none"
-                  />
-                </div>
-                <div className="pt-12">
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm text-[#FAF3E0]/70 mb-2">Name</label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full rounded-xl border border-white/15 bg-white/[0.02] px-4 py-3 text-sm
+                                 placeholder:text-[#FAF3E0]/40 focus:outline-none focus:border-white/30 transition"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#FAF3E0]/70 mb-2">Email</label>
+                    <input
+                      type="email"
+                      required
+                      className="w-full rounded-xl border border-white/15 bg-white/[0.02] px-4 py-3 text-sm
+                                 placeholder:text-[#FAF3E0]/40 focus:outline-none focus:border-white/30 transition"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#FAF3E0]/70 mb-2">Message</label>
+                    <textarea
+                      rows={5}
+                      required
+                      className="w-full rounded-xl border border-white/15 bg-white/[0.02] px-4 py-3 text-sm
+                                 placeholder:text-[#FAF3E0]/40 focus:outline-none focus:border-white/30 transition resize-none"
+                    />
+                  </div>
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="border border-[#f5f5f0] px-16 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300 disabled:opacity-50"
+                    className="w-full rounded-xl bg-[#FAF3E0] px-6 py-3 text-black font-medium
+                               hover:opacity-90 transition disabled:opacity-50"
                   >
-                    {status === 'loading' ? 'Sending...' : 'Send'}
+                    {status === 'loading' ? 'Sending...' : 'Send Message'}
                   </button>
-                </div>
-              </form>
+                </form>
+              )}
             </div>
-          )}
 
-          {/* Contact Info */}
-          <div className="mt-48 border border-[#f5f5f0]/10 p-12 md:p-20 w-full max-w-xl text-center">
-            <div className="space-y-20">
-              <div>
-                <span className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/30 block mb-8">Email</span>
-                <a href="mailto:hello@memonu.com" className="text-2xl hover:text-[#f5f5f0]/50 transition-colors">
+            {/* Contact Info */}
+            <div className="space-y-6">
+              <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+                <div className="text-sm text-[#FAF3E0]/50 mb-2">Email</div>
+                <a href="mailto:hello@memonu.com" className="text-lg hover:text-[#FAF3E0]/70 transition">
                   hello@memonu.com
                 </a>
               </div>
-              <div>
-                <span className="text-[11px] tracking-[0.3em] uppercase text-[#f5f5f0]/30 block mb-8">Social</span>
-                <div className="flex gap-16 justify-center text-2xl">
-                  <a href="https://instagram.com/memonu" className="hover:text-[#f5f5f0]/50 transition-colors">Instagram</a>
-                  <a href="https://twitter.com/memonu" className="hover:text-[#f5f5f0]/50 transition-colors">Twitter</a>
+              
+              <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+                <div className="text-sm text-[#FAF3E0]/50 mb-2">Social</div>
+                <div className="flex gap-4">
+                  <a 
+                    href="https://instagram.com/memonu" 
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-xl border border-white/15 bg-white/[0.02] px-4 py-2 text-sm hover:bg-white/[0.05] transition"
+                  >
+                    Instagram
+                  </a>
+                  <a 
+                    href="https://twitter.com/memonu"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-xl border border-white/15 bg-white/[0.02] px-4 py-2 text-sm hover:bg-white/[0.05] transition"
+                  >
+                    Twitter
+                  </a>
                 </div>
+              </div>
+              
+              <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+                <div className="text-sm text-[#FAF3E0]/50 mb-2">Response Time</div>
+                <div className="text-lg">Within 24 hours</div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
+  );
+}
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-50 bg-black/80 backdrop-blur border-b border-white/10">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <Link href="/" className="font-semibold tracking-tight">
+          memo
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-2">
+          <NavLink href="/shop" label="Shop" />
+          <NavLink href="/science" label="Science" />
+          <NavLink href="/about" label="About" />
+          <NavLink href="/ambassadors" label="Ambassadors" />
+          <NavLink href="/contact" label="Contact" />
+        </nav>
+
+        <details className="md:hidden relative">
+          <summary className="list-none cursor-pointer rounded-xl border border-white/15 bg-white/[0.02] px-3 py-2 text-sm hover:bg-white/[0.05] transition">
+            Menu
+          </summary>
+          <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-white/10 bg-black p-2 shadow-xl">
+            <MobileLink href="/shop" label="Shop" />
+            <MobileLink href="/science" label="Science" />
+            <MobileLink href="/about" label="About" />
+            <MobileLink href="/ambassadors" label="Ambassadors" />
+            <MobileLink href="/contact" label="Contact" />
+          </div>
+        </details>
+      </div>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-white/10 bg-black">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between">
+        <div className="text-sm text-[#FAF3E0]/70">© {new Date().getFullYear()} memo</div>
+        <div className="flex flex-wrap gap-3 text-sm">
+          <FooterLink href="/about" label="About" />
+          <FooterLink href="/contact" label="Contact" />
+          <FooterLink href="/ambassadors" label="Ambassadors" />
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function NavLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/80 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition">
+      {label}
+    </Link>
+  );
+}
+
+function MobileLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="block rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/85 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition">
+      {label}
+    </Link>
+  );
+}
+
+function FooterLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="text-[#FAF3E0]/75 hover:text-[#FAF3E0] transition">
+      {label}
+    </Link>
+  );
+}
+
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.02] px-3 py-1 text-xs text-[#FAF3E0]/80">
+      {children}
+    </span>
   );
 }

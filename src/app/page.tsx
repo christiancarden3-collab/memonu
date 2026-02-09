@@ -1,159 +1,172 @@
-'use client';
-
-import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
-
-const sportsVideos = [
-  "/videos/sport-1.mp4",
-  "/videos/sport-2.mp4",
-  "/videos/sport-3.mp4",
-  "/videos/sport-4.mp4",
-];
+import Link from "next/link";
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-
-  const playfair = "var(--font-playfair), 'Playfair Display', Georgia, serif";
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentVideoIndex((prev) => (prev + 1) % sportsVideos.length);
-    }, 750);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    sportsVideos.forEach((src) => {
-      const video = document.createElement('video');
-      video.src = src;
-      video.preload = 'auto';
-    });
-  }, []);
-
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-[#0a0a0a]" style={{ fontFamily: playfair }}>
-      {/* Video Background */}
-      {sportsVideos.map((src, index) => (
-        <video
-          key={src}
-          ref={(el) => { videoRefs.current[index] = el; }}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-150 ${
-            index === currentVideoIndex ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <source src={src} type="video/mp4" />
-        </video>
-      ))}
-      
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50" />
+    <main className="min-h-screen bg-black text-[#FAF3E0]">
+      <Header />
 
-      {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-30 px-6 md:px-12 py-8 text-center">
-        <span className="text-[#f5f5f0] text-lg tracking-[0.06em]">memo</span>
+      {/* HERO */}
+      <section className="relative">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-10 sm:pb-14">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center justify-between gap-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
+                  memo
+                </h1>
+                <Pill>Electrolyte Strips</Pill>
+              </div>
 
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">
-            Menu
-          </span>
-          <div className="flex flex-col gap-[5px]">
-            <span className={`w-6 h-[1px] bg-[#f5f5f0] transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[3px]' : ''}`} />
-            <span className={`w-6 h-[1px] bg-[#f5f5f0] transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[3px]' : ''}`} />
-          </div>
-        </button>
-      </header>
+              <p className="max-w-2xl text-base sm:text-lg md:text-xl text-[#FAF3E0]/80 leading-relaxed">
+                Fuel Your Performance
+              </p>
 
-      {/* Center Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">
-        <h1 className="text-[#f5f5f0] text-6xl md:text-8xl lg:text-[10rem] font-light tracking-[0.02em] mb-8">
-          memo
-        </h1>
-        
-        <p className="text-[#f5f5f0]/70 text-base md:text-lg tracking-[0.4em] uppercase font-light mb-20">
-          Fuel Your Performance
-        </p>
-
-        <Link 
-          href="/shop"
-          className="px-12 py-5 border border-[#f5f5f0]/40 text-[#f5f5f0] text-[11px] tracking-[0.3em] uppercase hover:bg-[#f5f5f0] hover:text-[#0a0a0a] transition-all duration-300"
-        >
-          Shop Now
-        </Link>
-      </div>
-
-      {/* Footer */}
-      <footer className="absolute bottom-0 left-0 right-0 z-30 flex items-end justify-between px-6 md:px-12 py-8">
-        <div className="flex items-center gap-8">
-          <a href="https://instagram.com/memonu" target="_blank" rel="noopener noreferrer" className="text-[#f5f5f0]/30 hover:text-[#f5f5f0] transition-colors text-[10px] tracking-[0.2em] uppercase">
-            IG
-          </a>
-          <a href="https://twitter.com/memonu" target="_blank" rel="noopener noreferrer" className="text-[#f5f5f0]/30 hover:text-[#f5f5f0] transition-colors text-[10px] tracking-[0.2em] uppercase">
-            TW
-          </a>
-        </div>
-        <span className="text-[#f5f5f0]/20 text-[10px] tracking-wider">© 2026</span>
-      </footer>
-
-      {/* Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-all duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <button 
-          onClick={() => setIsMenuOpen(false)}
-          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">
-            Close
-          </span>
-          <div className="relative w-6 h-6 flex items-center justify-center">
-            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] rotate-45" />
-            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] -rotate-45" />
-          </div>
-        </button>
-
-        <div className="h-full flex flex-col items-center justify-center px-6 text-center">
-          <nav>
-            <ul className="space-y-12">
-              {['Shop', 'Science', 'About', 'Ambassadors', 'Contact'].map((item, i) => (
-                <li 
-                  key={item}
-                  className={`transition-all duration-500 ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                  style={{ transitionDelay: isMenuOpen ? `${i * 60 + 100}ms` : '0ms' }}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link
+                  href="/shop"
+                  className="inline-flex items-center justify-center rounded-2xl bg-[#FAF3E0] px-5 py-3 text-black font-medium
+                             hover:opacity-90 transition border border-transparent"
                 >
-                  <Link 
-                    href={`/${item.toLowerCase()}`}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-[#f5f5f0] text-5xl md:text-7xl font-light hover:text-[#f5f5f0]/40 transition-colors duration-300 block"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+                  Shop Now
+                </Link>
 
-          <div className="absolute bottom-8 left-6 right-6 md:left-12 md:right-12 flex items-end justify-between">
-            <div className="flex items-center gap-8">
-              <a href="https://instagram.com/memonu" target="_blank" rel="noopener noreferrer" className="text-[#f5f5f0]/30 hover:text-[#f5f5f0] transition-colors text-[10px] tracking-[0.25em] uppercase">
-                Instagram
-              </a>
-              <a href="https://twitter.com/memonu" target="_blank" rel="noopener noreferrer" className="text-[#f5f5f0]/30 hover:text-[#f5f5f0] transition-colors text-[10px] tracking-[0.25em] uppercase">
-                Twitter
-              </a>
+                <Link
+                  href="/science"
+                  className="inline-flex items-center justify-center rounded-2xl px-5 py-3 font-medium
+                             border border-white/15 bg-white/[0.02] hover:bg-white/[0.05] transition"
+                >
+                  Science
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-4 pt-2">
+                <SocialLink href="https://instagram.com/memonu" label="IG" />
+                <SocialLink href="https://twitter.com/memonu" label="TW" />
+              </div>
             </div>
-            <span className="text-[#f5f5f0]/20 text-[10px] tracking-wider hidden md:block">
-              Electrolyte Strips
-            </span>
+          </div>
+
+          {/* FEATURE GRID */}
+          <div className="mt-10 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <Card title="Fast & Clean" body="Dissolves quickly. No bottle. No mess." />
+            <Card title="Travel-Ready" body="Pocket strips built for runs, lifts, and flights." />
+            <Card title="Performance First" body="Hydration support you can actually use mid-session." />
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between">
+          <div className="text-sm text-[#FAF3E0]/70">© {new Date().getFullYear()} memo</div>
+          <div className="flex flex-wrap gap-3 text-sm">
+            <FooterLink href="/about" label="About" />
+            <FooterLink href="/contact" label="Contact" />
+            <FooterLink href="/ambassadors" label="Ambassadors" />
+          </div>
+        </div>
+      </footer>
     </main>
+  );
+}
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-50 bg-black/80 backdrop-blur border-b border-white/10">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <Link href="/" className="font-semibold tracking-tight">
+          memo
+        </Link>
+
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-2">
+          <NavLink href="/shop" label="Shop" />
+          <NavLink href="/science" label="Science" />
+          <NavLink href="/about" label="About" />
+          <NavLink href="/ambassadors" label="Ambassadors" />
+          <NavLink href="/contact" label="Contact" />
+        </nav>
+
+        {/* Mobile menu (CSS-only) */}
+        <details className="md:hidden relative">
+          <summary className="list-none cursor-pointer rounded-xl border border-white/15 bg-white/[0.02] px-3 py-2 text-sm hover:bg-white/[0.05] transition">
+            Menu
+          </summary>
+
+          <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-white/10 bg-black p-2 shadow-xl">
+            <MobileLink href="/shop" label="Shop" />
+            <MobileLink href="/science" label="Science" />
+            <MobileLink href="/about" label="About" />
+            <MobileLink href="/ambassadors" label="Ambassadors" />
+            <MobileLink href="/contact" label="Contact" />
+            <div className="mt-2 border-t border-white/10 pt-2 flex gap-2">
+              <SocialLink href="https://instagram.com/memonu" label="Instagram" />
+              <SocialLink href="https://twitter.com/memonu" label="Twitter" />
+            </div>
+          </div>
+        </details>
+      </div>
+    </header>
+  );
+}
+
+function NavLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/80 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition"
+    >
+      {label}
+    </Link>
+  );
+}
+
+function MobileLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="block rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/85 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition"
+    >
+      {label}
+    </Link>
+  );
+}
+
+function SocialLink({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/[0.02] px-3 py-2 text-xs sm:text-sm
+                 hover:bg-white/[0.06] transition"
+    >
+      {label}
+    </a>
+  );
+}
+
+function FooterLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="text-[#FAF3E0]/75 hover:text-[#FAF3E0] transition">
+      {label}
+    </Link>
+  );
+}
+
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.02] px-3 py-1 text-xs text-[#FAF3E0]/80">
+      {children}
+    </span>
+  );
+}
+
+function Card({ title, body }: { title: string; body: string }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+      <div className="text-base font-semibold">{title}</div>
+      <div className="mt-2 text-sm text-[#FAF3E0]/75 leading-relaxed">{body}</div>
+    </div>
   );
 }

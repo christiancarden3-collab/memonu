@@ -1,111 +1,62 @@
-'use client';
-
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 
 export default function About() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const playfair = "var(--font-playfair), 'Playfair Display', Georgia, serif";
-
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-[#f5f5f0]" style={{ fontFamily: playfair }}>
-      {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-8 text-center">
-        <Link href="/" className="text-[#f5f5f0] text-lg tracking-[0.06em]">
-          memo
-        </Link>
-        
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Menu</span>
-          <div className="flex flex-col gap-[5px]">
-            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
-            <span className="w-6 h-[1px] bg-[#f5f5f0]" />
-          </div>
-        </button>
-      </header>
+    <main className="min-h-screen bg-black text-[#FAF3E0]">
+      <Header />
 
-      {/* Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#0a0a0a] z-50 transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <button 
-          onClick={() => setIsMenuOpen(false)} 
-          className="absolute top-8 right-6 md:right-12 text-[#f5f5f0] flex items-center gap-3 group"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#f5f5f0]/50 group-hover:text-[#f5f5f0] transition-colors hidden md:block">Close</span>
-          <div className="relative w-6 h-6 flex items-center justify-center">
-            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] rotate-45" />
-            <span className="absolute w-6 h-[1px] bg-[#f5f5f0] -rotate-45" />
-          </div>
-        </button>
-        
-        <nav className="h-full flex items-center justify-center">
-          <ul className="space-y-12 text-center">
-            {['Shop', 'Science', 'About', 'Ambassadors', 'Contact'].map((item) => (
-              <li key={item}>
-                <Link 
-                  href={`/${item.toLowerCase()}`}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-[#f5f5f0] text-5xl md:text-7xl font-light hover:text-[#f5f5f0]/40 transition-colors block"
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-
-      {/* Hero - Full Screen */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2940&auto=format&fit=crop"
-            alt="Athlete"
-            fill
-            className="object-cover"
-            style={{ filter: 'grayscale(100%) contrast(1.1) brightness(0.4)' }}
-            priority
-          />
-        </div>
-        <div className="relative z-10 px-6 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light mb-6">
-            About
-          </h1>
-          <p className="text-[#f5f5f0]/60 text-base sm:text-lg md:text-xl">
-            Born from necessity. Built for performance.
-          </p>
-        </div>
-      </section>
-
-      {/* The Story - Full Screen */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#f5f5f0] text-[#0a0a0a]">
-        <div className="text-center max-w-2xl">
-          <span className="text-[11px] tracking-[0.3em] uppercase text-[#0a0a0a]/40 block mb-8">Our Story</span>
-          
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-12 md:mb-16 leading-relaxed">
-            We got tired of carrying bottles and mixing powders.
-          </h2>
-          
-          <div className="space-y-8 text-[#0a0a0a]/60 text-sm sm:text-base md:text-lg leading-relaxed">
-            <p>
-              It started with a simple question: why does staying hydrated have to be so complicated?
-            </p>
-            <p>
-              We were athletes who trained at 5 AM, entrepreneurs who lived on planes, parents who never had a free hand.
-            </p>
-            <p>
-              So we spent two years developing a dissolving strip that delivers electrolytes instantly—no water, no mixing, no waiting.
-            </p>
+      {/* HERO */}
+      <section className="relative">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-10 sm:pb-14">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10 relative overflow-hidden">
+            <div className="absolute inset-0 opacity-20">
+              <Image
+                src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2940&auto=format&fit=crop"
+                alt="Athlete"
+                fill
+                className="object-cover"
+                style={{ filter: 'grayscale(100%)' }}
+              />
+            </div>
+            <div className="relative z-10">
+              <Pill>Our Story</Pill>
+              <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
+                About memo
+              </h1>
+              <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#FAF3E0]/80 leading-relaxed">
+                Born from necessity. Built for performance.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Image Break - Full Screen */}
-      <section className="h-screen relative">
+      {/* THE STORY */}
+      <section className="bg-[#FAF3E0] text-black">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <div className="max-w-3xl">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+              We got tired of carrying bottles and mixing powders.
+            </h2>
+            
+            <div className="mt-8 space-y-6 text-base sm:text-lg text-black/70 leading-relaxed">
+              <p>
+                It started with a simple question: why does staying hydrated have to be so complicated?
+              </p>
+              <p>
+                We were athletes who trained at 5 AM, entrepreneurs who lived on planes, parents who never had a free hand.
+              </p>
+              <p>
+                So we spent two years developing a dissolving strip that delivers electrolytes instantly—no water, no mixing, no waiting.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* IMAGE BREAK */}
+      <section className="relative h-64 sm:h-80 md:h-96">
         <Image
           src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2940&auto=format&fit=crop"
           alt="Training"
@@ -115,66 +66,147 @@ export default function About() {
         />
       </section>
 
-      {/* Values - 01 */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#0a0a0a]">
-        <div className="text-center max-w-lg">
-          <span className="text-7xl sm:text-8xl md:text-9xl font-light text-[#f5f5f0]/10 block mb-8">01</span>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-8 text-[#f5f5f0]">Simplicity</h3>
-          <p className="text-[#f5f5f0]/50 text-base sm:text-lg md:text-xl leading-relaxed">
-            The best solutions are the ones you actually use. No complexity, no barriers.
-          </p>
+      {/* VALUES */}
+      <section>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <SectionTitle>What We Believe</SectionTitle>
+          
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <ValueCard 
+              number="01" 
+              title="Simplicity" 
+              body="The best solutions are the ones you actually use. No complexity, no barriers."
+            />
+            <ValueCard 
+              number="02" 
+              title="Performance" 
+              body="Every ingredient earns its place. Nothing more, nothing less."
+            />
+            <ValueCard 
+              number="03" 
+              title="Freedom" 
+              body="Hydration that goes where you go. No bottles, no limits."
+            />
+          </div>
         </div>
       </section>
 
-      {/* Values - 02 */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#0a0a0a]">
-        <div className="text-center max-w-lg">
-          <span className="text-7xl sm:text-8xl md:text-9xl font-light text-[#f5f5f0]/10 block mb-8">02</span>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-8 text-[#f5f5f0]">Performance</h3>
-          <p className="text-[#f5f5f0]/50 text-base sm:text-lg md:text-xl leading-relaxed">
-            Every ingredient earns its place. Nothing more, nothing less.
-          </p>
+      {/* CTA */}
+      <section className="bg-[#FAF3E0] text-black">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <div className="rounded-3xl border border-black/10 bg-black/[0.03] p-6 sm:p-10 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold">Join the Movement</h2>
+            <p className="mt-4 text-base sm:text-lg text-black/70">
+              Be the first to experience hydration, reimagined.
+            </p>
+            <Link
+              href="/shop"
+              className="mt-6 inline-flex items-center justify-center rounded-2xl bg-black px-6 py-3 text-[#FAF3E0] font-medium
+                         hover:opacity-90 transition"
+            >
+              Shop Now
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Values - 03 */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#0a0a0a]">
-        <div className="text-center max-w-lg">
-          <span className="text-7xl sm:text-8xl md:text-9xl font-light text-[#f5f5f0]/10 block mb-8">03</span>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-8 text-[#f5f5f0]">Freedom</h3>
-          <p className="text-[#f5f5f0]/50 text-base sm:text-lg md:text-xl leading-relaxed">
-            Hydration that goes where you go. No bottles, no limits.
-          </p>
-        </div>
-      </section>
-
-      {/* CTA - Full Screen */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-[#f5f5f0] text-[#0a0a0a]">
-        <div className="text-center max-w-lg">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-8">
-            Join the Movement
-          </h2>
-          <p className="text-[#0a0a0a]/50 text-base sm:text-lg md:text-xl mb-12">
-            Be the first to experience hydration, reimagined.
-          </p>
-          <Link 
-            href="/shop"
-            className="inline-block border border-[#0a0a0a] px-10 sm:px-14 py-4 sm:py-5 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase hover:bg-[#0a0a0a] hover:text-[#f5f5f0] transition-all duration-300"
-          >
-            Shop Now
-          </Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-16 md:py-24 px-6 border-t border-[#f5f5f0]/10 bg-[#0a0a0a] text-center">
-        <span className="text-lg tracking-[0.06em] text-[#f5f5f0] block mb-8">memo</span>
-        <div className="flex gap-8 justify-center text-[10px] tracking-[0.2em] uppercase text-[#f5f5f0]/30">
-          <Link href="/about" className="hover:text-[#f5f5f0] transition-colors">About</Link>
-          <Link href="/contact" className="hover:text-[#f5f5f0] transition-colors">Contact</Link>
-          <span>© 2026</span>
-        </div>
-      </footer>
+      <Footer />
     </main>
+  );
+}
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-50 bg-black/80 backdrop-blur border-b border-white/10">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <Link href="/" className="font-semibold tracking-tight">
+          memo
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-2">
+          <NavLink href="/shop" label="Shop" />
+          <NavLink href="/science" label="Science" />
+          <NavLink href="/about" label="About" />
+          <NavLink href="/ambassadors" label="Ambassadors" />
+          <NavLink href="/contact" label="Contact" />
+        </nav>
+
+        <details className="md:hidden relative">
+          <summary className="list-none cursor-pointer rounded-xl border border-white/15 bg-white/[0.02] px-3 py-2 text-sm hover:bg-white/[0.05] transition">
+            Menu
+          </summary>
+          <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-white/10 bg-black p-2 shadow-xl">
+            <MobileLink href="/shop" label="Shop" />
+            <MobileLink href="/science" label="Science" />
+            <MobileLink href="/about" label="About" />
+            <MobileLink href="/ambassadors" label="Ambassadors" />
+            <MobileLink href="/contact" label="Contact" />
+          </div>
+        </details>
+      </div>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-white/10 bg-black">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between">
+        <div className="text-sm text-[#FAF3E0]/70">© {new Date().getFullYear()} memo</div>
+        <div className="flex flex-wrap gap-3 text-sm">
+          <FooterLink href="/about" label="About" />
+          <FooterLink href="/contact" label="Contact" />
+          <FooterLink href="/ambassadors" label="Ambassadors" />
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function NavLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/80 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition">
+      {label}
+    </Link>
+  );
+}
+
+function MobileLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="block rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/85 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition">
+      {label}
+    </Link>
+  );
+}
+
+function FooterLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="text-[#FAF3E0]/75 hover:text-[#FAF3E0] transition">
+      {label}
+    </Link>
+  );
+}
+
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.02] px-3 py-1 text-xs text-[#FAF3E0]/80">
+      {children}
+    </span>
+  );
+}
+
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{children}</h2>
+  );
+}
+
+function ValueCard({ number, title, body }: { number: string; title: string; body: string }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+      <div className="text-4xl font-light text-[#FAF3E0]/20">{number}</div>
+      <div className="mt-2 text-lg font-semibold">{title}</div>
+      <div className="mt-2 text-sm text-[#FAF3E0]/75 leading-relaxed">{body}</div>
+    </div>
   );
 }
