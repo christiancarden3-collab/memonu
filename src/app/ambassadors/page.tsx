@@ -18,29 +18,27 @@ export default function Ambassadors() {
     <main className="min-h-screen bg-black text-[#FAF3E0]">
       <Header />
 
-      {/* HERO */}
-      <section className="relative">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-10 sm:pb-14">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-20">
-              <Image
-                src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2940&auto=format&fit=crop"
-                alt="Athletes"
-                fill
-                className="object-cover"
-                style={{ filter: 'grayscale(100%)' }}
-              />
-            </div>
-            <div className="relative z-10">
-              <Pill>Join Us</Pill>
-              <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-                Ambassadors
-              </h1>
-              <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#FAF3E0]/80 leading-relaxed">
-                Join a community of athletes redefining hydration.
-              </p>
-            </div>
-          </div>
+      {/* HERO - Full Width Image */}
+      <section className="relative h-[70vh] sm:h-[80vh] flex items-center justify-center">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2940&auto=format&fit=crop"
+            alt="Athletes"
+            fill
+            className="object-cover"
+            style={{ filter: 'grayscale(100%) brightness(0.4)' }}
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+        <div className="relative z-10 text-center px-6">
+          <Pill>Join Us</Pill>
+          <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight">
+            Ambassadors
+          </h1>
+          <p className="mt-4 max-w-xl mx-auto text-base sm:text-lg text-[#FAF3E0]/80 leading-relaxed">
+            Join a community of athletes redefining hydration.
+          </p>
         </div>
       </section>
 

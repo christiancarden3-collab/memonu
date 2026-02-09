@@ -5,18 +5,16 @@ export default function Shop() {
     <main className="min-h-screen bg-black text-[#FAF3E0]">
       <Header />
 
-      {/* HERO */}
-      <section className="relative">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-10 sm:pb-14">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
-            <Pill>Shop</Pill>
-            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-              Coming Soon
-            </h1>
-            <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#FAF3E0]/80 leading-relaxed">
-              We're putting the finishing touches on something special.
-            </p>
-          </div>
+      {/* HERO - Full Width */}
+      <section className="relative h-[60vh] sm:h-[70vh] flex items-center justify-center bg-gradient-to-b from-black via-black/95 to-black">
+        <div className="relative z-10 text-center px-6">
+          <Pill>Shop</Pill>
+          <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight">
+            Coming Soon
+          </h1>
+          <p className="mt-4 max-w-xl mx-auto text-base sm:text-lg text-[#FAF3E0]/80 leading-relaxed">
+            We're putting the finishing touches on something special.
+          </p>
         </div>
       </section>
 

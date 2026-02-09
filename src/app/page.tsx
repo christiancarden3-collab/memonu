@@ -62,23 +62,13 @@ export default function Home() {
           Fuel Your Performance
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <Link
-            href="/shop"
-            className="inline-flex items-center justify-center rounded-2xl bg-[#FAF3E0] px-6 py-3 text-black font-medium
-                       hover:opacity-90 transition"
-          >
-            Shop Now
-          </Link>
-
-          <Link
-            href="/science"
-            className="inline-flex items-center justify-center rounded-2xl px-6 py-3 font-medium
-                       border border-white/20 bg-white/[0.05] hover:bg-white/[0.1] transition backdrop-blur-sm"
-          >
-            Science
-          </Link>
-        </div>
+        <Link
+          href="/shop"
+          className="inline-flex items-center justify-center rounded-2xl bg-[#FAF3E0] px-8 py-4 text-black font-medium
+                     hover:opacity-90 transition"
+        >
+          Shop Now
+        </Link>
       </div>
 
       {/* Footer */}
