@@ -38,9 +38,10 @@ export default function Home() {
           loop
           muted
           playsInline
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-150 ${
+          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-150 ${
             index === currentVideoIndex ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{ objectPosition: 'center 30%' }}
         >
           <source src={src} type="video/mp4" />
         </video>
