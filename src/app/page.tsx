@@ -115,28 +115,10 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="absolute bottom-0 left-0 right-0 z-30 px-4 sm:px-6 lg:px-8 py-6">
-        <div className="mx-auto max-w-6xl flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <SocialLink href="https://instagram.com/memonu" label="IG" />
-            <SocialLink href="https://twitter.com/memonu" label="TW" />
-          </div>
+        <div className="mx-auto max-w-6xl flex items-center justify-center">
           <span className="text-[#FAF3E0]/30 text-xs">© {new Date().getFullYear()} Memo Nu</span>
         </div>
       </footer>
     </main>
-  );
-}
-
-function SocialLink({ href, label }: { href: string; label: string }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/[0.05] backdrop-blur-sm px-3 py-2 text-xs sm:text-sm
-                 hover:bg-white/[0.1] transition"
-    >
-      {label}
-    </a>
   );
 }
