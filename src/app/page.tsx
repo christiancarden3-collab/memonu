@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from "next/link";
 
 const sportsVideos = [
   "/videos/sport-1.mp4",
@@ -12,6 +11,8 @@ const sportsVideos = [
 
 export default function Home() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,6 +28,14 @@ export default function Home() {
       video.preload = 'auto';
     });
   }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: Connect to email service (Klaviyo, Mailchimp, etc.)
+    console.log('Email submitted:', email);
+    setSubmitted(true);
+    setEmail('');
+  };
 
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-black text-[#FAF3E0]">
@@ -48,28 +57,60 @@ export default function Home() {
       ))}
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
-
-      {/* Header */}
-      <Header />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
 
       {/* Center Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">
-        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semibold tracking-tight mb-6">
+        {/* Logo */}
+        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semibold tracking-tight mb-4">
           memo
         </h1>
         
-        <p className="text-[#FAF3E0]/70 text-sm sm:text-base md:text-lg tracking-[0.3em] uppercase font-light mb-12">
+        {/* Tagline */}
+        <p className="text-[#FAF3E0]/70 text-sm sm:text-base md:text-lg tracking-[0.3em] uppercase font-light mb-8">
           Fuel Your Performance
         </p>
 
-        <Link
-          href="/shop"
-          className="inline-flex items-center justify-center rounded-2xl bg-[#FAF3E0] px-8 py-4 text-black font-medium
-                     hover:opacity-90 transition"
-        >
-          Shop Now
-        </Link>
+        {/* Coming Soon Badge */}
+        <div className="mb-10">
+          <span className="inline-block px-6 py-3 rounded-full border border-[#FAF3E0]/30 bg-white/5 backdrop-blur-sm text-lg sm:text-xl md:text-2xl font-medium tracking-wider">
+            COMING SOON
+          </span>
+        </div>
+
+        {/* Description */}
+        <p className="text-[#FAF3E0]/60 text-sm sm:text-base max-w-md mb-10 leading-relaxed">
+          Revolutionary hydration strips for athletes. 
+          <br className="hidden sm:block" />
+          Fast-absorbing electrolytes — no water needed.
+        </p>
+
+        {/* Email Signup */}
+        {!submitted ? (
+          <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+              className="flex-1 px-5 py-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 
+                         text-[#FAF3E0] placeholder-[#FAF3E0]/50 text-center sm:text-left
+                         focus:outline-none focus:border-[#FAF3E0]/50 transition"
+            />
+            <button
+              type="submit"
+              className="px-8 py-4 rounded-2xl bg-[#FAF3E0] text-black font-semibold
+                         hover:bg-[#FAF3E0]/90 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Notify Me
+            </button>
+          </form>
+        ) : (
+          <div className="px-6 py-4 rounded-2xl bg-green-500/20 border border-green-500/30 backdrop-blur-sm">
+            <p className="text-green-300 font-medium">You&apos;re on the list! We&apos;ll be in touch.</p>
+          </div>
+        )}
       </div>
 
       {/* Footer */}
@@ -79,72 +120,10 @@ export default function Home() {
             <SocialLink href="https://instagram.com/memonu" label="IG" />
             <SocialLink href="https://twitter.com/memonu" label="TW" />
           </div>
-          <span className="text-[#FAF3E0]/30 text-xs">© {new Date().getFullYear()}</span>
+          <span className="text-[#FAF3E0]/30 text-xs">© {new Date().getFullYear()} Memo Nu</span>
         </div>
       </footer>
     </main>
-  );
-}
-
-function Header() {
-  return (
-    <header className="absolute top-0 left-0 right-0 z-30 px-4 sm:px-6 lg:px-8 py-4">
-      <div className="mx-auto max-w-6xl flex items-center justify-between">
-        <Link href="/" className="font-semibold tracking-tight">
-          memo
-        </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-2">
-          <NavLink href="/shop" label="Shop" />
-          <NavLink href="/science" label="Science" />
-          <NavLink href="/about" label="About" />
-          <NavLink href="/ambassadors" label="Ambassadors" />
-          <NavLink href="/contact" label="Contact" />
-        </nav>
-
-        {/* Mobile menu */}
-        <details className="md:hidden relative">
-          <summary className="list-none cursor-pointer rounded-xl border border-white/20 bg-white/[0.05] backdrop-blur-sm px-3 py-2 text-sm hover:bg-white/[0.1] transition">
-            Menu
-          </summary>
-
-          <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-white/10 bg-black/90 backdrop-blur-md p-2 shadow-xl">
-            <MobileLink href="/shop" label="Shop" />
-            <MobileLink href="/science" label="Science" />
-            <MobileLink href="/about" label="About" />
-            <MobileLink href="/ambassadors" label="Ambassadors" />
-            <MobileLink href="/contact" label="Contact" />
-            <div className="mt-2 border-t border-white/10 pt-2 flex gap-2">
-              <SocialLink href="https://instagram.com/memonu" label="Instagram" />
-              <SocialLink href="https://twitter.com/memonu" label="Twitter" />
-            </div>
-          </div>
-        </details>
-      </div>
-    </header>
-  );
-}
-
-function NavLink({ href, label }: { href: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/80 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition"
-    >
-      {label}
-    </Link>
-  );
-}
-
-function MobileLink({ href, label }: { href: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="block rounded-xl px-3 py-2 text-sm text-[#FAF3E0]/85 hover:text-[#FAF3E0] hover:bg-white/[0.05] transition"
-    >
-      {label}
-    </Link>
   );
 }
 
