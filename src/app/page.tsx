@@ -78,13 +78,6 @@ export default function Home() {
           </span>
         </div>
 
-        {/* Description */}
-        <p className="text-[#FAF3E0]/60 text-sm sm:text-base max-w-md mb-10 leading-relaxed">
-          Revolutionary hydration strips for athletes. 
-          <br className="hidden sm:block" />
-          Fast-absorbing electrolytes — no water needed.
-        </p>
-
         {/* Email Signup */}
         {!submitted ? (
           <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col sm:flex-row gap-3">
