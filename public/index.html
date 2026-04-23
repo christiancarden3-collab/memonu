@@ -1153,11 +1153,21 @@ document.querySelectorAll('.sr').forEach(el=>ro.observe(el));
   }));
 
   // Init with IntersectionObserver so canvas has real size
+  let animFrame=null;
   const io=new IntersectionObserver(entries=>{
-    if(entries[0].isIntersecting&&!started){
-      started=true;
-      resize();
-      loop();
+    if(entries[0].isIntersecting){
+      if(!started){started=true;resize();}
+      else{
+        // Clamp all balls back in bounds when re-entering view
+        balls.forEach(b=>{
+          b.x=Math.max(b.r,Math.min(W-b.r,b.x));
+          b.y=Math.max(b.r*1.2,Math.min(H-b.r*1.2,b.y));
+          b.vx*=.3;b.vy*=.3;
+        });
+      }
+      if(!animFrame){animFrame=requestAnimationFrame(loop);}
+    } else {
+      if(animFrame){cancelAnimationFrame(animFrame);animFrame=null;}
     }
   },{threshold:.05});
   io.observe(cv.parentElement);
