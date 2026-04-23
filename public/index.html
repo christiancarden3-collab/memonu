@@ -197,6 +197,146 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.04);padding:
 .fcol a:hover{color:var(--white)}
 .fbot{display:flex;justify-content:space-between;padding-top:28px;border-top:1px solid rgba(255,255,255,.04);flex-wrap:wrap;gap:12px}
 .fbot p{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:1px}
+
+
+/* Mobile Menu */
+.mob-toggle { display: none; background: none; border: none; padding: 8px; cursor: pointer; }
+.mob-toggle span { display: block; width: 22px; height: 2px; background: var(--white); margin: 5px 0; transition: all .3s; }
+@media (max-width: 768px) {
+  .mob-toggle { display: block; }
+  .nav-left::after { display: none; }
+  .nav-center { 
+    display: none; 
+    position: fixed; 
+    top: 64px; 
+    left: 0; 
+    right: 0; 
+    background: rgba(6,6,8,.98); 
+    backdrop-filter: blur(20px);
+    flex-direction: column; 
+    padding: 24px; 
+    gap: 0;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .nav-center.open { display: flex; }
+  .nlink { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+  .nlink::after { display: none; }
+  body.menu-open { overflow: hidden; }
+}
+
+/* ═══ MOBILE RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+ .sci-wrap { grid-template-columns: 1fr; gap: 48px; padding: 80px 48px; }
+ .prod-inner { grid-template-columns: 1fr; }
+ .pcard { padding: 60px 48px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.05); }
+ .pcard:last-child { border-bottom: none; }
+ .amb-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+ /* Hide custom cursor on touch devices */
+ #cd, #cr { display: none !important; }
+ body { cursor: auto; }
+ button, a { cursor: pointer; }
+ 
+ /* NAV - Mobile hamburger */
+ #nav { padding: 0 24px; height: 64px; }
+ .nav-center { display: none; }
+ .nav-right { display: none; }
+ .nlogo { font-size: 18px; }
+ 
+ /* Mobile menu toggle */
+ .nav-left { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+ .nav-left::after {
+   content: '☰';
+   font-size: 24px;
+   color: var(--white);
+   cursor: pointer;
+ }
+ 
+ /* HERO */
+ .hero-content { padding: 0 24px; bottom: 100px; }
+ .hero-h1 { font-size: clamp(48px, 12vw, 80px) !important; }
+ .hero-kicker { font-size: 9px; letter-spacing: 4px; }
+ .hero-ctas { flex-direction: column; gap: 12px; }
+ .btn-bone, .btn-ghost { width: 100%; text-align: center; justify-content: center; }
+ .hero-scroll { display: none; }
+ 
+ /* STATS */
+ .stats { grid-template-columns: repeat(2, 1fr); }
+ .stat { padding: 24px 16px; }
+ .stn { font-size: 32px; }
+ 
+ /* SCIENCE */
+ .science { min-height: auto; }
+ .sci-wrap { padding: 60px 24px; gap: 40px; }
+ .sci-lead { font-size: 14px; margin-bottom: 32px; }
+ .big-h { font-size: clamp(36px, 8vw, 56px) !important; }
+ .ss { padding: 18px 0; }
+ .ss-num { font-size: 24px; }
+ .ss-title { font-size: 16px; }
+ .ss-txt { font-size: 12px; }
+ .ic { padding: 12px 16px; }
+ .ic-name { font-size: 10px; }
+ .ic-detail { font-size: 8px; }
+ 
+ /* PRODUCTS */
+ .products-sec { min-height: auto; }
+ .pcard { padding: 48px 24px; }
+ .pname { font-size: clamp(40px, 10vw, 64px) !important; }
+ .pprice { font-size: 28px; }
+ .pdesc { max-height: none !important; opacity: 1 !important; margin-bottom: 24px !important; }
+ .pdesc-list li { grid-template-columns: 70px 1fr; gap: 12px; padding: 8px 0; }
+ .pdesc-lead { font-size: 12px; }
+ .pdesc-val { font-size: 11px; }
+ 
+ /* SPORTS */
+ .sports-sec { min-height: 60vh; }
+ .sports-h { font-size: clamp(40px, 10vw, 80px) !important; }
+ .sports-sub { font-size: 12px; letter-spacing: 3px; }
+ 
+ /* AMBASSADORS */
+ .amb-sec { padding: 60px 24px; }
+ .amb-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+ .amb-card { aspect-ratio: 3/4; }
+ .amb-info { padding: 16px; }
+ .amb-name { font-size: 18px; }
+ .amb-sport { font-size: 8px; }
+ .amb-quote { font-size: 11px; display: none; }
+ .amb-tagline { font-size: 14px; }
+ .amb-cta-text { font-size: 14px; }
+ .amb-apply { padding: 14px 32px; font-size: 9px; }
+ 
+ /* ABOUT */
+ .about-sec { min-height: auto; }
+ .about-wrap { padding: 80px 24px; }
+ .about-p { font-size: 14px; }
+ 
+ /* CONTACT */
+ .con-wrap { padding: 60px 24px; }
+ .con-sub { font-size: 13px; margin-bottom: 32px; }
+ .con-input { padding: 14px 16px; font-size: 14px; }
+ 
+ /* FOOTER */
+ footer { padding: 40px 24px; }
+ .ft { flex-direction: column; gap: 32px; }
+ .flinks { gap: 32px; }
+ .fbot { flex-direction: column; text-align: center; gap: 8px; }
+}
+
+@media (max-width: 480px) {
+ .hero-h1 { font-size: 42px !important; }
+ .stats { grid-template-columns: 1fr 1fr; }
+ .stat { padding: 20px 12px; }
+ .stn { font-size: 26px; }
+ .stl { font-size: 8px; }
+ .big-h { font-size: 32px !important; }
+ .amb-grid { grid-template-columns: 1fr 1fr; }
+ .pname { font-size: 36px !important; }
+ .sports-h { font-size: 36px !important; }
+ .sec-ey { font-size: 8px; letter-spacing: 3px; }
+}
+
 </style>
 </head>
 <body>
@@ -204,14 +344,14 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.04);padding:
 
 <!-- NAV -->
 <nav id="nav">
- <div class="nav-left"><a href="#" class="nlogo">memo</a></div>
+ <div class="nav-left"><a href="#" class="nlogo">memo</a><button class="mob-toggle" onclick="document.querySelector('.nav-center').classList.toggle('open');document.body.classList.toggle('menu-open')"><span></span><span></span><span></span></button></div>
  <div class="nav-center">
- <a href="#science" class="nlink">Science</a>
- <a href="#products" class="nlink">Shop</a>
- <a href="#sports" class="nlink">Sports</a>
- <a href="#ambassadors" class="nlink">Ambassadors</a>
- <a href="#about" class="nlink">About</a>
- <a href="#contact" class="nlink">Contact</a>
+ <a href="#science" class="nlink" onclick="document.querySelector('.nav-center').classList.remove('open');document.body.classList.remove('menu-open')">Science</a>
+ <a href="#products" class="nlink" onclick="document.querySelector('.nav-center').classList.remove('open');document.body.classList.remove('menu-open')">Shop</a>
+ <a href="#sports" class="nlink" onclick="document.querySelector('.nav-center').classList.remove('open');document.body.classList.remove('menu-open')">Sports</a>
+ <a href="#ambassadors" class="nlink" onclick="document.querySelector('.nav-center').classList.remove('open');document.body.classList.remove('menu-open')">Ambassadors</a>
+ <a href="#about" class="nlink" onclick="document.querySelector('.nav-center').classList.remove('open');document.body.classList.remove('menu-open')">About</a>
+ <a href="#contact" class="nlink" onclick="document.querySelector('.nav-center').classList.remove('open');document.body.classList.remove('menu-open')">Contact</a>
  </div>
  <div class="nav-right"><button class="ncta" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Get Started</button></div>
 </nav>
