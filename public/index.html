@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MEMO Hydration, Instantly</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Outfit:wght@300;400;500&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --ink:#060608;--dark:#0e0e12;--card:#16161c;
+ --mid:#606068;--silver:#a0a0aa;--bone:#dedad2;
+ --cream:#edeae3;--white:#f8f6f2;
+ --ice:#b8d4e8;--cyan:#00D4FF;--cyan-dim:rgba(0,212,255,0.15);--ease:cubic-bezier(0.22,1,0.36,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{cursor:none;font-family:inherit;border:none;background:none}
+::selection{background:var(--bone);color:var(--ink)}
+
+/* CURSOR */
+#cd{position:fixed;z-index:9999;pointer-events:none;width:7px;height:7px;background:var(--white);border-radius:50%;transform:translate(-50%,-50%);transition:transform .15s,opacity .2s}
+#cr{position:fixed;z-index:9998;pointer-events:none;width:36px;height:36px;border:1px solid rgba(255,255,255,.18);border-radius:50%;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),border-color .3s}
+body.hov #cr{width:60px;height:60px;border-color:var(--ice)}
+body.hov #cd{transform:translate(-50%,-50%) scale(0)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;height:72px;padding:0 64px;transition:background .5s,border-bottom .5s}
+#nav.sol{background:rgba(6,6,8,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-left{flex:1}
+.nav-center{flex:2;display:flex;justify-content:center;gap:0}
+.nav-right{flex:1;display:flex;justify-content:flex-end}
+.nlogo{font-family:'Nunito',sans-serif;font-size:20px;font-weight:700;letter-spacing:1px;color:var(--white);text-transform:none;transition:color .3s} .nlogo:hover{color:var(--bone)}
+.nlink{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--bone);transition:color .2s;padding:0 26px;white-space:nowrap;position:relative}
+.nlink::after{content:'';position:absolute;bottom:-4px;left:26px;right:26px;height:1px;background:var(--white);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nlink:hover{color:var(--white)}
+.nlink:hover::after{transform:scaleX(1)} .nlink{transition:color .4s}
+.ncta{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink);background:var(--white);padding:11px 30px;transition:all .2s}
+.ncta:hover{background:var(--bone)}
+
+/* SHARED */
+.sr{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.sr.vis{opacity:1;transform:translateY(0)}
+.sec-ey{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--silver);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec-ey::before{content:'';width:24px;height:1px;background:var(--mid)}
+.big-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);letter-spacing:3px;line-height:.9;color:var(--white)}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--mid)}
+
+/* ═══ 1. HERO ═══ */
+.hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-ol{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(6,6,8,.96) 0%,rgba(6,6,8,.35) 38%,transparent 65%)}
+.hero-content{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);z-index:2;padding:0 64px;width:100%;max-width:900px;text-align:center}
+.hero-kicker{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;margin-bottom:18px;opacity:0;animation:up .9s .3s var(--ease) forwards}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,13vw,152px);line-height:.87;letter-spacing:4px;color:var(--white);opacity:0;animation:up 1s .5s var(--ease) forwards}
+.hero-ctas{display:flex;gap:14px;margin-top:32px;align-items:center;justify-content:center;opacity:0;animation:up .9s .8s var(--ease) forwards}
+.btn-bone{background:var(--white);color:var(--ink);padding:14px 42px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;transition:all .2s}
+.btn-bone:hover{background:var(--bone);transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(255,255,255,.35);color:var(--bone);padding:13px 36px;font-size:10px;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:all .2s}
+.btn-ghost:hover{border-color:var(--bone);color:var(--white)}
+.play-tri{width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid currentColor}
+.hero-scroll{position:absolute;bottom:36px;right:64px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.8s forwards}
+.sbar{width:1px;height:48px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
+.sbar::after{content:'';position:absolute;top:-100%;left:0;right:0;bottom:0;background:var(--white);animation:sdrop 2s ease-in-out infinite}
+@keyframes sdrop{0%{top:-100%}100%{top:100%}}
+.slbl{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--mid)}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ═══ 2. STATS BAR ═══ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--dark);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+.stat{padding:32px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.04);transition:background .25s;cursor:default}
+.stat:last-child{border-right:none}
+.stat:hover{background:var(--card)}
+.stn{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:var(--white);display:block;line-height:1}
+.stl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--silver);display:block;margin-top:7px;line-height:1.4}
+
+/* ═══ 3. SCIENCE ═══ */
+.science{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;background:var(--dark)}
+#sci-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:1}
+.sci-ol{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(14,14,18,.97) 0%,rgba(14,14,18,.85) 55%,rgba(14,14,18,.4) 100%)}
+.sci-wrap{position:relative;z-index:2;width:100%;padding:120px 80px;display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:start;max-width:1300px;margin:0 auto}
+.sci-lead{font-size:16px;font-weight:300;color:var(--bone);font-family:'Outfit',sans-serif;font-style:normal;letter-spacing:.2px;line-height:1.9;margin-bottom:44px;max-width:460px}
+.sci-steps{display:flex;flex-direction:column}
+.ss{display:flex;gap:22px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:none;transition:all .25s;position:relative;overflow:hidden}
+.ss:first-child{border-top:1px solid rgba(255,255,255,.04)}
+.ss:hover{padding-left:10px}
+.ss-num{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:rgba(224,219,210,.14);flex-shrink:0;line-height:1;padding-top:4px;transition:color .25s}
+.ss:hover .ss-num{color:rgba(255,255,255,.4)}
+.ss-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--bone);margin-bottom:5px}
+.ss-txt{font-size:13px;font-weight:300;color:var(--silver);font-family:'Outfit',sans-serif;line-height:1.75}
+.ing-cards{display:flex;flex-direction:column;gap:2px}
+.ic{display:flex;align-items:center;gap:16px;padding:15px 20px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04);cursor:none;transition:all .3s var(--ease);position:relative;overflow:hidden}
+.ic::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(184,212,232,.06);transition:width .35s var(--ease)}
+.ic:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.18);transform:translateX(5px)}
+.ic:hover::before{width:100%}
+.ic-sym{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:rgba(184,212,232,.3);width:24px;text-align:center;flex-shrink:0;transition:color .25s}
+.ic:hover .ic-sym{color:var(--white)}
+.ic-name{font-size:11px;letter-spacing:1px;color:var(--bone);flex:1;transition:color .25s}
+.ic:hover .ic-name{color:var(--white)}
+.ic-detail{font-size:9px;color:var(--mid);text-align:right;line-height:1.5;transition:color .25s}
+.ic:hover .ic-detail{color:var(--silver)}
+
+/* ═══ 4. PRODUCTS ═══ */
+.products-sec{position:relative;overflow:hidden;background:var(--ink)}
+#prod-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.6}
+.prod-ol{position:absolute;inset:0;z-index:1;background:rgba(6,6,8,.45)}
+.prod-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;min-height:90vh}
+.pcard{padding:80px 64px;display:flex;flex-direction:column;justify-content:flex-end;border-right:1px solid rgba(255,255,255,.05);cursor:none;transition:background .4s;position:relative}
+.pcard:last-child{border-right:none}
+.pcard:hover{background:rgba(255,253,248,.025)}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--white);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+.pcard:hover::before{transform:scaleX(1)}
+/* 3D strip canvas per card */
+.pstrip-canvas{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.pcard-content{position:relative;z-index:1}
+.ptag{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--silver);margin-bottom:14px}
+.pname{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,88px);letter-spacing:3px;line-height:.88;color:var(--white);margin-bottom:10px}
+.pprice{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:var(--white);margin-bottom:28px}
+.padd{display:inline-block;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;padding:13px 36px;transition:all .25s;cursor:none}
+.pad-l{background:var(--white);color:var(--ink);font-weight:500}
+.pad-l:hover{background:var(--bone);transform:translateY(-2px)}
+.pad-p{background:#00D4FF;color:var(--ink);border:none;font-weight:500;box-shadow:0 0 28px rgba(0,212,255,0.28)}
+.pad-p:hover{background:#33DDFF;box-shadow:0 0 44px rgba(0,212,255,0.48);transform:translateY(-2px)}
+.ptag-pro{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#E8D5B0;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ptag-pro::before{content:'';width:6px;height:6px;border-radius:50%;background:#E8D5B0;flex-shrink:0;box-shadow:0 0 8px rgba(232,213,176,.6)}
+.pdesc{margin-bottom:32px;border-top:1px solid rgba(255,255,255,.06);padding-top:24px;
+ max-height:0;overflow:hidden;opacity:0;transition:max-height .6s var(--ease),opacity .5s var(--ease),margin .4s;margin-bottom:0}
+.pcard:hover .pdesc{max-height:400px;opacity:1;margin-bottom:32px}
+.pdesc-lead{font-size:13px;font-weight:400;color:var(--bone);line-height:1.75;margin-bottom:20px;font-family:'Outfit',sans-serif;font-style:normal}
+.pdesc-list{list-style:none;display:flex;flex-direction:column;gap:0}
+.pdesc-list li{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;align-items:baseline}
+.pdesc-label{color:var(--bone);letter-spacing:1.5px;text-transform:uppercase;font-size:8.5px;font-weight:700;font-family:'DM Sans',sans-serif}
+.pdesc-val{color:var(--silver);font-weight:300;line-height:1.5;font-family:'Outfit',sans-serif;font-size:13px;font-style:italic}
+
+/* ═══ 5. SPORTS ═══ */
+.sports-sec{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#020202}
+#sports-canvas{position:absolute;inset:0;width:100%;height:100%}
+.sports-ol{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 90% 90% at 50% 50%,rgba(6,6,8,.1) 0%,rgba(6,6,8,.65) 100%)}
+.sports-content{position:relative;z-index:2;text-align:center;pointer-events:none}
+.sports-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,130px);letter-spacing:6px;line-height:.87;color:var(--white);text-shadow:0 0 120px rgba(255,255,255,.06)}
+.sports-sub{font-size:15px;letter-spacing:4px;text-transform:uppercase;color:var(--bone);font-family:'Outfit',sans-serif;font-style:normal;margin-top:20px}
+
+/* ═══ 6. AMBASSADORS ═══ */
+.amb-sec{padding:140px 64px;background:var(--dark);border-top:1px solid rgba(255,255,255,.04)}
+.amb-top{max-width:1200px;margin:0 auto 64px}
+.amb-tagline{font-size:18px;font-weight:300;color:var(--bone);font-family:'Outfit',sans-serif;font-style:normal;max-width:500px;margin-top:16px;line-height:1.8}
+.amb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;max-width:1200px;margin:0 auto 48px}
+.amb-card{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:none;background:#111}
+.amb-vid{position:absolute;inset:0;overflow:hidden} .amb-vid video{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1) brightness(.75);display:block}
+.amb-vid video{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1) brightness(.75);transform:scale(1.05);transition:transform .7s var(--ease),filter .5s}
+.amb-card:hover .amb-vid video{transform:scale(1.1);filter:grayscale(1) contrast(1.1) brightness(.95)}
+.amb-ol{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.9) 0%,transparent 50%)}
+.amb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--white);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:2}
+.amb-card:hover::before{transform:scaleX(1)}
+.amb-info{position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2}
+.amb-sport{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--silver);margin-bottom:4px}
+.amb-name{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--white);line-height:1}
+.amb-quote{font-size:13px;font-weight:300;color:var(--silver);font-family:'Outfit',sans-serif;font-style:normal;margin-top:5px;line-height:1.5}
+.amb-cta-wrap{max-width:1200px;margin:0 auto;text-align:center;padding-top:16px}
+.amb-cta-text{font-size:18px;font-weight:300;color:var(--silver);font-family:'Outfit',sans-serif;font-style:normal;margin-bottom:28px;letter-spacing:.3px}
+.amb-apply{display:inline-block;background:var(--white);color:var(--ink);font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:16px 56px;transition:all .2s;cursor:none}
+.amb-apply:hover{background:var(--bone);transform:translateY(-2px)}
+
+/* ═══ 7. ABOUT ═══ */
+.about-sec{position:relative;overflow:hidden;min-height:80vh;display:flex;align-items:center;justify-content:center;background:var(--ink)}
+#about-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.about-ol{position:absolute;inset:0;z-index:1;background:rgba(6,6,8,.68)}
+.about-wrap{position:relative;z-index:2;max-width:660px;text-align:center;padding:160px 52px}
+.about-h2{margin-bottom:24px}
+.about-p{font-size:17px;font-weight:300;color:var(--bone);font-family:'Outfit',sans-serif;font-style:normal;line-height:1.95;line-height:1.9;margin-bottom:14px}
+.about-p:last-of-type{margin-bottom:40px}
+
+/* ═══ 8. CONTACT ═══ */
+.contact-sec{position:relative;overflow:hidden;background:var(--dark);border-top:1px solid rgba(255,255,255,.04)}
+#con-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.4}
+.con-ol{position:absolute;inset:0;z-index:1;background:rgba(14,14,18,.8)}
+.con-wrap{position:relative;z-index:2;max-width:580px;margin:0 auto;text-align:center;padding:120px 52px}
+.con-h2{margin-bottom:14px}
+.con-sub{font-size:16px;font-weight:300;color:var(--silver);font-family:'Outfit',sans-serif;font-style:normal;margin-bottom:44px;line-height:1.7}
+.con-form{display:flex;flex-direction:column;gap:2px}
+.con-input{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:16px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;color:var(--white);outline:none;transition:border-color .25s,background .25s;width:100%}
+.con-input::placeholder{color:var(--mid)}
+.con-input:focus{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04)}
+textarea.con-input{height:110px;resize:none}
+.con-btn{background:var(--white);color:var(--ink);font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:16px;width:100%;margin-top:4px;transition:all .2s;cursor:none}
+.con-btn:hover{background:var(--bone)}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.04);padding:52px 64px}
+.ft{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:48px;flex-wrap:wrap;gap:36px}
+.flogo{font-family:'Nunito',sans-serif;font-size:18px;font-weight:700;letter-spacing:1px;color:var(--white);text-transform:none}
+.ftagline{font-size:12px;color:var(--mid);font-family:'Outfit',sans-serif;font-style:normal;margin-top:7px;letter-spacing:1.5px}
+.flinks{display:flex;gap:52px;flex-wrap:wrap}
+.fcolh{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.18);margin-bottom:18px}
+.fcol a{display:block;font-size:12px;font-weight:300;color:var(--mid);margin-bottom:10px;transition:color .2s}
+.fcol a:hover{color:var(--white)}
+.fbot{display:flex;justify-content:space-between;padding-top:28px;border-top:1px solid rgba(255,255,255,.04);flex-wrap:wrap;gap:12px}
+.fbot p{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:1px}
+</style>
+</head>
+<body>
+<div id="cd"></div><div id="cr"></div>
+
+<!-- NAV -->
+<nav id="nav">
+ <div class="nav-left"><a href="#" class="nlogo">memo</a></div>
+ <div class="nav-center">
+ <a href="#science" class="nlink">Science</a>
+ <a href="#products" class="nlink">Shop</a>
+ <a href="#sports" class="nlink">Sports</a>
+ <a href="#ambassadors" class="nlink">Ambassadors</a>
+ <a href="#about" class="nlink">About</a>
+ <a href="#contact" class="nlink">Contact</a>
+ </div>
+ <div class="nav-right"><button class="ncta" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Get Started</button></div>
+</nav>
+
+<!-- ═══ 1. HERO CROWD WAVE ═══ -->
+<section class="hero" id="hero">
+ <canvas id="hero-canvas"></canvas>
+ <div class="hero-ol"></div>
+ <div class="hero-content">
+ <p class="hero-kicker">Instant Hydration Technology</p>
+ <h1 class="hero-h1">PERFORM<br>WITHOUT<br>LIMITS.</h1>
+ <p style="font-size:12px;font-weight:300;color:rgba(255,255,255,.38);margin-top:16px;letter-spacing:5px;text-transform:uppercase;opacity:0;animation:up .9s .75s var(--ease) forwards;font-family:'DM Sans',sans-serif">Fuel Your Performance</p>
+ <div class="hero-ctas">
+ <button class="btn-bone" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+ <button class="btn-ghost" onclick="document.getElementById('science').scrollIntoView({behavior:'smooth'})"><span class="play-tri"></span>The Science</button>
+ </div>
+ </div>
+ <div class="hero-scroll"><span class="slbl">Scroll</span><div class="sbar"></div></div>
+</section>
+
+<!-- ═══ 2. STATS BAR ═══ -->
+<div class="stats sr">
+ <div class="stat"><span class="stn">3s</span><span class="stl">Dissolves In</span></div>
+ <div class="stat"><span class="stn" style="font-size:18px;padding-top:10px;display:block;line-height:1.2">Complete<br>Electrolyte<br>Matrix</span><span class="stl" style="margin-top:10px">What's Inside</span></div>
+ <div class="stat"><span class="stn">0</span><span class="stl">Calories</span></div>
+ <div class="stat"><span class="stn">0</span><span class="stl">Bottles Needed</span></div>
+</div>
+
+<!-- ═══ 3. SCIENCE ═══ -->
+<section class="science sr" id="science">
+ <canvas id="sci-canvas"></canvas>
+ <div class="sci-ol"></div>
+ <div class="sci-wrap">
+ <div>
+ <div class="sec-ey">The Science</div>
+ <h2 class="big-h" style="margin-bottom:24px">WHY THE<br>STRIP WORKS</h2>
+ <p class="sci-lead">Most hydration takes minutes to kick in. Memo Nu takes three seconds. Place the strip on your tongue, it dissolves, you're hydrated. No bottle. No powder. Nothing to carry.</p>
+ <div class="sci-steps">
+ <div class="ss"><div class="ss-num">01</div><div><div class="ss-title">Place It</div><p class="ss-txt">On your tongue. No water, no mixing, no prep.</p></div></div>
+ <div class="ss"><div class="ss-num">02</div><div><div class="ss-title">It Dissolves</div><p class="ss-txt">Three seconds. The strip is gone. Electrolytes hit your system instantly.</p></div></div>
+ <div class="ss"><div class="ss-num">03</div><div><div class="ss-title">You Perform</div><p class="ss-txt">Hydrated. Focused. No bottle in your hand. Just you and the game.</p></div></div>
+ </div>
+ </div>
+ <div class="ing-cards">
+ <div class="ic"><div class="ic-sym">Na</div><div class="ic-name">Sodium</div><div class="ic-detail">250–500mg<br>Primary electrolyte</div></div>
+ <div class="ic"><div class="ic-sym">K</div><div class="ic-name">Potassium</div><div class="ic-detail">Fluid balance<br>Nerve signals</div></div>
+ <div class="ic"><div class="ic-sym">Mg</div><div class="ic-name">Magnesium</div><div class="ic-detail">300+ reactions<br>Muscle function</div></div>
+ <div class="ic"><div class="ic-sym">B</div><div class="ic-name">B Vitamins</div><div class="ic-detail">B1·B3·B6·B12<br>Energy metabolism</div></div>
+ <div class="ic"><div class="ic-sym">C</div><div class="ic-name">Vitamin C</div><div class="ic-detail">Antioxidant<br>Recovery support</div></div>
+ <div class="ic"><div class="ic-sym">T</div><div class="ic-name">L-Taurine</div><div class="ic-detail">Endurance<br>Cardio output</div></div>
+ <div class="ic"><div class="ic-sym">cw</div><div class="ic-name">Coconut Water</div><div class="ic-detail">Natural minerals<br>No sugar added</div></div>
+ <div class="ic"><div class="ic-sym">xa</div><div class="ic-name">Xylitol + Aloe</div><div class="ic-detail">Instant dissolve<br>Thirst relief</div></div>
+ </div>
+ </div>
+</section>
+
+<!-- ═══ 4. PRODUCTS ═══ -->
+<section class="products-sec sr" id="products">
+ <canvas id="prod-canvas"></canvas>
+ <div class="prod-ol"></div>
+ <div class="prod-inner">
+ <div class="pcard">
+ <canvas class="pstrip-canvas" id="strip-lite-canvas"></canvas>
+ <div class="pcard-content">
+ <div class="ptag">Standard Performance</div>
+ <div class="pname">HYDRATE<br>LITE</div>
+ <div class="pprice">$14.99</div>
+ <div class="pdesc">
+ <p class="pdesc-lead">Your everyday hydration strip. Designed for training sessions, gym workouts, recreational sports, and anyone who wants fast hydration without carrying a bottle.</p>
+ <ul class="pdesc-list">
+ <li><span class="pdesc-label">Sodium</span><span class="pdesc-val">250mg standard sweat replacement</span></li>
+ <li><span class="pdesc-label">Size</span><span class="pdesc-val">Standard strip, dissolves in 3 seconds</span></li>
+ <li><span class="pdesc-label">Best for</span><span class="pdesc-val">Gym, casual sports, everyday use</span></li>
+ <li><span class="pdesc-label">Calories</span><span class="pdesc-val">Zero</span></li>
+ </ul>
+ </div>
+ <button class="padd pad-l">Add to Cart</button>
+ </div>
+ </div>
+ <div class="pcard">
+ <canvas class="pstrip-canvas" id="strip-pro-canvas"></canvas>
+ <div class="pcard-content">
+ <div class="ptag-pro">Elite Performance</div>
+ <div class="pname">HYDRATE<br>PRO</div>
+ <div class="pprice">$19.99</div>
+ <div class="pdesc">
+ <p class="pdesc-lead">Built for elite athletes and endurance sports. Double the sodium, larger strip, with L-Taurine and coconut water powder for peak output marathons, triathlons, long-distance cycling, intense competition.</p>
+ <ul class="pdesc-list">
+ <li><span class="pdesc-label">Sodium</span><span class="pdesc-val">500mg double the Lite, matches peak sweat loss</span></li>
+ <li><span class="pdesc-label">Size</span><span class="pdesc-val">Larger strip, faster saturation</span></li>
+ <li><span class="pdesc-label">Best for</span><span class="pdesc-val">Endurance, triathlon, marathon, cycling</span></li>
+ <li><span class="pdesc-label">Added</span><span class="pdesc-val">L-Taurine + Coconut Water Powder</span></li>
+ <li><span class="pdesc-label">Calories</span><span class="pdesc-val">Zero</span></li>
+ </ul>
+ </div>
+ <button class="padd pad-p">Add to Cart</button>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- ═══ 5. SPORTS ═══ -->
+<section class="sports-sec sr" id="sports">
+ <canvas id="sports-canvas"></canvas>
+ <div class="sports-ol"></div>
+ <div class="sports-content">
+ <h2 class="sports-h">ONE STRIP.<br>EVERY SPORT.</h2>
+ <p class="sports-sub">Track. Pitch. Pool. Court. Road.</p>
+ </div>
+</section>
+
+<!-- ═══ 6. AMBASSADORS ═══ -->
+<section class="amb-sec sr" id="ambassadors">
+ <div class="amb-top">
+ <div class="sec-ey">Ambassadors</div>
+ <h2 class="big-h">THE ATHLETES<br>WHO RUN ON IT.</h2>
+ <p class="amb-tagline">Real athletes. Every discipline. One strip.</p>
+ </div>
+ <div class="amb-grid">
+ <div class="amb-card" style="background:#111">
+ <div class="amb-vid">
+ <video id="av1" autoplay muted loop playsinline preload="auto">
+ <source src="v1.mp4" type="video/mp4">
+ </video>
+ </div>
+ <div class="amb-ol"></div>
+ <div class="amb-info"><div class="amb-sport">Tennis</div><div class="amb-name">THE COURT</div><div class="amb-quote">"Back in the match in three seconds."</div></div>
+ </div>
+ <div class="amb-card" style="background:#111">
+ <div class="amb-vid">
+ <video id="av2" autoplay muted loop playsinline preload="auto">
+ <source src="v2.mp4" type="video/mp4">
+ </video>
+ </div>
+ <div class="amb-ol"></div>
+ <div class="amb-info"><div class="amb-sport">Football · Soccer</div><div class="amb-name">THE PITCH</div><div class="amb-quote">"90 minutes. One strip at half time."</div></div>
+ </div>
+ <div class="amb-card" style="background:#111">
+ <div class="amb-vid">
+ <video id="av3" autoplay muted loop playsinline preload="auto">
+ <source src="v3.mp4" type="video/mp4">
+ </video>
+ </div>
+ <div class="amb-ol"></div>
+ <div class="amb-info"><div class="amb-sport">Running · Marathon</div><div class="amb-name">THE ROAD</div><div class="amb-quote">"Mile 20 and I kept moving."</div></div>
+ </div>
+ <div class="amb-card" style="background:#111">
+ <div class="amb-vid">
+ <video id="av4" autoplay muted loop playsinline preload="auto">
+ <source src="v4.mp4" type="video/mp4">
+ <source src="v4.mp4" type="video/quicktime">
+ </video>
+ </div>
+ <div class="amb-ol"></div>
+ <div class="amb-info"><div class="amb-sport">Cycling · Triathlon</div><div class="amb-name">THE RIDE</div><div class="amb-quote">"No hands, no bottle. Just speed."</div></div>
+ </div>
+ </div>
+ <div class="amb-cta-wrap">
+ <p class="amb-cta-text">No matter the sport you play we want you on the team.</p>
+ <button class="amb-apply">Apply to Become an Ambassador</button>
+ </div>
+</section>
+
+<!-- ═══ 7. ABOUT ═══ -->
+<section class="about-sec sr" id="about">
+ <canvas id="about-canvas"></canvas>
+ <div class="about-ol"></div>
+ <div class="about-wrap">
+ <div class="sec-ey" style="justify-content:center;display:block;text-align:center">About Memo Nu</div>
+ <h2 class="big-h about-h2">BUILT FOR<br>ATHLETES.</h2>
+ <p class="about-p">Memo Nu was built for every athlete who hates carrying water. Runners, cyclists, footballers, basketball players, swimmers, tennis players, gym athletes. Anyone who has ever cramped, faded, or slowed down because hydration was too slow or too inconvenient.</p>
+ <p class="about-p">We stripped hydration down to its bare minimum a single dissolvable film, a complete electrolyte matrix, three seconds. Nothing more. Nothing less.</p>
+ <button class="btn-bone" style="margin:0 auto;display:block">Our Story</button>
+ </div>
+</section>
+
+<!-- ═══ 8. CONTACT ═══ -->
+<section class="contact-sec sr" id="contact">
+ <canvas id="con-canvas"></canvas>
+ <div class="con-ol"></div>
+ <div class="con-wrap">
+ <div class="sec-ey" style="justify-content:center;display:block;text-align:center">Get In Touch</div>
+ <h2 class="big-h con-h2">CONTACT US</h2>
+ <p class="con-sub">Questions, partnerships, press, wholesale we're here.</p>
+ <div class="con-form">
+ <input class="con-input" type="text" placeholder="Your Name">
+ <input class="con-input" type="email" placeholder="Email Address">
+ <textarea class="con-input" placeholder="Your Message"></textarea>
+ <button class="con-btn">Send Message</button>
+ </div>
+ </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+ <div class="ft">
+ <div><div class="flogo">memo</div><div class="ftagline">Strip. Dissolve. Perform.</div></div>
+ <div class="flinks">
+ <div class="fcol"><div class="fcolh">Product</div><a href="#">Hydrate Lite</a><a href="#">Hydrate Pro</a><a href="#science">Science</a></div>
+ <div class="fcol"><div class="fcolh">Company</div><a href="#about">About</a><a href="#ambassadors">Ambassadors</a><a href="#contact">Contact</a></div>
+ <div class="fcol"><div class="fcolh">Social</div><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">X</a></div>
+ </div>
+ </div>
+ <div class="fbot"><p>© 2026 Memo Nu. All rights reserved.</p><p>Privacy · Terms</p></div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════
+// CURSOR
+// ══════════════════════════════════════════════════════
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let gMX=0,gMY=0,crx=0,cry=0,cmx=0,cmy=0;
+document.addEventListener('mousemove',e=>{gMX=cmx=e.clientX;gMY=cmy=e.clientY;cd.style.left=cmx+'px';cd.style.top=cmy+'px'});
+(function L(){crx+=(cmx-crx)*.1;cry+=(cmy-cry)*.1;cr.style.left=crx+'px';cr.style.top=cry+'px';requestAnimationFrame(L)})();
+document.querySelectorAll('button,a,.ic,.ss,.pcard,.amb-card,.amb-apply,.ncta,.con-input').forEach(el=>{
+ el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+ el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+// NAV
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('sol',scrollY>60),{passive:true});
+
+// SCROLL REVEAL
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');ro.unobserve(x.target)}})},{threshold:.08});
+document.querySelectorAll('.sr').forEach(el=>ro.observe(el));
+
+// ══════════════════════════════════════════════════════
+// 1. HERO CROWD WAVE MEMO IN NUNITO BURSTS IN
+// ══════════════════════════════════════════════════════
+(function(){
+ const cv=document.getElementById('hero-canvas'),ctx=cv.getContext('2d');
+ let W,H;
+ const resize=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};
+ resize();addEventListener('resize',resize);
+
+ let mx=.5,my=.5,tmx=.5,tmy=.5,mouseSpeed=0,pmx=.5,pmy=.5;
+ document.addEventListener('mousemove',e=>{
+ pmx=tmx;pmy=tmy;
+ tmx=e.clientX/W;tmy=e.clientY/H;
+ mouseSpeed=Math.sqrt((tmx-pmx)**2+(tmy-pmy)**2);
+ });
+
+ const COLS=90,ROWS=44;
+
+ // Build MEMO mask by rendering actual Nunito text to an offscreen canvas
+ // then sampling which dot positions fall inside the letter pixels
+ function buildMask(){
+ const set=new Set();
+ const off=document.createElement('canvas');
+ // Make offscreen match the dot grid proportions
+ off.width=COLS*10;
+ off.height=ROWS*10;
+ const octx=off.getContext('2d');
+ octx.clearRect(0,0,off.width,off.height);
+
+ // Draw "memo" in Nunito same font as nav logo
+ const fontSize=Math.round(off.height*0.55);
+ octx.font=`700 ${fontSize}px 'Nunito', sans-serif`;
+ octx.fillStyle='#ffffff';
+ octx.textAlign='center';
+ octx.textBaseline='middle';
+ octx.fillText('memo', off.width/2, off.height*0.36);
+
+ // Sample pixel data check each dot grid position
+ const imgData=octx.getImageData(0,0,off.width,off.height);
+ const data=imgData.data;
+
+ for(let r=0;r<ROWS;r++){
+ for(let c=0;c<COLS;c++){
+ // Sample a small area around this dot's pixel position
+ const px=Math.round(c*10+5);
+ const py=Math.round(r*10+5);
+ let filled=false;
+ // Check 3x3 sample area for coverage
+ for(let dy=-4;dy<=4;dy+=2){
+ for(let dx=-4;dx<=4;dx+=2){
+ const sx=Math.max(0,Math.min(off.width-1,px+dx));
+ const sy=Math.max(0,Math.min(off.height-1,py+dy));
+ const idx=(sy*off.width+sx)*4;
+ // Alpha channel if pixel has any fill, dot is inside letter
+ if(data[idx+3]>60){ filled=true; break; }
+ }
+ if(filled) break;
+ }
+ if(filled) set.add(`${c},${r}`);
+ }
+ }
+ return set;
+ }
+
+ // Wait for Nunito to load before building mask
+ let memoMask=new Set();
+ function initMask(){
+ // Try building if font not loaded yet, retry
+ const testCanvas=document.createElement('canvas');
+ testCanvas.width=200;testCanvas.height=60;
+ const tc=testCanvas.getContext('2d');
+ tc.font="700 40px 'Nunito',sans-serif";
+ const w1=tc.measureText('memo').width;
+ tc.font="700 40px sans-serif";
+ const w2=tc.measureText('memo').width;
+ // If widths match font hasn't loaded yet
+ if(Math.abs(w1-w2)<2){
+ setTimeout(initMask,100);
+ } else {
+ memoMask=buildMask();
+ // Trigger burst once mask is ready
+ setTimeout(triggerBurst,400);
+ }
+ }
+ // Start checking after fonts should be loaded
+ setTimeout(initMask, 300);
+ addEventListener('resize',()=>{ memoMask=buildMask(); });
+
+ const dotLit=new Float32Array(COLS*ROWS);
+ const dotBurst=new Float32Array(COLS*ROWS);
+
+ let introPlayed=false;
+ function triggerBurst(){
+ if(introPlayed||memoMask.size===0) return;
+ introPlayed=true;
+ // Convert mask to array for staggered delay
+ const maskDots=[...memoMask].map(k=>{
+ const [c,r]=k.split(',').map(Number);
+ return {c,r,idx:r*COLS+c};
+ });
+ // Stagger outward from center
+ const cx2=COLS/2, cy2=ROWS*0.36;
+ maskDots.forEach(d=>{
+ const dist=Math.sqrt((d.c-cx2)**2+(d.r-cy2)**2);
+ const delay=dist*14+Math.random()*60;
+ setTimeout(()=>{ dotBurst[d.idx]=1.0; }, delay);
+ });
+ }
+
+ const dots=[];
+ for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++) dots.push({c,r,idx:r*COLS+c});
+
+ let t=0;
+ function draw(){
+ t+=.018;
+ mx+=(tmx-mx)*.055;my+=(tmy-my)*.055;
+ ctx.clearRect(0,0,W,H);
+
+ const ambientBase=0.24+Math.sin(t*0.55)*0.07;
+ const litDecay=0.013;
+ const litSpread=0.15;
+
+ dots.forEach(d=>{
+ const key=`${d.c},${d.r}`;
+ const inMemo=memoMask.has(key);
+
+ // Burst decay
+ if(dotBurst[d.idx]>0){
+ dotLit[d.idx]=Math.min(1,dotLit[d.idx]+dotBurst[d.idx]*0.14);
+ dotBurst[d.idx]=Math.max(0,dotBurst[d.idx]-0.022);
+ }
+
+ if(inMemo){
+ const dx=d.c/COLS-mx,dy=d.r/ROWS-my;
+ const dist=Math.sqrt(dx*dx+dy*dy);
+ const proximity=Math.max(0,1-dist/litSpread);
+ const mouseBoost=proximity*(1+mouseSpeed*14)*0.75;
+ const target=ambientBase+mouseBoost;
+ if(target>dotLit[d.idx]) dotLit[d.idx]=Math.min(1,dotLit[d.idx]+0.055);
+ else dotLit[d.idx]=Math.max(ambientBase*0.78,dotLit[d.idx]-litDecay);
+ } else {
+ dotLit[d.idx]=Math.max(0,dotLit[d.idx]-litDecay*0.5);
+ }
+ });
+
+ const tiltY=(mx-.5)*.1;
+
+ dots.forEach(d=>{
+ const bx=(d.c/COLS)*W+W/COLS*.5;
+ const by=(d.r/ROWS)*H+H/ROWS*.5;
+ const lit=dotLit[d.idx];
+ const burst=dotBurst[d.idx];
+ const inMemo=memoMask.has(`${d.c},${d.r}`);
+
+ const wx=d.c/COLS-mx,wy=d.r/ROWS-my;
+ const wd=Math.sqrt(wx*wx+wy*wy);
+ const ripple=Math.sin(wd*20-t*5)*Math.exp(-wd*2.2);
+ const w1=Math.sin(d.c*.35+t*1.1)*.18;
+ const w2=Math.cos(d.r*.55+t*.75)*.12;
+ const w3=Math.sin((d.c+d.r)*.2-t*.9)*.08;
+ const crowdH=(ripple*.7+w1+w2+w3)*52;
+ const memoRise=lit*42+burst*65;
+ const totalH=crowdH+memoRise;
+
+ const pz=d.r/ROWS;
+ const persp=1+pz*.32;
+ const px=W/2+(bx-W/2)/persp+tiltY*(1-pz)*55;
+ const py=by/persp+H*.07-totalH/persp;
+ const bright=Math.max(0,ripple*.85);
+
+ let rc,gc,bc,alpha,dotR;
+ if(inMemo&&lit>0.05){
+ // ice blue → cyan → white
+ const t1=Math.min(1,lit*1.2);
+ const p1=Math.min(1,t1*2),p2=Math.max(0,t1*2-1);
+ const midR=Math.round(184+(0-184)*p1);
+ const midG=Math.round(212+(212-212)*p1);
+ const midB=Math.round(232+(255-232)*p1);
+ rc=Math.round(midR+(255-midR)*p2);
+ gc=Math.round(midG+(255-midG)*p2);
+ bc=Math.round(midB+(255-midB)*p2);
+ alpha=Math.min(1,.38+lit*.62+burst*.25);
+ dotR=Math.max(.9,(1.2+pz*1.7)*persp*.66*(1+lit*.85+burst*.55));
+ } else {
+ rc=Math.round(180+bright*72);gc=Math.round(210+bright*42);bc=232;
+ alpha=Math.min(1,.2+pz*.26+bright*.52);
+ dotR=Math.max(.55,(1.0+pz*1.6)*persp*.6);
+ }
+
+ ctx.save();
+ if(inMemo&&lit>0.08){
+ ctx.shadowBlur=dotR*(9+burst*14);
+ ctx.shadowColor=lit<0.5
+ ?`rgba(0,212,255,${Math.min(1,lit*.9+burst*.5)})`
+ :`rgba(255,255,255,${Math.min(1,lit*.9+burst*.5)})`;
+ } else if(bright>.28){
+ ctx.shadowBlur=dotR*6;
+ ctx.shadowColor=`rgba(184,212,232,${bright*.6})`;
+ }
+ ctx.fillStyle=`rgba(${Math.max(0,Math.min(255,rc))},${Math.max(0,Math.min(255,gc))},${Math.max(0,Math.min(255,bc))},${alpha})`;
+ ctx.beginPath();ctx.arc(px,py,dotR,0,Math.PI*2);ctx.fill();
+ ctx.restore();
+ });
+ requestAnimationFrame(draw);
+ }
+ draw();
+
+ const hc=document.querySelector('.hero-content');
+ window.addEventListener('scroll',()=>{
+ const y=scrollY;
+ hc.style.opacity=Math.max(0,1-y/350);
+ cv.style.opacity=Math.max(0,1-y/500);
+ },{passive:true});
+})();
+
+// ══════════════════════════════════════════════════════
+// 3. SCIENCE DNA HELIX 3D
+// ══════════════════════════════════════════════════════
+(function(){
+ const cv=document.getElementById('sci-canvas'),ctx=cv.getContext('2d');
+ let W,H;
+ const resize=()=>{W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight};
+ resize();new ResizeObserver(resize).observe(cv.parentElement);
+ let t=0,mx=.5,my=.5;
+ document.addEventListener('mousemove',e=>{mx=e.clientX/innerWidth;my=e.clientY/innerHeight});
+ function draw(){
+ t+=.008;ctx.clearRect(0,0,W,H);
+ const cx=W*.72,cy=H*.5;
+ const rx=Math.min(W,H)*.28,ry=Math.min(W,H)*.55;
+ const tilt=(mx-.5)*.4;
+ const N=60;
+ const pts1=[],pts2=[];
+ for(let i=0;i<N;i++){
+ const a=i/N*Math.PI*4+t;
+ const y=cy+(i/N-.5)*ry*2;
+ const x1=cx+Math.cos(a+tilt)*rx,x2=cx+Math.cos(a+Math.PI+tilt)*rx;
+ const z1=Math.sin(a+tilt),z2=Math.sin(a+Math.PI+tilt);
+ pts1.push({x:x1,y,z:z1});pts2.push({x:x2,y,z:z2});
+ }
+ // rungs
+ for(let i=0;i<N;i+=2){
+ const p1=pts1[i],p2=pts2[i];
+ const avgZ=(p1.z+p2.z)/2;
+ const alpha=(.3+avgZ*.35)*.6;
+ ctx.save();ctx.strokeStyle=`rgba(200,228,255,${alpha*1.8})`;ctx.lineWidth=1.8;
+ ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+ // node dots
+ [p1,p2].forEach(p=>{
+ const a2=.35+p.z*.45;
+ ctx.fillStyle=`rgba(230,245,255,${Math.min(1,a2*1.8)})`;ctx.shadowBlur=12;ctx.shadowColor='rgba(180,220,255,.6)';
+ ctx.shadowBlur=8;ctx.shadowColor="rgba(180,220,255,.8)";ctx.beginPath();ctx.arc(p.x,p.y,5+p.z*3.5,0,Math.PI*2);ctx.fill();
+ });
+ ctx.restore();
+ }
+ // strands
+ [[pts1,'rgba(184,212,232,.9)'],[pts2,'rgba(140,190,255,.75)']].forEach(([pts,col])=>{
+ ctx.save();ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.lineCap='round';
+ ctx.beginPath();
+ pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+ ctx.stroke();ctx.restore();
+ });
+ requestAnimationFrame(draw);
+ }
+ draw();
+})();
+
+// ══════════════════════════════════════════════════════
+// 4. PRODUCTS FLOATING PARTICLE FIELD + 3D STRIPS
+// ══════════════════════════════════════════════════════
+(function(){
+ // Background particle field
+ const cv=document.getElementById('prod-canvas'),ctx=cv.getContext('2d');
+ let W,H;
+ const resize=()=>{W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight};
+ resize();new ResizeObserver(resize).observe(cv.parentElement);
+ const pts=Array.from({length:120},()=>({
+ x:Math.random(),y:Math.random(),
+ vx:(Math.random()-.5)*.0003,vy:(Math.random()-.5)*.0003,
+ r:.5+Math.random()*1.5,a:Math.random()*.4+.05
+ }));
+ let t=0;
+ function draw(){
+ t+=.008;ctx.clearRect(0,0,W,H);
+ pts.forEach(p=>{
+ p.x=(p.x+p.vx+1)%1;p.y=(p.y+p.vy+1)%1;
+ ctx.fillStyle=`rgba(184,212,232,${p.a*(Math.sin(t+p.x*10)*.3+.7)})`;
+ ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);ctx.fill();
+ });
+ // connect nearby
+ pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{
+ const dx=(a.x-b.x)*W,dy=(a.y-b.y)*H,d=Math.sqrt(dx*dx+dy*dy);
+ if(d<120){ctx.strokeStyle=`rgba(184,212,232,${.06*(1-d/120)})`;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);ctx.stroke()}
+ }));
+ requestAnimationFrame(draw);
+ }
+ draw();
+
+ // 3D strip on each product card
+ function makeStrip(canvasId, tint, isLite){
+ const sc=document.getElementById(canvasId);
+ if(!sc) return;
+ const sctx=sc.getContext('2d');
+ let W2,H2;
+ const r2=()=>{W2=sc.width=sc.offsetWidth;H2=sc.height=sc.offsetHeight};
+ r2();new ResizeObserver(r2).observe(sc.parentElement);
+ let t2=0,mx2=.5,my2=.5;
+ sc.parentElement.addEventListener('mousemove',e=>{
+ const rect=sc.getBoundingClientRect();
+ mx2=(e.clientX-rect.left)/rect.width;
+ my2=(e.clientY-rect.top)/rect.height;
+ });
+ function drawStrip(){
+ t2+=.01;sctx.clearRect(0,0,W2,H2);
+ const cx=W2*.5,cy=H2*.42;
+ const rotY=(mx2-.5)*1.2;
+ const rotX=(my2-.5)*-.5;
+ const sw=Math.min(W2,H2)*.38,sh=sw;
+ function proj(x,y,z){
+ const cosY=Math.cos(rotY),sinY=Math.sin(rotY);
+ const x2=x*cosY-z*sinY,z2=x*sinY+z*cosY;
+ const cosX=Math.cos(rotX),sinX=Math.sin(rotX);
+ const y2=y*cosX-z2*sinX;
+ const f=700/(700+z2+50);
+ return[cx+x2*f,cy+y2*f,f];
+ }
+ const hw=sw*.5,hh=sh*.5,d=4;
+ const faces=[
+ {verts:[[-hw,-hh,-d],[hw,-hh,-d],[hw,hh,-d],[-hw,hh,-d]],norm:[0,0,-1]},
+ {verts:[[-hw,-hh,d],[hw,-hh,d],[hw,hh,d],[-hw,hh,d]],norm:[0,0,1]},
+ {verts:[[hw,-hh,-d],[hw,-hh,d],[hw,hh,d],[hw,hh,-d]],norm:[1,0,0]},
+ {verts:[[-hw,-hh,-d],[-hw,-hh,d],[-hw,hh,d],[-hw,hh,-d]],norm:[-1,0,0]},
+ {verts:[[-hw,-hh,-d],[hw,-hh,-d],[hw,-hh,d],[-hw,-hh,d]],norm:[0,-1,0]},
+ {verts:[[-hw,hh,-d],[hw,hh,-d],[hw,hh,d],[-hw,hh,d]],norm:[0,1,0]},
+ ];
+ // Sort faces by Z
+ const projected=faces.map(f=>{
+ const ps=f.verts.map(v=>proj(v[0],v[1],v[2]));
+ const avgZ=ps.reduce((s,p)=>s+p[2],0)/ps.length;
+ return{...f,ps,avgZ};
+ }).sort((a,b)=>a.avgZ-b.avgZ);
+ projected.forEach(face=>{
+ const[r,g,b]=tint;
+ // lighting
+ const light=[.5,.5,-1];
+ const mag=Math.sqrt(light.reduce((s,v)=>s+v*v,0));
+ const nl=light.map(v=>v/mag);
+ const dot=Math.max(0,face.norm[0]*nl[0]+face.norm[1]*nl[1]+face.norm[2]*nl[2]);
+ const bright=.35+dot*.65;
+ sctx.save();
+ sctx.beginPath();
+ face.ps.forEach((p,i)=>i===0?sctx.moveTo(p[0],p[1]):sctx.lineTo(p[0],p[1]));
+ sctx.closePath();
+ // glass fill
+ const isFront=face.norm[2]>0;
+ if(isFront){
+ const grad=sctx.createLinearGradient(face.ps[0][0],face.ps[0][1],face.ps[2][0],face.ps[2][1]);
+ grad.addColorStop(0,`rgba(${r},${g},${b},.55)`);
+ grad.addColorStop(.4,`rgba(${r},${g},${b},.28)`);
+ grad.addColorStop(1,`rgba(${r},${g},${b},.45)`);
+ sctx.fillStyle=grad;
+ sctx.shadowBlur=60;sctx.shadowColor=`rgba(${r},${g},${b},.7)`;
+ } else {
+ sctx.fillStyle=`rgba(${Math.round(r*bright*.4)},${Math.round(g*bright*.4)},${Math.round(b*bright*.4)},.6)`;
+ }
+ sctx.fill();
+ sctx.strokeStyle=`rgba(${r},${g},${b},.4)`;sctx.lineWidth=.8;sctx.stroke();
+ // front face shine
+ if(isFront){
+ sctx.clip();
+ const shX=Math.sin(t2)*sw*.3;
+ const shG=sctx.createLinearGradient(cx-sw+shX,cy,cx+shX,cy);
+ shG.addColorStop(0,'rgba(255,255,255,0)');
+ shG.addColorStop(.5,`rgba(255,255,255,${.45+Math.sin(t2)*.1})`);
+ shG.addColorStop(1,'rgba(255,255,255,0)');
+ sctx.fillStyle=shG;sctx.fillRect(face.ps[0][0]-200,face.ps[0][1]-200,W2+400,H2+400);
+ // MN text
+ sctx.fillStyle=`rgba(255,255,255,.3)`;
+ sctx.font=`bold ${Math.round(sw*.22)}px 'Bebas Neue',sans-serif`;
+ sctx.textAlign='center';sctx.textBaseline='middle';
+ sctx.fillText('MN',cx,cy);
+ }
+ sctx.restore();
+ });
+ requestAnimationFrame(drawStrip);
+ }
+ drawStrip();
+ }
+ makeStrip('strip-lite-canvas',[180,225,255],true);
+ makeStrip('strip-pro-canvas',[160,120,255],false);
+})();
+
+// ══════════════════════════════════════════════════════
+// 5. SPORTS HYPER REALISTIC BALLS ON DARK BG
+// ══════════════════════════════════════════════════════
+(function(){
+ const cv=document.getElementById('sports-canvas'),ctx=cv.getContext('2d');
+ let W,H;
+ const resize=()=>{W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight};
+ resize();new ResizeObserver(resize).observe(cv.parentElement);
+ let tmx=0,tmy=0,mx=0,my=0,pmx=0,pmy=0;
+ cv.parentElement.addEventListener('mousemove',e=>{pmx=tmx;pmy=tmy;tmx=e.clientX;tmy=e.clientY});
+
+ // PHOTO-REALISTIC BALL RENDERERS
+ // Each uses multi-layer radial gradients to simulate real lighting:
+ // base color → shadow → diffuse → subsurface → specular highlight → rim light
+
+ function rSoccer(c,r,spin){
+ c.save();
+ // Base sphere white with grey shadow
+ let g=c.createRadialGradient(-r*.28,-r*.32,r*.05,r*.15,r*.18,r*1.35);
+ g.addColorStop(0,'#FFFFFF');g.addColorStop(.25,'#F2F2F2');g.addColorStop(.55,'#D8D8D8');g.addColorStop(.8,'#B0B0B0');g.addColorStop(1,'#787878');
+ c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Pentagon panels black with depth
+ c.save();c.rotate(spin);c.clip();
+ const panel=(px,py,pr)=>{
+ c.save();c.translate(px,py);
+ c.fillStyle='#0A0A0A';
+ c.beginPath();
+ for(let i=0;i<5;i++){const a=i/5*Math.PI*2-Math.PI/2;c.lineTo(Math.cos(a)*pr,Math.sin(a)*pr)}
+ c.closePath();c.fill();
+ // Panel edge highlight
+ c.strokeStyle='rgba(80,80,80,.6)';c.lineWidth=r*.015;
+ c.beginPath();
+ for(let i=0;i<5;i++){const a=i/5*Math.PI*2-Math.PI/2;c.lineTo(Math.cos(a)*pr,Math.sin(a)*pr)}
+ c.closePath();c.stroke();
+ c.restore();
+ };
+ panel(0,0,r*.23);
+ for(let i=0;i<5;i++){const a=i/5*Math.PI*2-Math.PI/2;panel(Math.cos(a)*r*.54,Math.sin(a)*r*.54,r*.21)}
+ c.restore();
+ // Specular highlight key light
+ let sh=c.createRadialGradient(-r*.32,-r*.4,0,-r*.32,-r*.4,r*.52);
+ sh.addColorStop(0,'rgba(255,255,255,.95)');sh.addColorStop(.25,'rgba(255,255,255,.55)');sh.addColorStop(.6,'rgba(255,255,255,.1)');sh.addColorStop(1,'rgba(255,255,255,0)');
+ c.fillStyle=sh;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Rim light subtle blue from opposite side
+ let rl=c.createRadialGradient(r*.55,r*.45,r*.2,r*.55,r*.45,r*.8);
+ rl.addColorStop(0,'rgba(180,200,255,.18)');rl.addColorStop(1,'rgba(0,0,0,0)');
+ c.fillStyle=rl;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ c.restore();
+ }
+
+ function rBasketball(c,r,spin){
+ c.save();
+ // Deep orange leather base
+ let g=c.createRadialGradient(-r*.26,-r*.3,r*.04,r*.18,r*.22,r*1.3);
+ g.addColorStop(0,'#FF922B');g.addColorStop(.2,'#E8720A');g.addColorStop(.45,'#C85A00');g.addColorStop(.7,'#9A3E00');g.addColorStop(1,'#5A1E00');
+ c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Leather pebble texture
+ c.save();c.clip();
+ for(let i=0;i<200;i++){
+ const a=Math.random()*Math.PI*2,rd=Math.random()*r;
+ const px=Math.cos(a)*rd,py=Math.sin(a)*rd;
+ const bright=.5+Math.random()*.5;
+ c.fillStyle=`rgba(${Math.round(bright*30)},${Math.round(bright*15)},0,${.06+Math.random()*.08})`;
+ c.beginPath();c.arc(px,py,r*.018+Math.random()*r*.012,0,Math.PI*2);c.fill();
+ }
+ // Black seams thick with depth
+ c.rotate(spin);
+ c.strokeStyle='#0A0500';c.lineWidth=r*.065;c.lineCap='round';
+ c.shadowBlur=3;c.shadowColor='rgba(0,0,0,.8)';
+ c.beginPath();c.arc(0,0,r*.52,0,Math.PI*2);c.stroke();
+ c.beginPath();c.moveTo(-r,0);c.lineTo(r,0);c.stroke();
+ c.beginPath();c.moveTo(0,-r);c.lineTo(0,r);c.stroke();
+ // Seam highlight
+ c.strokeStyle='rgba(255,160,60,.3)';c.lineWidth=r*.02;c.shadowBlur=0;
+ c.beginPath();c.arc(0,0,r*.52,0,Math.PI*2);c.stroke();
+ c.restore();
+ // Specular
+ let sh=c.createRadialGradient(-r*.3,-r*.38,0,-r*.3,-r*.38,r*.5);
+ sh.addColorStop(0,'rgba(255,255,255,.85)');sh.addColorStop(.2,'rgba(255,200,120,.4)');sh.addColorStop(.5,'rgba(255,160,60,.08)');sh.addColorStop(1,'rgba(0,0,0,0)');
+ c.fillStyle=sh;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Rim light
+ let rl=c.createRadialGradient(r*.5,r*.4,r*.1,r*.5,r*.4,r*.9);
+ rl.addColorStop(0,'rgba(255,100,0,.15)');rl.addColorStop(1,'rgba(0,0,0,0)');
+ c.fillStyle=rl;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ c.restore();
+ }
+
+ function rTennis(c,r,spin){
+ c.save();
+ // Bright chartreuse felt base
+ let g=c.createRadialGradient(-r*.24,-r*.28,r*.04,r*.14,r*.18,r*1.3);
+ g.addColorStop(0,'#E8F440');g.addColorStop(.2,'#CCDA18');g.addColorStop(.5,'#A8B400');g.addColorStop(.75,'#7A8800');g.addColorStop(1,'#485200');
+ c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Felt fiber texture micro
+ c.save();c.clip();
+ for(let i=0;i<300;i++){
+ const a=Math.random()*Math.PI*2,rd=Math.random()*r;
+ const hue=65+Math.random()*15;
+ c.fillStyle=`hsla(${hue},70%,${35+Math.random()*30}%,${.05+Math.random()*.07})`;
+ c.beginPath();c.arc(Math.cos(a)*rd,Math.sin(a)*rd,r*.008+Math.random()*r*.006,0,Math.PI*2);c.fill();
+ }
+ // White seam curves thick and realistic
+ c.rotate(spin);
+ c.strokeStyle='rgba(255,255,255,.95)';c.lineWidth=r*.09;c.lineCap='round';
+ c.shadowBlur=2;c.shadowColor='rgba(255,255,255,.5)';
+ c.beginPath();c.moveTo(-r*.68,-r*.44);c.quadraticCurveTo(0,r*.38,r*.68,-r*.44);c.stroke();
+ c.beginPath();c.moveTo(-r*.68,r*.44);c.quadraticCurveTo(0,-r*.38,r*.68,r*.44);c.stroke();
+ c.restore();
+ // Specular
+ let sh=c.createRadialGradient(-r*.28,-r*.35,0,-r*.28,-r*.35,r*.5);
+ sh.addColorStop(0,'rgba(255,255,255,.88)');sh.addColorStop(.2,'rgba(240,255,120,.4)');sh.addColorStop(.55,'rgba(200,230,0,.08)');sh.addColorStop(1,'rgba(0,0,0,0)');
+ c.fillStyle=sh;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Rim light cool
+ let rl=c.createRadialGradient(r*.48,r*.38,r*.15,r*.48,r*.38,r*.8);
+ rl.addColorStop(0,'rgba(180,220,100,.12)');rl.addColorStop(1,'rgba(0,0,0,0)');
+ c.fillStyle=rl;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ c.restore();
+ }
+
+ function rFootball(c,r,spin){
+ c.save();c.scale(1.2,.8);
+ // Brown leather
+ let g=c.createRadialGradient(-r*.24,-r*.3,r*.04,r*.14,r*.18,r*1.25);
+ g.addColorStop(0,'#B06030');g.addColorStop(.22,'#8A4418');g.addColorStop(.5,'#662E08');g.addColorStop(.75,'#3E1800');g.addColorStop(1,'#1E0800');
+ c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Leather texture
+ c.save();c.clip();
+ for(let i=0;i<180;i++){
+ const a=Math.random()*Math.PI*2,rd=Math.random()*r;
+ c.fillStyle=`rgba(${20+Math.round(Math.random()*40)},${Math.round(Math.random()*15)},0,${.05+Math.random()*.09})`;
+ c.beginPath();c.arc(Math.cos(a)*rd,Math.sin(a)*rd,r*.022,0,Math.PI*2);c.fill();
+ }
+ c.rotate(spin*.4);
+ // White laces realistic
+ c.strokeStyle='rgba(240,235,220,.92)';c.lineWidth=r*.055;c.lineCap='round';
+ c.shadowBlur=2;c.shadowColor='rgba(0,0,0,.6)';
+ c.beginPath();c.moveTo(-r*.5,0);c.lineTo(r*.5,0);c.stroke();
+ // Lace cross stitches
+ c.lineWidth=r*.038;
+ for(let i=-3;i<=3;i++){
+ c.beginPath();c.moveTo(i*r*.11,-r*.2);c.lineTo(i*r*.11,r*.2);c.stroke();
+ }
+ // Horizontal lace line
+ c.beginPath();c.moveTo(-r*.38,-r*.05);c.lineTo(r*.38,-r*.05);c.stroke();
+ c.beginPath();c.moveTo(-r*.38,r*.05);c.lineTo(r*.38,r*.05);c.stroke();
+ c.restore();
+ c.scale(1,1/.8);
+ // Specular
+ let sh=c.createRadialGradient(-r*.28,-r*.38,0,-r*.28,-r*.38,r*.52);
+ sh.addColorStop(0,'rgba(255,255,255,.7)');sh.addColorStop(.25,'rgba(255,180,100,.3)');sh.addColorStop(.6,'rgba(180,80,0,.05)');sh.addColorStop(1,'rgba(0,0,0,0)');
+ c.fillStyle=sh;c.scale(1.2,.8);c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ c.restore();
+ }
+
+ function rVolleyball(c,r,spin){
+ c.save();
+ // Off-white base
+ let g=c.createRadialGradient(-r*.26,-r*.3,r*.04,r*.16,r*.2,r*1.3);
+ g.addColorStop(0,'#FEFEFE');g.addColorStop(.3,'#F0EDE8');g.addColorStop(.6,'#D8D4CC');g.addColorStop(.85,'#B8B4AC');g.addColorStop(1,'#888480');
+ c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Panel lines dark blue realistic
+ c.save();c.rotate(spin);c.clip();
+ c.strokeStyle='#1A2080';c.lineWidth=r*.075;c.lineCap='round';
+ c.shadowBlur=3;c.shadowColor='rgba(10,10,100,.8)';
+ // Three curved panel lines like a real volleyball
+ c.beginPath();c.arc(0,0,r*.66,0,Math.PI*2);c.stroke();
+ c.beginPath();c.arc(r*.4,0,r*.66,0,Math.PI*2);c.stroke();
+ c.beginPath();c.arc(-r*.4,0,r*.66,0,Math.PI*2);c.stroke();
+ // Subtle color panels blue tint
+ c.fillStyle='rgba(30,40,160,.04)';
+ c.beginPath();c.arc(r*.4,0,r*.66,0,Math.PI*2);c.fill();
+ c.restore();
+ // Specular
+ let sh=c.createRadialGradient(-r*.3,-r*.38,0,-r*.3,-r*.38,r*.54);
+ sh.addColorStop(0,'rgba(255,255,255,.92)');sh.addColorStop(.25,'rgba(255,255,255,.45)');sh.addColorStop(.6,'rgba(255,255,255,.08)');sh.addColorStop(1,'rgba(0,0,0,0)');
+ c.fillStyle=sh;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ // Rim light
+ let rl=c.createRadialGradient(r*.5,r*.42,r*.1,r*.5,r*.42,r*.85);
+ rl.addColorStop(0,'rgba(180,185,255,.14)');rl.addColorStop(1,'rgba(0,0,0,0)');
+ c.fillStyle=rl;c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.fill();
+ c.restore();
+ }
+
+ const DRAWS=[rSoccer,rBasketball,rTennis,rFootball,rVolleyball,hCycling];
+ const balls=DRAWS.map((fn,i)=>{
+ const zone=i/DRAWS.length;
+ return{
+ draw:fn,zone,
+ x:0,y:0,
+ vx:(Math.random()-.5)*1.8,vy:(Math.random()-.5)*1.4,
+ r:50+Math.random()*22,spin:0,
+ zoneStr:.0005,
+ };
+ });
+ function initBalls(){
+ balls.forEach(b=>{b.x=W*.08+b.zone*W*.84;b.y=H*.2+Math.random()*H*.6});
+ }
+ initBalls();addEventListener('resize',initBalls);
+
+ let t2=0;
+ function draw(){
+ t2+=.016;mx+=(tmx-mx)*.06;my+=(tmy-my)*.06;
+ const mvx=tmx-pmx,mvy=tmy-pmy;
+ ctx.fillStyle='rgba(6,6,8,0.18)';ctx.fillRect(0,0,W,H);
+ balls.sort((a,b)=>a.y-b.y).forEach(b=>{
+ const dx=b.x-mx,dy=b.y-my,d=Math.sqrt(dx*dx+dy*dy);
+ if(d<200){const f=(200-d)/200*1.1;b.vx+=dx/d*f;b.vy+=dy/d*f;b.vx+=mvx*.05;b.vy+=mvy*.05}
+ // stay in zone
+ b.vx+=(W*.08+b.zone*W*.84-b.x)*b.zoneStr;
+ b.vy+=(H*.5-b.y)*.00008;
+ // ball separation
+ balls.forEach(o=>{
+ if(o===b)return;
+ const ox=b.x-o.x,oy=b.y-o.y,od=Math.sqrt(ox*ox+oy*oy);
+ const mn=(b.r+o.r)*2.4;
+ if(od<mn&&od>0){const f=(mn-od)/mn*.15;b.vx+=ox/od*f;b.vy+=oy/od*f}
+ });
+ b.vx*=.978;b.vy*=.978;b.x+=b.vx;b.y+=b.vy;
+ if(b.x<b.r){b.x=b.r;b.vx=Math.abs(b.vx)*.7}
+ if(b.x>W-b.r){b.x=W-b.r;b.vx=-Math.abs(b.vx)*.7}
+ if(b.y<b.r){b.y=b.r;b.vy=Math.abs(b.vy)*.7}
+ if(b.y>H-b.r){b.y=H-b.r;b.vy=-Math.abs(b.vy)*.7}
+ b.spin+=b.vx*.018;
+ const ds=.75+b.y/H*.45;const br=b.r*ds;
+ const spd=Math.sqrt(b.vx*b.vx+b.vy*b.vy);
+ // shadow
+ ctx.save();ctx.translate(b.x+br*.12,b.y+br*.25);ctx.scale(1,.28);
+ const sg=ctx.createRadialGradient(0,0,0,0,0,br);
+ sg.addColorStop(0,'rgba(0,0,0,.7)');sg.addColorStop(0.5,'rgba(0,0,0,.3)');sg.addColorStop(1,'rgba(0,0,0,0)');
+ ctx.fillStyle=sg;ctx.beginPath();ctx.arc(0,0,br,0,Math.PI*2);ctx.fill();ctx.restore();
+ // motion blur
+ if(spd>2){for(let s=1;s<=3;s++){ctx.save();ctx.translate(b.x-b.vx*s*.65,b.y-b.vy*s*.65);ctx.scale(ds,ds);ctx.globalAlpha=.07/s;b.draw(ctx,b.r,b.spin);ctx.restore()}}
+ // ambient glow
+ ctx.save();
+ const bg2=ctx.createRadialGradient(b.x,b.y,b.r*ds*.6,b.x,b.y,b.r*ds*1.8);
+ bg2.addColorStop(0,'rgba(255,255,255,.04)');bg2.addColorStop(1,'rgba(0,0,0,0)');
+ ctx.fillStyle=bg2;ctx.beginPath();ctx.arc(b.x,b.y,b.r*ds*1.8,0,Math.PI*2);ctx.fill();ctx.restore();
+ ctx.save();ctx.translate(b.x,b.y);ctx.scale(ds,ds);b.draw(ctx,b.r,b.spin);ctx.restore();
+ });
+ requestAnimationFrame(draw);
+ }
+ draw();
+})();
+
+// ══════════════════════════════════════════════════════
+// 7. ABOUT AURORA FIELD
+// ══════════════════════════════════════════════════════
+(function(){
+ const cv=document.getElementById('about-canvas'),ctx=cv.getContext('2d');
+ let W,H;
+ const resize=()=>{W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight};
+ resize();new ResizeObserver(resize).observe(cv.parentElement);
+ const N=80;
+ const lines=Array.from({length:N},()=>({
+ x:Math.random()*1200,y:Math.random()*800,
+ angle:Math.random()*Math.PI*2,
+ speed:.6+Math.random()*.8,
+ curl:(Math.random()-.5)*.05,
+ hue:200+Math.random()*80,
+ w:.4+Math.random()*1.2,
+ life:0,maxLife:200+Math.random()*100,
+ trail:[],
+ }));
+ let t=0,mx=.5,my=.5,tmx2=.5,tmy2=.5;
+ cv.parentElement.addEventListener('mousemove',e=>{tmx2=e.clientX/innerWidth;tmy2=e.clientY/innerHeight});
+ function draw(){
+ t++;mx+=(tmx2-mx)*.04;my+=(tmy2-my)*.04;
+ ctx.fillStyle='rgba(6,6,8,.18)';ctx.fillRect(0,0,W,H);
+ lines.forEach(l=>{
+ l.life++;
+ if(l.life>l.maxLife){Object.assign(l,{x:Math.random()*W,y:Math.random()*H,angle:Math.random()*Math.PI*2,life:0,trail:[]}); return}
+ const tx=mx*W-l.x,ty=my*H-l.y,dist=Math.sqrt(tx*tx+ty*ty);
+ const fa=Math.atan2(ty,tx)+Math.PI/2;
+ l.angle+=l.curl+Math.sin(t*.006+l.x*.002)*.015;
+ l.angle+=(fa-l.angle)*Math.min(.03,800/(dist+200)*.002);
+ l.x+=Math.cos(l.angle)*l.speed;l.y+=Math.sin(l.angle)*l.speed;
+ l.trail.push({x:l.x,y:l.y});
+ if(l.trail.length>50)l.trail.shift();
+ if(l.trail.length<3)return;
+ const alpha=Math.min(l.life/25,1)*Math.min((l.maxLife-l.life)/25,1);
+ ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+ for(let i=1;i<l.trail.length;i++){
+ const p=i/l.trail.length;
+ ctx.strokeStyle=`hsla(${l.hue+p*35},55%,${45+p*28}%,${alpha*p*.65})`;
+ ctx.lineWidth=l.w*(0.4+p*.6);
+ ctx.beginPath();ctx.moveTo(l.trail[i-1].x,l.trail[i-1].y);ctx.lineTo(l.trail[i].x,l.trail[i].y);ctx.stroke();
+ }
+ ctx.restore();
+ });
+ const gg=ctx.createRadialGradient(mx*W,my*H,0,mx*W,my*H,180);
+ gg.addColorStop(0,'rgba(100,150,255,.07)');gg.addColorStop(1,'rgba(0,0,0,0)');
+ ctx.fillStyle=gg;ctx.fillRect(0,0,W,H);
+ requestAnimationFrame(draw);
+ }
+ draw();
+})();
+
+// ══════════════════════════════════════════════════════
+// 8. CONTACT PARTICLE CONSTELLATION
+// ══════════════════════════════════════════════════════
+(function(){
+ const cv=document.getElementById('con-canvas'),ctx=cv.getContext('2d');
+ let W,H;
+ const resize=()=>{W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight};
+ resize();new ResizeObserver(resize).observe(cv.parentElement);
+ const N=120;
+ const pts=Array.from({length:N},()=>({
+ x:Math.random(),y:Math.random(),
+ vx:(Math.random()-.5)*.0004,vy:(Math.random()-.5)*.0004,
+ r:.8+Math.random()*2,pulse:Math.random()*Math.PI*2,
+ }));
+ let t=0,mx=.5,my=.5,tmx2=.5,tmy2=.5;
+ cv.parentElement.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();tmx2=(e.clientX-r.left)/r.width;tmy2=(e.clientY-r.top)/r.height});
+ function draw(){
+ t+=.012;mx+=(tmx2-mx)*.05;my+=(tmy2-my)*.05;
+ ctx.clearRect(0,0,W,H);
+ pts.forEach(p=>{
+ p.pulse+=.02;
+ // mouse attract
+ const dx=mx-p.x,dy=my-p.y,d=Math.sqrt(dx*dx+dy*dy);
+ if(d<.3){p.vx+=dx*.00008;p.vy+=dy*.00008}
+ p.vx*=.995;p.vy*=.995;
+ p.x=(p.x+p.vx+1)%1;p.y=(p.y+p.vy+1)%1;
+ const a=.15+Math.sin(p.pulse)*.1;
+ ctx.fillStyle=`rgba(184,212,232,${a})`;
+ ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);ctx.fill();
+ });
+ // connections
+ pts.forEach((a,i)=>pts.slice(i+1,i+8).forEach(b=>{
+ const dx=(a.x-b.x)*W,dy=(a.y-b.y)*H,d=Math.sqrt(dx*dx+dy*dy);
+ if(d<100){ctx.strokeStyle=`rgba(184,212,232,${.08*(1-d/100)})`;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);ctx.stroke()}
+ }));
+ requestAnimationFrame(draw);
+ }
+ draw();
+})();
+
+// Force all videos to play fixes autoplay policy issues
+window.addEventListener('load', () => {
+ document.querySelectorAll('video').forEach(v => {
+ v.muted = true;
+ v.play().catch(() => {
+ // retry on first user interaction
+ document.addEventListener('click', () => v.play().catch(()=>{}), {once:true});
+ document.addEventListener('touchstart', () => v.play().catch(()=>{}), {once:true});
+ });
+ });
+});
+// Also try immediately
+document.querySelectorAll('video').forEach(v => { v.muted=true; v.load(); v.play().catch(()=>{}); });
+</script>
+</body>
+</html>
