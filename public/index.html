@@ -983,18 +983,7 @@ document.querySelectorAll('.sr').forEach(el=>ro.observe(el));
 
   let mx=0,my=0,pmx=0,pmy=0;
   window.addEventListener('mousemove',e=>{pmx=mx;pmy=my;mx=e.clientX;my=e.clientY;});
-  // Touch support
-  cv.parentElement.addEventListener('touchmove',e=>{
-    e.preventDefault();
-    const t=e.touches[0];pmx=mx;pmy=my;mx=t.clientX;my=t.clientY;
-  },{passive:false});
-  cv.parentElement.addEventListener('touchstart',e=>{
-    const t=e.touches[0];mx=t.clientX;my=t.clientY;
-  },{passive:true});
-  cv.parentElement.addEventListener('touchend',()=>{
-    // Reset mouse to center so balls drift back
-    setTimeout(()=>{mx=W/2;my=H/2;},800);
-  },{passive:true});
+  // Touch disabled on mobile for performance — desktop mouse only
 
   function soccer(c,r,s){
     c.save();
