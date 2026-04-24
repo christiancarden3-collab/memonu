@@ -321,6 +321,35 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.04);padding:
   .hamburger{display:flex}
   .nav-right .ncta{display:none}
 }
+
+/* MOBILE MEMO hero text */
+.hero-memo-text{
+  display:none; /* hidden on desktop */
+  position:absolute;
+  top:22%;left:0;right:0;
+  z-index:2;
+  text-align:center;
+  font-family:'Nunito',sans-serif;
+  font-weight:700;
+  font-size:clamp(72px,22vw,110px);
+  letter-spacing:8px;
+  color:rgba(255,255,255,0);
+  text-transform:lowercase;
+  animation:memoGlow 1.2s .5s var(--ease) forwards;
+  pointer-events:none;
+  text-shadow:
+    0 0 40px rgba(184,212,232,.0),
+    0 0 80px rgba(184,212,232,.0);
+}
+@keyframes memoGlow{
+  0%{color:rgba(255,255,255,0);text-shadow:0 0 40px rgba(184,212,232,0),0 0 80px rgba(0,212,255,0)}
+  40%{color:rgba(255,255,255,1);text-shadow:0 0 40px rgba(184,212,232,.8),0 0 80px rgba(0,212,255,.4)}
+  70%{color:rgba(255,255,255,.95);text-shadow:0 0 30px rgba(184,212,232,.6),0 0 60px rgba(0,212,255,.3)}
+  100%{color:rgba(255,255,255,.82);text-shadow:0 0 20px rgba(184,212,232,.4),0 0 40px rgba(0,212,255,.15)}
+}
+@media (max-width: 768px){
+  .hero-memo-text{display:block}
+}
 </style>
 </head>
 <body>
